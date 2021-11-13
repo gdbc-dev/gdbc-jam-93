@@ -30,4 +30,9 @@ public class StartMenu : MonoBehaviour
     {
         creditsContainer.SetActive(true);
     }
+
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
 }
