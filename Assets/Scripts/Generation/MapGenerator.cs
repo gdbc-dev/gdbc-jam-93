@@ -18,7 +18,15 @@ public class MapGenerator : MonoBehaviour
     public int minIslandSize = 16;
     public int maxIslandSize = 32;
     private float timer = 0;
+    public int maxIslands = 25;
     public GameObject groundPrefab;
+    public GameObject[] groundEdgePrefabs;
+    public GameObject[] groundMainsPrefab;
+    public GameObject[] outerDoodads;
+    public GameObject[] innerDoodads;
+    public GameObject[] largeInnerDoodads;
+    public GameObject[] waterDoodads;
+    public GameObject[] waterBesideLand;
     public List<GameObject> grounds;
 
     private void Start()
@@ -48,7 +56,7 @@ public class MapGenerator : MonoBehaviour
     private void generateMap()
     {
         List<IslandData> islands = new List<IslandData>();
-        for (int i = 0; i < 25; i++)
+        for (int i = 0; i < maxIslands; i++)
         {
             IslandData islandData = generateIslandData();
             if (islandData != null)
@@ -100,15 +108,90 @@ public class MapGenerator : MonoBehaviour
             {
                 if (map[x, y] > 0)
                 {
-                    grounds.Add(Instantiate(groundPrefab, new Vector3(x, 0, y), Quaternion.identity));
-                    groundTilemap.SetTile(new Vector3Int(x, y, 0), groundTile);
+                    bool isEde = isEdge(map, x, y);
+                    grounds.Add(Instantiate(groundMainsPrefab[Random.Range(0, groundMainsPrefab.Length)], new Vector3(x, 0, y ), Quaternion.identity));
+
+                    if (isEde)
+                    {
+                        if (Random.Range(0, 1f) > .85f)
+                        {
+                            grounds.Add(Instantiate(outerDoodads[Random.Range(0, outerDoodads.Length)], new Vector3(x, 0, y ), Quaternion.Euler(0, Random.Range(0,360),0)));
+                        }
+                    }
+                    else
+                    {
+                        if (Random.Range(0, 1f) > .97f)
+                        {
+                            grounds.Add(Instantiate(largeInnerDoodads[Random.Range(0, largeInnerDoodads.Length)], new Vector3(x, 0, y ), Quaternion.Euler(0, Random.Range(0,360),0)));
+                        } else if (Random.Range(0, 1f) > .75f)
+                        {
+                            grounds.Add(Instantiate(innerDoodads[Random.Range(0, innerDoodads.Length)], new Vector3(x, 0, y ), Quaternion.Euler(0, Random.Range(0,360),0)));
+                        }
+                    }
+                    
+//
+//                    if (isEde)
+//                    {
+//                        grounds.Add(Instantiate(groundEdgePrefabs[Random.Range(0, groundEdgePrefabs.Length)], new Vector3(x, -Random.Range(.01f, .25f), y ), Quaternion.identity));
+//                    }
+//                    else
+//                    {
+//                        grounds.Add(Instantiate(groundMainsPrefab[Random.Range(0, groundMainsPrefab.Length)], new Vector3(x, 0, y ), Quaternion.identity));
+//                    }
+                    
+//                    groundTilemap.SetTile(new Vector3Int(x, y, 0), groundTile);
                 }
                 else
                 {
-                    groundTilemap.SetTile(new Vector3Int(x, y, 0), null);
+                    bool isBesideLand = besideLand(map, x, y);
+                    if (isBesideLand)
+                    {
+                        if (Random.Range(0, 1f) > .80f)
+                        {
+                            grounds.Add(Instantiate(waterBesideLand[Random.Range(0, waterBesideLand.Length)], new Vector3(x, -.8f, y ), Quaternion.Euler(0, Random.Range(0,360),0)));
+                        }
+                    }
+                    else
+                    {
+                        
+                    }
+//                    groundTilemap.SetTile(new Vector3Int(x, y, 0), null);
+                    if (Random.Range(0, 1f) > .999f)
+                    {
+                        grounds.Add(Instantiate(waterDoodads[Random.Range(0, waterDoodads.Length)], new Vector3(x, -1.4f, y ), Quaternion.Euler(0, Random.Range(0,360),0)));
+                    }
+                    
                 }
             }
         }
+    }
+
+    private bool isEdge(int[,] map, int x, int y)
+    {
+        if (
+            (x > 0 && map[x - 1, y] == 0) || 
+            (x < map.GetLength(0) && map[x + 1, y] == 0) || 
+            (y > 0 && map[x, y - 1] == 0) || 
+            (y < map.GetLength(1) && map[x, y + 1] == 0))
+        {
+            return true;
+        }
+
+        return false;
+    }
+    
+    private bool besideLand(int[,] map, int x, int y)
+    {
+        if (
+            (x > 0 && map[x - 1, y] == 1) || 
+            (x < map.GetLength(0) - 1 && map[x + 1, y] == 1) || 
+            (y > 0 && map[x, y - 1] == 1) || 
+            (y < map.GetLength(1) - 1 && map[x, y + 1] == 1))
+        {
+            return true;
+        }
+
+        return false;
     }
 
     private void applyIslandToMap(int[,] map, IslandData islandData)
@@ -184,13 +267,13 @@ public class MapGenerator : MonoBehaviour
             return null;
         }
 
-        int[,] newNoise = new int[max.x - min.x, max.y - min.y];
+        int[,] newNoise = new int[max.x - min.x + 4, max.y - min.y + 4];
 
         for (int x = min.x; x < max.x; x++)
         {
             for (int y = min.y; y < max.y; y++)
             {
-                newNoise[x - min.x, y - min.y] = noise[x, y];
+                newNoise[x - min.x + 2, y - min.y + 2] = noise[x, y];
             }
         }
 

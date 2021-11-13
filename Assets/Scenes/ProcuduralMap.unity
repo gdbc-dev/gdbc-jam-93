@@ -175,7 +175,7 @@ Camera:
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
-  orthographic: 1
+  orthographic: 0
   orthographic size: 25
   m_Depth: -1
   m_CullingMask:
@@ -199,8 +199,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 13146671}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 32, y: 32, z: -10}
+  m_LocalRotation: {x: -0.2529862, y: 0.48172563, z: -0.14769556, w: -0.8259083}
+  m_LocalPosition: {x: 53.71549, y: 11.7818575, z: 15.1557045}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -299,7 +299,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
---- !u!1 &401654821
+--- !u!1 &401163496
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -307,37 +307,38 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 401654825}
-  - component: {fileID: 401654824}
-  - component: {fileID: 401654823}
-  - component: {fileID: 401654822}
+  - component: {fileID: 401163500}
+  - component: {fileID: 401163499}
+  - component: {fileID: 401163498}
+  - component: {fileID: 401163497}
   m_Layer: 0
-  m_Name: Ground
+  m_Name: Plane (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!65 &401654822
-BoxCollider:
+--- !u!64 &401163497
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 401654821}
+  m_GameObject: {fileID: 401163496}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!23 &401654823
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!23 &401163498
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 401654821}
+  m_GameObject: {fileID: 401163496}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -350,7 +351,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 24071234f7a29ce46930996b3e2ba9f3, type: 2}
+  - {fileID: 2100000, guid: 3a29270c8e26c8c488f1564570a39c7e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -372,27 +373,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!33 &401654824
+--- !u!33 &401163499
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 401654821}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!4 &401654825
+  m_GameObject: {fileID: 401163496}
+  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &401163500
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 401654821}
+  m_GameObject: {fileID: 401163496}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 29.761044, y: 22.874424, z: 27.419338}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: -2, z: 0}
+  m_LocalScale: {x: 50, y: 50, z: 50}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1010105445
 GameObject:
@@ -550,14 +551,58 @@ MonoBehaviour:
     lacunarity: 1.62
     seedOffset: 0
     offset: {x: 5.52, y: -35.49}
-  size: 64
+  size: 128
   groundTile: {fileID: 11400000, guid: 8903e93d8628a324cbf7129ba37269e1, type: 2}
-  distanceFalloff: 0.36
-  minHeightForLand: 0.7
+  distanceFalloff: 0.26
+  minHeightForLand: 0.58
   autoGenerate: 0
   minIslandSize: 16
   maxIslandSize: 32
-  groundPrefab: {fileID: 401654821}
+  maxIslands: 45
+  groundPrefab: {fileID: 0}
+  groundEdgePrefabs:
+  - {fileID: 1258712568071856, guid: 0c75154c4fc68e9468d08eebd25883ae, type: 3}
+  - {fileID: 1584586519996402, guid: e1d99045198462c469398bb7b073aee1, type: 3}
+  groundMainsPrefab:
+  - {fileID: 1422405886661062, guid: 42293651eb3c22641be72d185ef35606, type: 3}
+  - {fileID: 1813541169467894, guid: ea891dfd407f72a499ce5af232475e3d, type: 3}
+  outerDoodads:
+  - {fileID: 1377862632007034, guid: c8e26dbea6eaa4449a17e5328d7433d2, type: 3}
+  - {fileID: 1188654037934212, guid: 66489f36ceb40f246871466b4af2e854, type: 3}
+  - {fileID: 1174159323728966, guid: 2c24980933c1d2f42ad6cf1b96a3082e, type: 3}
+  - {fileID: 1801773475871094, guid: 2b13e2d6b46ee28408f05029dbbbe279, type: 3}
+  - {fileID: 1327949715867880, guid: e504dba8aebd74849aeed163d00cb69e, type: 3}
+  - {fileID: 1470051130261414, guid: dccd05b9dd0d26849a76fbe2b4d10bcc, type: 3}
+  - {fileID: 1722713802754298, guid: 9ccbbff3d2afcb545acdc241597d1860, type: 3}
+  - {fileID: 1128666432614778, guid: a6a902675d1d5684aba18a5344614ea0, type: 3}
+  - {fileID: 1928129189861834, guid: 17c23995aa6fed844aca0b9c84e910cd, type: 3}
+  innerDoodads:
+  - {fileID: 1299558455464746, guid: 5489845d46e81464a9b6e313d61b9717, type: 3}
+  - {fileID: 1049981646049018, guid: 7311cceef8de00e47bb4ec534bec1204, type: 3}
+  - {fileID: 1648201614984700, guid: c2ff0586fa4d9ee4eabea7d8abd12191, type: 3}
+  - {fileID: 1150707807220270, guid: 080912b7b9094e94b8d2a96688d050a8, type: 3}
+  - {fileID: 1198730632247122, guid: 976afdf7fca1a5f469a53a775afc3e05, type: 3}
+  - {fileID: 1377862632007034, guid: c8e26dbea6eaa4449a17e5328d7433d2, type: 3}
+  - {fileID: 1188654037934212, guid: 66489f36ceb40f246871466b4af2e854, type: 3}
+  - {fileID: 1174159323728966, guid: 2c24980933c1d2f42ad6cf1b96a3082e, type: 3}
+  - {fileID: 1801773475871094, guid: 2b13e2d6b46ee28408f05029dbbbe279, type: 3}
+  - {fileID: 1327949715867880, guid: e504dba8aebd74849aeed163d00cb69e, type: 3}
+  - {fileID: 1470051130261414, guid: dccd05b9dd0d26849a76fbe2b4d10bcc, type: 3}
+  - {fileID: 1722713802754298, guid: 9ccbbff3d2afcb545acdc241597d1860, type: 3}
+  largeInnerDoodads:
+  - {fileID: 1284718070223092, guid: 787facca5f4ae3341834b69f5a7c941c, type: 3}
+  - {fileID: 1737419297715478, guid: 4f925478599cb734590ff58c49a21803, type: 3}
+  waterDoodads:
+  - {fileID: 1889486365217932, guid: 90c7fc433604f96478dc023f03f17ad7, type: 3}
+  - {fileID: 1517687235147230, guid: 53e28efe3a8e4864aa13ca028c62fe87, type: 3}
+  waterBesideLand:
+  - {fileID: 1815794713128316, guid: 035adeb57cfb8c64e9e6985908f63572, type: 3}
+  - {fileID: 1486004834697146, guid: 5881b4c54ede2b1468377a625b5a05fe, type: 3}
+  - {fileID: 1288830028018458, guid: 971c7fa74edb1954c886b49ee2d8d100, type: 3}
+  - {fileID: 1278507456746066, guid: 089f20e6cbc1eb54ab48da9418d71cdc, type: 3}
+  - {fileID: 1182972358325360, guid: f4fc29367c2b5494e82c171805cea532, type: 3}
+  - {fileID: 1327162969594786, guid: 5996226ec93174d4f8e17cc9c6eb92db, type: 3}
+  - {fileID: 1351972780996186, guid: c4c33f4412404244e9a1c704466d6275, type: 3}
   grounds: []
 --- !u!4 &1593673959
 Transform:
@@ -567,8 +612,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1593673957}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.09436062, y: 0.18691832, z: -0.7730745}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0.09436062, y: -0.26, z: -0.7730745}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
@@ -589,7 +634,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1719549376
 Transform:
   m_ObjectHideFlags: 0
@@ -708,11 +753,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1982774197}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.5, z: 0}
   m_LocalScale: {x: 50, y: 50, z: 50}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2026053851
 GameObject:
@@ -838,9 +883,7 @@ CompositeCollider2D:
   m_GeometryType: 0
   m_GenerationType: 0
   m_EdgeRadius: 0
-  m_ColliderPaths:
-  - m_Collider: {fileID: 2026053855}
-    m_ColliderPaths: []
+  m_ColliderPaths: []
   m_CompositePaths:
     m_Paths: []
   m_VertexDistance: 0.0005
