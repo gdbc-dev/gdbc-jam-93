@@ -213,14 +213,15 @@ public class GameController : MonoBehaviour
 
     private Vector3 getEdgeLocation()
     {
+        float offScreenAmount = 5;
         if (Random.Range(0, 1f) > .5f)
         {
             // Top or bottom spawn
-            return new Vector3(Random.Range(0, map.GetLength(0)), 0, Random.Range(0, 1f) > .5f ? 0 : map.GetLength(1));
+            return new Vector3(Random.Range(0, map.GetLength(0)), 0, Random.Range(0, 1f) > .5f ? -offScreenAmount : map.GetLength(1) + offScreenAmount);
         }
 
         // Left or right spawn
-        return new Vector3(Random.Range(0, 1f) > .5f ? 0 : map.GetLength(0), 0, Random.Range(0, map.GetLength(1)));
+        return new Vector3(Random.Range(0, 1f) > .5f ? -offScreenAmount : map.GetLength(0) + offScreenAmount, 0, Random.Range(0, map.GetLength(1)));
     }
 
     private Vector3 getWaterLocation()
@@ -287,8 +288,8 @@ public class GameController : MonoBehaviour
             List<Vector3> currentPath = shipPaths[i];
 
             GameObject gameObject = Instantiate(playerShipsPrefabs[Random.Range(0, playerShipsPrefabs.Length)],
-                new Vector3(currentPath[0].x, 0, currentPath[0].y), Quaternion.Euler(0, Random.Range(0, 360), 0));
-            gameObject.GetComponent<Rigidbody>().position = new Vector3(currentPath[i].x, 0, currentPath[i].y);
+                new Vector3(currentPath[0].x, 0, currentPath[0].z), Quaternion.Euler(0, Random.Range(0, 360), 0));
+            gameObject.GetComponent<Rigidbody>().position = new Vector3(currentPath[i].x, 0, currentPath[i].z);
             gameObject.GetComponent<PlayerBoatsController>().path = new LinePath(currentPath.ToArray());
         }
 
@@ -303,7 +304,7 @@ public class GameController : MonoBehaviour
             return map[x, y] == 0;
         }
 
-        return false;
+        return true;
     }
 
     private void OnApplicationQuit()
