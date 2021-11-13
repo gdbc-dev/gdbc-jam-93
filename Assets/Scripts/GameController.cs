@@ -35,7 +35,11 @@ public class GameController : MonoBehaviour
         if (generateMenuLevelEnabled)
         {
             generateMenuLevel();
-        }    
+        }
+        else
+        {
+            startGame();
+        }
 
         // needs some code to populate the dolphin and patrol boats list
         // could do find objects with tags or add them when they are spawned?
@@ -86,17 +90,18 @@ public class GameController : MonoBehaviour
     {
         for (int i = 0; i < aliveDolphins.Count; i++)
         {
-            Destroy(aliveDolphins[i]);
+            Destroy(aliveDolphins[i].gameObject);
         }
         
         aliveDolphins.Clear();
         
         for (int i = 0; i < patrolBoats.Count; i++)
         {
-            Destroy(patrolBoats[i]);
+            Destroy(patrolBoats[i].gameObject);
         }
         
         patrolBoats.Clear();
+        
         isPlayingGame = true;
         if (levels.Count >= levelNumber)
         {
