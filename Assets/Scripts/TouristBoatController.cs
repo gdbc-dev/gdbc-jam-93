@@ -6,7 +6,7 @@ using UnityMovementAI;
 public class TouristBoatController : MonoBehaviour
 {
     // Components
-    Rigidbody2D rb;
+    Rigidbody rb;
     SteeringBasics sb;
     Evade evade;
     WallAvoidance wa;
