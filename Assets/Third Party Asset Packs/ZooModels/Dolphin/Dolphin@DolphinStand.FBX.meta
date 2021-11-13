@@ -1,0 +1,203 @@
+fileFormatVersion: 2
+guid: e99c1144b2ed38f44b80a04314c123b6
+timeCreated: 1480638050
+licenseType: Store
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: Body1
+    100002: Body2
+    100004: Body3
+    100006: Body4
+    100008: Bone009
+    100010: Bone010
+    100012: Center
+    100014: Dolphin
+    100016: //RootNode
+    100018: Head
+    100020: IK Chain001
+    100022: IK Chain002
+    100024: LeftLeg
+    100026: LefttHand1
+    100028: LefttHand2
+    100030: LefttHand3
+    100032: Mouth1
+    100034: Mouth2
+    100036: RightHand1
+    100038: RightHand2
+    100040: RightHand3
+    100042: RightLeg
+    100044: Tail
+    100046: Tung1
+    100048: Tung2
+    400000: Body1
+    400002: Body2
+    400004: Body3
+    400006: Body4
+    400008: Bone009
+    400010: Bone010
+    400012: Center
+    400014: Dolphin
+    400016: //RootNode
+    400018: Head
+    400020: IK Chain001
+    400022: IK Chain002
+    400024: LeftLeg
+    400026: LefttHand1
+    400028: LefttHand2
+    400030: LefttHand3
+    400032: Mouth1
+    400034: Mouth2
+    400036: RightHand1
+    400038: RightHand2
+    400040: RightHand3
+    400042: RightLeg
+    400044: Tail
+    400046: Tung1
+    400048: Tung2
+    4300000: Dolphin
+    7400000: DolphinStand
+    9500000: //RootNode
+    13700000: Dolphin
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleRotations: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: DolphinStand
+      takeName: Take 001
+      firstFrame: 0
+      lastFrame: 100
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Center
+        weight: 1
+      - path: Center/Body1
+        weight: 1
+      - path: Center/Body1/Head
+        weight: 1
+      - path: Center/Body1/Head/Mouth1
+        weight: 1
+      - path: Center/Body1/Head/Mouth2
+        weight: 1
+      - path: Center/Body1/Head/Tung1
+        weight: 1
+      - path: Center/Body1/Head/Tung1/Tung2
+        weight: 1
+      - path: Center/Body1/LefttHand1
+        weight: 1
+      - path: Center/Body1/LefttHand1/LefttHand2
+        weight: 1
+      - path: Center/Body1/LefttHand1/LefttHand2/LefttHand3
+        weight: 1
+      - path: Center/Body1/RightHand1
+        weight: 1
+      - path: Center/Body1/RightHand1/RightHand2
+        weight: 1
+      - path: Center/Body1/RightHand1/RightHand2/RightHand3
+        weight: 1
+      - path: Center/Body2
+        weight: 1
+      - path: Center/Body2/Body3
+        weight: 1
+      - path: Center/Body2/Body3/Body4
+        weight: 1
+      - path: Center/Body2/Body3/Body4/Tail
+        weight: 1
+      - path: Center/Body2/Body3/Body4/Tail/LeftLeg
+        weight: 1
+      - path: Center/Body2/Body3/Body4/Tail/RightLeg
+        weight: 1
+      - path: Center/Body2/Bone009
+        weight: 1
+      - path: Center/Body2/Bone009/Bone010
+        weight: 1
+      - path: Dolphin
+        weight: 1
+      - path: IK Chain001
+        weight: 1
+      - path: IK Chain002
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
