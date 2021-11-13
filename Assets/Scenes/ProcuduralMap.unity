@@ -177,7 +177,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 15
+  orthographic size: 25.13
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -368,30 +368,33 @@ MonoBehaviour:
   levels:
   - worldSize: 64
     numIslands: 10
-    numShips: 3
-    numDolphins: 3
-    numTourists: 2
+    numShips: 1
+    numDolphins: 2
+    touristSpawns:
+    - spawnDelay: 5
+    - spawnDelay: 5
+    - spawnDelay: 10
   - worldSize: 96
     numIslands: 20
     numShips: 2
     numDolphins: 3
-    numTourists: 3
+    touristSpawns: []
   - worldSize: 128
     numIslands: 70
     numShips: 3
     numDolphins: 3
-    numTourists: 5
+    touristSpawns: []
   - worldSize: 180
     numIslands: 125
     numShips: 3
     numDolphins: 3
-    numTourists: 7
+    touristSpawns: []
   menuLevel:
     worldSize: 256
     numIslands: 64
     numShips: 3
     numDolphins: 3
-    numTourists: 3
+    touristSpawns: []
   aliveDolphins: []
   patrolBoats: []
   touristBoats: []

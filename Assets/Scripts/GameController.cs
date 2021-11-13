@@ -28,6 +28,9 @@ public class GameController : MonoBehaviour
     private GAME_STATE gameState = GAME_STATE.PLANNING;
 
     private int shipsLeftToSpawn;
+    private List<TouristData> touristShipsToSpawn;
+    private float spawnTimer;
+    private bool isQuitting = false;
 
     public enum GAME_STATE
     {
@@ -108,7 +111,10 @@ public class GameController : MonoBehaviour
 
         for (int i = 0; i < patrolBoats.Count; i++)
         {
-            Destroy(patrolBoats[i].gameObject);
+            if (patrolBoats[i] && patrolBoats[i].gameObject)
+            {
+                Destroy(patrolBoats[i].gameObject);
+            }
         }
 
         patrolBoats.Clear();
@@ -122,6 +128,17 @@ public class GameController : MonoBehaviour
             Debug.LogError("Invalid level: " + levelNumber);
         }
 
+        touristShipsToSpawn = new List<TouristData>();
+
+        for (var i = 0; i < levels[levelNumber].touristSpawns.Count; i++)
+        {
+            touristShipsToSpawn.Add(new TouristData
+                {
+                    spawnDelay = levels[levelNumber].touristSpawns[i].spawnDelay
+                }
+            );
+        }
+
         StartPlanningPhase();
     }
 
@@ -129,9 +146,18 @@ public class GameController : MonoBehaviour
     {
         if (gameState == GAME_STATE.PLANNING)
         {
-            if (shipsLeftToSpawn <= 0)
+        }
+        else if (gameState == GAME_STATE.PLAYING)
+        {
+            spawnTimer += Time.deltaTime;
+            if (touristShipsToSpawn.Count > 0)
             {
-                StartGamePhase();
+                if (spawnTimer >= touristShipsToSpawn[0].spawnDelay)
+                {
+                    Instantiate(touristShipsPrefabs[Random.Range(0, touristShipsPrefabs.Length)],
+                        getEdgeLocation(), Quaternion.Euler(0, Random.Range(0, 360), 0));
+                    touristShipsToSpawn.RemoveAt(0);
+                }
             }
         }
     }
@@ -166,7 +192,7 @@ public class GameController : MonoBehaviour
             return;
         }
 
-        for (int i = 0; i < levelData.numShips; i++)
+        for (int i = 0; i < levelData.numDolphins; i++)
         {
             Instantiate(dolphinsPrefabs[Random.Range(0, dolphinsPrefabs.Length)],
                 getWaterLocation(), Quaternion.Euler(0, Random.Range(0, 360), 0));
@@ -183,6 +209,18 @@ public class GameController : MonoBehaviour
 //            Instantiate(touristShipsPrefabs[Random.Range(0, touristShipsPrefabs.Length)],
 //                getWaterLocation(), Quaternion.Euler(0, Random.Range(0, 360), 0));
 //        }
+    }
+
+    private Vector3 getEdgeLocation()
+    {
+        if (Random.Range(0, 1f) > .5f)
+        {
+            // Top or bottom spawn
+            return new Vector3(Random.Range(0, map.GetLength(0)), 0, Random.Range(0, 1f) > .5f ? 0 : map.GetLength(1));
+        }
+
+        // Left or right spawn
+        return new Vector3(Random.Range(0, 1f) > .5f ? 0 : map.GetLength(0), 0, Random.Range(0, map.GetLength(1)));
     }
 
     private Vector3 getWaterLocation()
@@ -229,7 +267,17 @@ public class GameController : MonoBehaviour
 
     public void removeDolphin(MovementAIRigidbody dolphin)
     {
+        if (isQuitting)
+        {
+            return;
+        }
         this.aliveDolphins.Remove(dolphin);
+
+        if (aliveDolphins.Count == 0)
+        {
+            Debug.Log("All the dolphins were photographed!");
+            loseLevel();
+        }
     }
 
     public void finishPlanning(List<List<Vector3>> shipPaths)
@@ -240,8 +288,7 @@ public class GameController : MonoBehaviour
 
             GameObject gameObject = Instantiate(playerShipsPrefabs[Random.Range(0, playerShipsPrefabs.Length)],
                 new Vector3(currentPath[0].x, 0, currentPath[0].y), Quaternion.Euler(0, Random.Range(0, 360), 0));
-            gameObject.GetComponent<Rigidbody>().position = new Vector3(currentPath[0].x, 0, currentPath[0].y);
-
+            gameObject.GetComponent<Rigidbody>().position = new Vector3(currentPath[i].x, 0, currentPath[i].y);
             gameObject.GetComponent<PlayerBoatsController>().path = new LinePath(currentPath.ToArray());
         }
 
@@ -257,5 +304,10 @@ public class GameController : MonoBehaviour
         }
 
         return false;
+    }
+
+    private void OnApplicationQuit()
+    {
+        isQuitting = true;
     }
 }
