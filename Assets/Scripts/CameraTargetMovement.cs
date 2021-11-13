@@ -11,13 +11,13 @@ public class CameraTargetMovement : MonoBehaviour
     [SerializeField] private float zoomSpeed;
     
     Transform cam;
-    CinemachineVirtualCamera vcam;
+    CinemachineVirtualCamera planningVcam, actionVcam;
 
     // Start is called before the first frame update
     void Start()
     {
         cam = GameObject.Find("Main Camera").transform;
-        vcam = cam.transform.Find("CM vcam1").
+        planningVcam = cam.transform.Find("Planning Virtual Camera").
             GetComponent<CinemachineVirtualCamera>();
     }
 
