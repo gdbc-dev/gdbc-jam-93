@@ -47,6 +47,12 @@ public class TouristBoatController : MonoBehaviour
                 evadeTarget = nearestPatrol;
             }
         }
+
+        if (!puTarget.gameObject)
+        {
+            puTarget = ReturnNearestaIRigidbody(
+                GameController.instance.aliveDolphins);
+        }
     }
 
     // Update is called once per frame

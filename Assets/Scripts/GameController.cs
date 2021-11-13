@@ -13,6 +13,7 @@ public class GameController : MonoBehaviour
     public LevelData menuLevel;
     public List<MovementAIRigidbody> aliveDolphins;
     public List<MovementAIRigidbody> patrolBoats;
+    public List<MovementAIRigidbody> touristBoats;
 
     public GameObject[] playerShipsPrefabs;
     public GameObject[] touristShipsPrefabs;
