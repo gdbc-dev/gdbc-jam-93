@@ -125,15 +125,23 @@ public class GameController : MonoBehaviour
         
         for (int i = 0; i < levelData.numShips; i++)
         {
+            Instantiate(dolphinsPrefabs[Random.Range(0, dolphinsPrefabs.Length)],
+                getWaterLocation(), Quaternion.Euler(0, Random.Range(0, 360), 0));
+        }
+        
+        for (int i = 0; i < levelData.numShips; i++)
+        {
+            Instantiate(playerShipsPrefabs[Random.Range(0, playerShipsPrefabs.Length)],
+                getWaterLocation(), Quaternion.Euler(0, Random.Range(0, 360), 0));
+        }
+        
+        for (int i = 0; i < levelData.numShips; i++)
+        {
             Instantiate(touristShipsPrefabs[Random.Range(0, touristShipsPrefabs.Length)],
                 getWaterLocation(), Quaternion.Euler(0, Random.Range(0, 360), 0));
         }
 
-        for (int i = 0; i < levelData.numShips; i++)
-        {
-            Instantiate(dolphinsPrefabs[Random.Range(0, dolphinsPrefabs.Length)],
-                getWaterLocation(), Quaternion.Euler(0, Random.Range(0, 360), 0));
-        }
+
     }
 
     private Vector3 getWaterLocation()
