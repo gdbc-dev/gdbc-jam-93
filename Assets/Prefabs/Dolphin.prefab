@@ -196,7 +196,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 14
+  m_Constraints: 94
   m_CollisionDetection: 0
 --- !u!114 &1103157741332840306
 MonoBehaviour:
@@ -232,7 +232,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   deathTimer: 0
   maxDeathTime: 10
-  isDying: 0
+  isUnwell: 0
 --- !u!135 &6456802816235938905
 SphereCollider:
   m_ObjectHideFlags: 0

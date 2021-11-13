@@ -93,10 +93,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   path:
     nodes:
-    - {x: 50, y: 0, z: 0}
-    - {x: 0, y: 0, z: 75}
-    - {x: -50, y: 0, z: 24.12}
-    - {x: 50, y: 0, z: 0}
+    - {x: 50, y: 0, z: 150}
+    - {x: 100, y: 0, z: 100}
+    - {x: 0, y: 0, z: 100}
+    - {x: 50, y: 0, z: 150}
   pursueTarget: {fileID: 0}
   pathLoop: 1
   reversePath: 0
