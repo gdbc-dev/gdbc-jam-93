@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 33947763056365672}
   - component: {fileID: 23720411675651702}
   - component: {fileID: 65260223395527384}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Paradise Islands Ground 04
   m_TagString: Untagged
   m_Icon: {fileID: 0}

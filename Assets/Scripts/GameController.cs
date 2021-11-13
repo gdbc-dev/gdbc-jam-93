@@ -18,6 +18,8 @@ public class GameController : MonoBehaviour
     public GameObject[] dolphinsPrefabs;
     public GameObject[] environmentPrefabs;
 
+    private int[,] map;
+
     public int currentLevel = 0;
     private bool isPlayingGame = false;
 
@@ -82,6 +84,19 @@ public class GameController : MonoBehaviour
 
     public void generateLevel(int levelNumber)
     {
+        for (int i = 0; i < aliveDolphins.Count; i++)
+        {
+            Destroy(aliveDolphins[i]);
+        }
+        
+        aliveDolphins.Clear();
+        
+        for (int i = 0; i < patrolBoats.Count; i++)
+        {
+            Destroy(patrolBoats[i]);
+        }
+        
+        patrolBoats.Clear();
         isPlayingGame = true;
         if (levels.Count >= levelNumber)
         {
@@ -96,19 +111,43 @@ public class GameController : MonoBehaviour
 
     private void generate(LevelData levelData)
     {
-        mapGenerator.generateMap(levelData);
+        map = mapGenerator.generateMap(levelData);
+        generateEntities(levelData);
     }
 
-    private void generateEntities()
+    private void generateEntities(LevelData levelData)
     {
-        List<GameObject> alivePrefabs = new List<GameObject>();
+        if (touristShipsPrefabs.Length == 0 || dolphinsPrefabs.Length == 0)
+        {
+            Debug.LogError("SETUP THE PREFABS");
+            return;
+        }
+        
+        for (int i = 0; i < levelData.numShips; i++)
+        {
+            Instantiate(touristShipsPrefabs[Random.Range(0, touristShipsPrefabs.Length)],
+                getWaterLocation(), Quaternion.Euler(0, Random.Range(0, 360), 0));
+        }
 
-        alivePrefabs.Add(Instantiate(touristShipsPrefabs[Random.Range(0, touristShipsPrefabs.Length)],
-            getWaterLocation(), Quaternion.Euler(0, Random.Range(0, 360), 0)));
+        for (int i = 0; i < levelData.numShips; i++)
+        {
+            Instantiate(dolphinsPrefabs[Random.Range(0, dolphinsPrefabs.Length)],
+                getWaterLocation(), Quaternion.Euler(0, Random.Range(0, 360), 0));
+        }
     }
 
     private Vector3 getWaterLocation()
     {
+        int attempts = 0;
+        while (attempts < 1000)
+        {
+            attempts++;
+            Vector2Int pos = new Vector2Int(Random.Range(5, map.GetLength(0)), Random.Range(5, map.GetLength(1)));
+            if (map[pos.x, pos.y] == 0)
+            {
+                return new Vector3(pos.x, 0, pos.y);
+            }
+        }
         return new Vector3();
     }
 

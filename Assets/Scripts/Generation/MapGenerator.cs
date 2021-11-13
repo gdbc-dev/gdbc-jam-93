@@ -27,6 +27,8 @@ public class MapGenerator : MonoBehaviour
     public GameObject[] waterBesideLand;
     public List<GameObject> grounds;
 
+    public Transform levelParent;
+
     private void Start()
     {
     }
@@ -60,7 +62,7 @@ public class MapGenerator : MonoBehaviour
     }
 
 
-    public void generateMap(LevelData levelData)
+    public int[,] generateMap(LevelData levelData)
     {
         int numIslands = levelData.numIslands;
         int worldSize = levelData.worldSize;
@@ -121,14 +123,14 @@ public class MapGenerator : MonoBehaviour
                 {
                     bool isEde = isEdge(map, x, y);
                     grounds.Add(Instantiate(groundMainsPrefab[Random.Range(0, groundMainsPrefab.Length)],
-                        new Vector3(x, map[x, y], y), Quaternion.identity));
+                        new Vector3(x, map[x, y], y), Quaternion.identity, levelParent));
 
                     if (isEde)
                     {
                         if (Random.Range(0, 1f) > .85f)
                         {
                             grounds.Add(Instantiate(outerDoodads[Random.Range(0, outerDoodads.Length)],
-                                new Vector3(x, map[x, y], y), Quaternion.Euler(0, Random.Range(0, 360), 0)));
+                                new Vector3(x, map[x, y], y), Quaternion.Euler(0, Random.Range(0, 360), 0), levelParent));
                         }
                     }
                     else
@@ -136,12 +138,12 @@ public class MapGenerator : MonoBehaviour
                         if (Random.Range(0, 1f) > .97f)
                         {
                             grounds.Add(Instantiate(largeInnerDoodads[Random.Range(0, largeInnerDoodads.Length)],
-                                new Vector3(x, map[x, y], y), Quaternion.Euler(0, Random.Range(0, 360), 0)));
+                                new Vector3(x, map[x, y], y), Quaternion.Euler(0, Random.Range(0, 360), 0), levelParent));
                         }
                         else if (Random.Range(0, 1f) > .75f)
                         {
                             grounds.Add(Instantiate(innerDoodads[Random.Range(0, innerDoodads.Length)],
-                                new Vector3(x, map[x, y], y), Quaternion.Euler(0, Random.Range(0, 360), 0)));
+                                new Vector3(x, map[x, y], y), Quaternion.Euler(0, Random.Range(0, 360), 0), levelParent));
                         }
                     }
 
@@ -165,7 +167,7 @@ public class MapGenerator : MonoBehaviour
                         if (Random.Range(0, 1f) > .80f)
                         {
                             grounds.Add(Instantiate(waterBesideLand[Random.Range(0, waterBesideLand.Length)],
-                                new Vector3(x, -.8f, y), Quaternion.Euler(0, Random.Range(0, 360), 0)));
+                                new Vector3(x, -.8f, y), Quaternion.Euler(0, Random.Range(0, 360), 0), levelParent));
                         }
                     }
                     else
@@ -176,11 +178,13 @@ public class MapGenerator : MonoBehaviour
                     if (Random.Range(0, 1f) > .999f)
                     {
                         grounds.Add(Instantiate(waterDoodads[Random.Range(0, waterDoodads.Length)],
-                            new Vector3(x, -1.4f, y), Quaternion.Euler(0, Random.Range(0, 360), 0)));
+                            new Vector3(x, -1.4f, y), Quaternion.Euler(0, Random.Range(0, 360), 0), levelParent));
                     }
                 }
             }
         }
+
+        return map;
     }
 
     private bool isEdge(int[,] map, int x, int y)

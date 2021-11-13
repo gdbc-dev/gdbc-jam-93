@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 33211776946210730}
   - component: {fileID: 23241420894016752}
   - component: {fileID: 65813388652772780}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Paradise Islands Ground 03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
