@@ -1,0 +1,27 @@
+Hello and thank you for purchasing Low Poly Paradise Islands Package.
+
+************
+
+"IMPORTANT"
+1. Go to Edit/Project Settings/Player and Set Color Space to Linear to achieve similar rendering.
+
+2. You need to have Unity Standard Assets/Environment imported to your project in order to have the water prefabs work properly.
+
+	Link:
+	https://assetstore.unity.com/packages/essentials/asset-packs/standard-assets-32351
+
+
+3. Prefabs are set to static. So if animating or having dynamic objects uncheck the static.
+
+************
+
+
+Spike Tower 01 and Spike Tower 03 have separate parts for animation.
+
+Texture is 512*512 png
+
+There are 66 prefabs.
+
+
+For questions you can contact me at:
+a3deve@gmail.com
