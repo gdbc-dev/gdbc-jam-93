@@ -21,6 +21,7 @@ public class TouristBoatController : MonoBehaviour
     float timeOfNextDistanceCheck;
     private enum TouristStatus { Idle, PursuingDolphin, EvadingPatrol};
     [SerializeField] private TouristStatus touristStatus;
+    public bool inRangeOfDolphin;
 
     // Start is called before the first frame update
     void Start()
@@ -29,6 +30,7 @@ public class TouristBoatController : MonoBehaviour
         evade = GetComponent<Evade>();
         wa = GetComponent<WallAvoidance>();
         pu = GetComponent<Pursue>();
+        rb = GetComponent<Rigidbody>();
     }
 
     private void OnEnable()
@@ -44,6 +46,7 @@ public class TouristBoatController : MonoBehaviour
         {
             puTarget = ReturnNearestaIRigidbody(
                 GameController.instance.aliveDolphins);
+            inRangeOfDolphin = false;
         }
         if (!evadeTarget)
         {
@@ -55,6 +58,7 @@ public class TouristBoatController : MonoBehaviour
         {
             puTarget = ReturnNearestaIRigidbody(
                 GameController.instance.aliveDolphins);
+            inRangeOfDolphin = false;
         }
         if (evadeTarget == null)
         {
@@ -87,8 +91,11 @@ public class TouristBoatController : MonoBehaviour
         accel = Vector3.zero;
 
         // always avoid walls!
-        waAccel = wa.GetSteering();
-        accel += waAccel * wallAvoidWeight;
+        if (!inRangeOfDolphin)
+        {
+            waAccel = wa.GetSteering();
+            accel += waAccel * wallAvoidWeight;
+        }
 
         // check if you should be evading
         if (evadeTarget != null)

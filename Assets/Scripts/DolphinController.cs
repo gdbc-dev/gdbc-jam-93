@@ -48,6 +48,7 @@ public class DolphinController : MonoBehaviour
                 deathTimer = 0;
             }
             nearbyTourists.Add(other.gameObject);
+            other.GetComponent<TouristBoatController>().inRangeOfDolphin = true;
         }
     }
 
@@ -58,6 +59,7 @@ public class DolphinController : MonoBehaviour
             if (nearbyTourists.Contains(other.gameObject))
             {
                 nearbyTourists.Remove(other.gameObject);
+                other.GetComponent<TouristBoatController>().inRangeOfDolphin = false;
             }
         }
     }
