@@ -109,23 +109,23 @@ public class MapGenerator : MonoBehaviour
                 if (map[x, y] > 0)
                 {
                     bool isEde = isEdge(map, x, y);
-                    grounds.Add(Instantiate(groundMainsPrefab[Random.Range(0, groundMainsPrefab.Length)], new Vector3(x, 0, y ), Quaternion.identity));
+                    grounds.Add(Instantiate(groundMainsPrefab[Random.Range(0, groundMainsPrefab.Length)], new Vector3(x, map[x,y], y ), Quaternion.identity));
 
                     if (isEde)
                     {
                         if (Random.Range(0, 1f) > .85f)
                         {
-                            grounds.Add(Instantiate(outerDoodads[Random.Range(0, outerDoodads.Length)], new Vector3(x, 0, y ), Quaternion.Euler(0, Random.Range(0,360),0)));
+                            grounds.Add(Instantiate(outerDoodads[Random.Range(0, outerDoodads.Length)], new Vector3(x, map[x,y], y ), Quaternion.Euler(0, Random.Range(0,360),0)));
                         }
                     }
                     else
                     {
                         if (Random.Range(0, 1f) > .97f)
                         {
-                            grounds.Add(Instantiate(largeInnerDoodads[Random.Range(0, largeInnerDoodads.Length)], new Vector3(x, 0, y ), Quaternion.Euler(0, Random.Range(0,360),0)));
+                            grounds.Add(Instantiate(largeInnerDoodads[Random.Range(0, largeInnerDoodads.Length)], new Vector3(x, map[x,y], y ), Quaternion.Euler(0, Random.Range(0,360),0)));
                         } else if (Random.Range(0, 1f) > .75f)
                         {
-                            grounds.Add(Instantiate(innerDoodads[Random.Range(0, innerDoodads.Length)], new Vector3(x, 0, y ), Quaternion.Euler(0, Random.Range(0,360),0)));
+                            grounds.Add(Instantiate(innerDoodads[Random.Range(0, innerDoodads.Length)], new Vector3(x, map[x,y], y ), Quaternion.Euler(0, Random.Range(0,360),0)));
                         }
                     }
                     
@@ -295,7 +295,7 @@ public class MapGenerator : MonoBehaviour
             {
                 if (noise[x, y] > minHeightForLand)
                 {
-                    intNoiseMap[x, y] = 1;
+                    intNoiseMap[x, y] = (int)(1 + (noise[x,y] - minHeightForLand) * 10);
                 }
                 else
                 {
