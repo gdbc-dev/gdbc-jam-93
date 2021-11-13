@@ -367,23 +367,28 @@ MonoBehaviour:
   - worldSize: 64
     numIslands: 10
     numShips: 1
+    numDolphins: 3
     numTourists: 2
   - worldSize: 96
     numIslands: 20
     numShips: 2
+    numDolphins: 3
     numTourists: 3
   - worldSize: 128
     numIslands: 70
     numShips: 3
+    numDolphins: 3
     numTourists: 5
   - worldSize: 180
     numIslands: 125
     numShips: 3
+    numDolphins: 3
     numTourists: 7
   menuLevel:
     worldSize: 256
     numIslands: 64
     numShips: 3
+    numDolphins: 3
     numTourists: 3
   aliveDolphins: []
   patrolBoats: []
@@ -395,7 +400,7 @@ MonoBehaviour:
   - {fileID: 1103157741332840318, guid: 31b013a4a78da495797d1da3f388dfbf, type: 3}
   environmentPrefabs: []
   currentLevel: 0
-  generateMenuLevelEnabled: 1
+  generateMenuLevelEnabled: 0
 --- !u!4 &211445441
 Transform:
   m_ObjectHideFlags: 0
