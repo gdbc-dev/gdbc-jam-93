@@ -23,6 +23,9 @@ public class DolphinController : MonoBehaviour
                 {
                     isUnwell = true;
                     print("This poor dolphin is now very unwell");
+
+                    // needs to remove itself from the alive dolphins
+                    // and then that list needs to inform the tourists
                 }
             }
         }
