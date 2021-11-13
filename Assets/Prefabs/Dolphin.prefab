@@ -120,7 +120,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1103157740799168943}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: -0, z: 8.28}
+  m_LocalPosition: {x: 0, y: -0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1103157739561175675}
@@ -139,6 +139,8 @@ GameObject:
   - component: {fileID: 1103157741332840307}
   - component: {fileID: 1103157741332840316}
   - component: {fileID: 1103157741332840306}
+  - component: {fileID: 2247871321388444471}
+  - component: {fileID: 6456802816235938905}
   m_Layer: 0
   m_Name: Dolphin
   m_TagString: Dolphin
@@ -216,3 +218,31 @@ MonoBehaviour:
   timeToTarget: 0.1
   smoothing: 1
   numSamplesForSmoothing: 5
+--- !u!114 &2247871321388444471
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1103157741332840318}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d984780995c5242bb975bf5ddb42db02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  deathTimer: 0
+  maxDeathTime: 10
+  isDying: 0
+--- !u!135 &6456802816235938905
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1103157741332840318}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 7
+  m_Center: {x: 0, y: 0, z: 0}

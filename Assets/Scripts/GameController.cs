@@ -20,9 +20,14 @@ public class GameController : MonoBehaviour
     public int currentLevel = 0;
     private bool isPlayingGame = false;
 
+    [SerializeField] private bool generateMenuLevelEnabled = true;
+
     private void Start()
     {
-        generateMenuLevel();
+        if (generateMenuLevelEnabled)
+        {
+            generateMenuLevel();
+        }    
 
         // needs some code to populate the dolphin and patrol boats list
         // could do find objects with tags or add them when they are spawned?

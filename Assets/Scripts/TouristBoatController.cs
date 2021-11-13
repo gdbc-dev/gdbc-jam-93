@@ -31,6 +31,7 @@ public class TouristBoatController : MonoBehaviour
         gc = GameObject.Find("Main Camera").GetComponent<GameController>();
 
         puTarget = ReturnNearestaIRigidbody(gc.aliveDolphins);
+        evadeTarget = ReturnNearestaIRigidbody(gc.patrolBoats);
     }
 
     private void Update()
@@ -65,7 +66,6 @@ public class TouristBoatController : MonoBehaviour
         {
             accel += evadeAccel;
         }
-        // if not, go for those godamn dolphins
         else
         {
             puAccel = pu.GetSteering(puTarget);

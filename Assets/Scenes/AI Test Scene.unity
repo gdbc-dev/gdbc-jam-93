@@ -1218,6 +1218,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerBoat (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 8953457121610363347, guid: 526253674b80e40b39b20d78063e06f4, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8953457121610363358, guid: 526253674b80e40b39b20d78063e06f4, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8953457121610363358, guid: 526253674b80e40b39b20d78063e06f4, type: 3}
       propertyPath: pursueTarget
       value: 
@@ -2883,6 +2891,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1103157740799168942, guid: 31b013a4a78da495797d1da3f388dfbf, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1103157741332840317, guid: 31b013a4a78da495797d1da3f388dfbf, type: 3}
       propertyPath: m_RootOrder
       value: 9
@@ -2897,7 +2909,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1103157741332840317, guid: 31b013a4a78da495797d1da3f388dfbf, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 8.49
       objectReference: {fileID: 0}
     - target: {fileID: 1103157741332840317, guid: 31b013a4a78da495797d1da3f388dfbf, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2941,21 +2953,9 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 3054030194625311860, guid: 770d1e92289a846b189c1dfd1e413429, type: 3}
-      propertyPath: puTarget
-      value: 
-      objectReference: {fileID: 1246844840}
-    - target: {fileID: 3054030194625311860, guid: 770d1e92289a846b189c1dfd1e413429, type: 3}
-      propertyPath: evadeTarget
-      value: 
-      objectReference: {fileID: 2008592424}
-    - target: {fileID: 3054030194625311860, guid: 770d1e92289a846b189c1dfd1e413429, type: 3}
       propertyPath: arriveTarget
       value: 
       objectReference: {fileID: 27925717}
-    - target: {fileID: 3054030194625311860, guid: 770d1e92289a846b189c1dfd1e413429, type: 3}
-      propertyPath: wallAvoidWeight
-      value: 4
-      objectReference: {fileID: 0}
     - target: {fileID: 3054030194625311861, guid: 770d1e92289a846b189c1dfd1e413429, type: 3}
       propertyPath: m_Name
       value: TouristBoat
@@ -3068,6 +3068,14 @@ PrefabInstance:
     - target: {fileID: 8953457121610363347, guid: 526253674b80e40b39b20d78063e06f4, type: 3}
       propertyPath: m_Name
       value: PlayerBoat
+      objectReference: {fileID: 0}
+    - target: {fileID: 8953457121610363347, guid: 526253674b80e40b39b20d78063e06f4, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8953457121610363358, guid: 526253674b80e40b39b20d78063e06f4, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8953457121610363358, guid: 526253674b80e40b39b20d78063e06f4, type: 3}
       propertyPath: pursueTarget
