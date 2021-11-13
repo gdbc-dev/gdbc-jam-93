@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityMovementAI;
 
 public class DolphinController : MonoBehaviour
 {
@@ -9,6 +10,12 @@ public class DolphinController : MonoBehaviour
     public bool isUnwell;
 
     List<GameObject> nearbyTourists = new List<GameObject>();
+
+    private void OnEnable()
+    {
+        // add to the dolphins list
+        GameController.instance.addDolphin(GetComponent<MovementAIRigidbody>());
+    }
 
     // Update is called once per frame
     void Update()

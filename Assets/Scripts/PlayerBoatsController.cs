@@ -28,6 +28,11 @@ public class PlayerBoatsController : MonoBehaviour
     [SerializeField] float maxPursueDistance; // how far to stray from patrol
     // the max pursue distance should possibly be dynamic based on size of patrol route?
 
+    private void OnEnable()
+    {
+        // add to the patrol boats list
+        GameController.instance.addPatrolBoat(GetComponent<MovementAIRigidbody>());
+    }
 
     // Start is called before the first frame update
     void Start()

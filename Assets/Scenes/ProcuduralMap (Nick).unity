@@ -385,7 +385,14 @@ MonoBehaviour:
     numIslands: 64
     numShips: 3
     numTourists: 3
+  aliveDolphins: []
+  patrolBoats: []
+  playerShipsPrefabs: []
+  touristShipsPrefabs: []
+  dolphinsPrefabs: []
+  environmentPrefabs: []
   currentLevel: 0
+  generateMenuLevelEnabled: 1
 --- !u!4 &211445441
 Transform:
   m_ObjectHideFlags: 0

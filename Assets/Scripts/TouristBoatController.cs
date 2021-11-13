@@ -11,7 +11,6 @@ public class TouristBoatController : MonoBehaviour
     Evade evade;
     WallAvoidance wa;
     Pursue pu;
-    GameController gc;
 
     // Variables
     [SerializeField] MovementAIRigidbody evadeTarget, puTarget;
@@ -28,10 +27,9 @@ public class TouristBoatController : MonoBehaviour
         evade = GetComponent<Evade>();
         wa = GetComponent<WallAvoidance>();
         pu = GetComponent<Pursue>();
-        gc = GameObject.Find("Main Camera").GetComponent<GameController>();
 
-        puTarget = ReturnNearestaIRigidbody(gc.aliveDolphins);
-        evadeTarget = ReturnNearestaIRigidbody(gc.patrolBoats);
+        puTarget = ReturnNearestaIRigidbody(GameController.instance.aliveDolphins);
+        evadeTarget = ReturnNearestaIRigidbody(GameController.instance.patrolBoats);
     }
 
     private void Update()
@@ -41,7 +39,8 @@ public class TouristBoatController : MonoBehaviour
         {
             timeOfNextDistanceCheck = Time.time + distanceCheckFrequency;
 
-            var nearestPatrol = ReturnNearestaIRigidbody(gc.patrolBoats);
+            var nearestPatrol = ReturnNearestaIRigidbody(
+                GameController.instance.patrolBoats);
 
             if (evadeTarget != nearestPatrol)
             {
