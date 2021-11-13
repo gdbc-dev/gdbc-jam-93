@@ -15,10 +15,15 @@ public class PlayerBoatsController : MonoBehaviour
     // Variables
     public LinePath path;
     [SerializeField] MovementAIRigidbody pursueTarget;
+    Vector3 accel;
+    List<MovementAIRigidbody> futureTargets = new List<MovementAIRigidbody>();
+    Vector3 centrePointOfPatrol;
 
     // Behaviour Settings
     [SerializeField] bool pathLoop;
     [SerializeField] bool reversePath;
+    [SerializeField] float wallAvoidWeight;
+    [SerializeField] float maxPursueDistance; // how far to stray from patrol
 
 
     // Start is called before the first frame update
@@ -30,11 +35,26 @@ public class PlayerBoatsController : MonoBehaviour
         pu = GetComponent<Pursue>();
 
         path.CalcDistances();
+        centrePointOfPatrol = ReturnCentrePointOfPatrolRoute(path.nodes);
     }
 
+    private void Update()
+    {
+        // check if you're pursuing too far away from the patrol route
+        if (pursueTarget != null)
+        {
+            if (Vector3.Distance(transform.position,centrePointOfPatrol) >
+                maxPursueDistance)
+            {
+                pursueTarget = null;
+            }
+        }
+    }
 
     private void FixedUpdate()
     {
+        accel = Vector3.zero;
+
         path.Draw();
 
         if (reversePath && fp.IsAtEndOfPath(path))
@@ -44,43 +64,81 @@ public class PlayerBoatsController : MonoBehaviour
 
         var waAccel = wa.GetSteering();
 
-        
-        if (waAccel.magnitude > 0.005f)
-        {
-            sb.Steer(waAccel);
-        }
-        else if (pursueTarget != null)
+        accel += waAccel * wallAvoidWeight;
+
+        if (pursueTarget != null)
         {
             var puAccel = pu.GetSteering(pursueTarget);
-            sb.Steer(puAccel);
+            accel += puAccel;
+            
         }
         else
         {
-            Vector3 accel = fp.GetSteering(path, pathLoop);
-            sb.Steer(accel);
+            var arriveAccel = fp.GetSteering(path, pathLoop);
+            accel += arriveAccel;
         }
 
+        sb.Steer(accel);
         sb.LookWhereYoureGoing();
     }
 
     private void OnTriggerEnter(Collider other)
     {
+        // a tourist has been spotted!
         if (other.CompareTag("Tourist"))
         {
-            pursueTarget = other.GetComponent<MovementAIRigidbody>();
+            var targetAiRb = other.GetComponent<MovementAIRigidbody>();
+            // if you don't have a target, pick it up
+            if (pursueTarget == null)
+            {
+                pursueTarget = targetAiRb;
+            }
+            // if you already do, add it to a list to potentially target in future
+            else
+            {
+                futureTargets.Add(targetAiRb);
+            }
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
+        // a tourist is no longer in sight...
         if (other.CompareTag("Tourist"))
         {
-            var targetRB = other.GetComponent<MovementAIRigidbody>();
-            // if it is the target that I am already chasing, then remove it
-            if (pursueTarget == targetRB)
+            var targetAiRb = other.GetComponent<MovementAIRigidbody>();
+            // if it is the target that I am chasing, then remove it
+            if (pursueTarget == targetAiRb)
             {
                 pursueTarget = null;
+                // and check if there are any other targets in range to go after
+                if (futureTargets.Count > 0)
+                {
+                    pursueTarget = futureTargets[0];
+                }
+            }
+            // if it is one of my potential future targets, remove it from the list
+            else if (futureTargets.Contains(targetAiRb))
+            {
+                futureTargets.Remove(targetAiRb);
             }
         }
+    }
+
+    private Vector3 ReturnCentrePointOfPatrolRoute(Vector3[] _waypointsArray)
+    {
+        if (_waypointsArray.Length == 0)
+        {
+            return Vector3.zero;
+        }
+
+        var meanVector = Vector3.zero;
+
+        foreach (Vector3 pos in _waypointsArray)
+        {
+            meanVector += pos;
+        }
+
+        return (meanVector / _waypointsArray.Length);
     }
 }

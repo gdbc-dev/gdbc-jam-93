@@ -14,8 +14,10 @@ public class TouristBoatController : MonoBehaviour
     // Variables
     [SerializeField] Transform arriveTarget;
     [SerializeField] MovementAIRigidbody evadeTarget;
-    [SerializeField] Vector3 evadeAccel, arriveAccel, wallAvoidAccel, accel;
+    [SerializeField] Vector3 evadeAccel, arriveAccel, waAccel, accel;
     [SerializeField] float evadeThreshold;
+    [SerializeField] float wallAvoidWeight;
+
 
     // Start is called before the first frame update
     void Start()
@@ -30,8 +32,11 @@ public class TouristBoatController : MonoBehaviour
     {
         evadeAccel = evade.GetSteering(evadeTarget);
         arriveAccel = sb.Arrive(arriveTarget.position);
-        wallAvoidAccel = wa.GetSteering();
+        waAccel = wa.GetSteering();
 
+        accel = Vector3.zero;
+
+        /*
         if (wallAvoidAccel.magnitude > 0.005f)
         {
             accel = wallAvoidAccel;
@@ -44,7 +49,19 @@ public class TouristBoatController : MonoBehaviour
         {
             accel = arriveAccel;
         }
-        
+        */
+
+        accel += waAccel * wallAvoidWeight;
+
+        if (evadeAccel.magnitude > evadeThreshold)
+        {
+            accel += evadeAccel;
+        }
+        else
+        {
+            accel += arriveAccel;
+        }
+
         sb.Steer(accel);
         sb.LookWhereYoureGoing();
     }

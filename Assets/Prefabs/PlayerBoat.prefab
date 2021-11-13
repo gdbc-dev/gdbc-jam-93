@@ -100,6 +100,7 @@ MonoBehaviour:
   pursueTarget: {fileID: 0}
   pathLoop: 1
   reversePath: 0
+  wallAvoidWeight: 4
 --- !u!54 &8953457121610363357
 Rigidbody:
   m_ObjectHideFlags: 0

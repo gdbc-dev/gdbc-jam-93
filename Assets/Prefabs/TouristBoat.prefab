@@ -447,9 +447,10 @@ MonoBehaviour:
   evadeTarget: {fileID: 0}
   evadeAccel: {x: 0, y: 0, z: 0}
   arriveAccel: {x: 0, y: 0, z: 0}
-  wallAvoidAccel: {x: 0, y: 0, z: 0}
+  waAccel: {x: 0, y: 0, z: 0}
   accel: {x: 0, y: 0, z: 0}
   evadeThreshold: 5
+  wallAvoidWeight: 4
 --- !u!114 &3054030194625311869
 MonoBehaviour:
   m_ObjectHideFlags: 0
