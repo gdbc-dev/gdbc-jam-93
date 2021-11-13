@@ -311,4 +311,9 @@ public class GameController : MonoBehaviour
     {
         isQuitting = true;
     }
+
+    public int getMapSize()
+    {
+        return map.GetLength(0);
+    }
 }
