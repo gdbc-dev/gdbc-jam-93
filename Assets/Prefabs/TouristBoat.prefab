@@ -498,7 +498,7 @@ MonoBehaviour:
   wallDetection: 1
   castMask:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 0
   wallAvoidDistance: 20
   mainWhiskerLen: 30
   sideWhiskerLen: 30
