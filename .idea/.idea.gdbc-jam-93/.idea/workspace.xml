@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9a36e575-d45d-41ea-977a-54facfa578ef" name="Default Changelist" comment="" />
+    <list default="true" id="9a36e575-d45d-41ea-977a-54facfa578ef" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameController.cs" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -93,7 +95,7 @@
       <option name="presentableId" value="Default" />
       <updated>1636756460584</updated>
       <workItem from="1636756463345" duration="14182000" />
-      <workItem from="1636810718107" duration="11814000" />
+      <workItem from="1636810718107" duration="11843000" />
     </task>
     <servers />
   </component>

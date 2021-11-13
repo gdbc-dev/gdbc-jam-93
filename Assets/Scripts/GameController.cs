@@ -171,17 +171,17 @@ public class GameController : MonoBehaviour
         this.patrolBoats.Add(boat);
     }
     
-    public void addTouristShip(MovementAIRigidbody ship)
+    public void addTouristBoat(MovementAIRigidbody ship)
     {
-        this.touristShips.Add(ship);
+        this.touristBoats.Add(ship);
     }
     public void addDolphin(MovementAIRigidbody dolphin)
     {
         this.aliveDolphins.Add(dolphin);
     }
-    public void removeTouristShip(MovementAIRigidbody ship)
+    public void removeTouristBoat(MovementAIRigidbody ship)
     {
-        this.touristShips.Remove(ship);
+        this.touristBoats.Remove(ship);
     }
 
 
