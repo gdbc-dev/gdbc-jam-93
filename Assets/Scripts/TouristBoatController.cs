@@ -32,6 +32,11 @@ public class TouristBoatController : MonoBehaviour
         evadeTarget = ReturnNearestaIRigidbody(GameController.instance.patrolBoats);
     }
 
+    private void OnEnable()
+    {
+        GameController.instance.addTouristBoat(GetComponent<MovementAIRigidbody>());
+    }
+
     private void Update()
     {
         // check if you should be evading a closer patrol boat
