@@ -368,6 +368,7 @@ MonoBehaviour:
   levels:
   - worldSize: 64
     numIslands: 10
+    surviveTime: 30
     numShips: 1
     numDolphins: 2
     touristSpawns:
@@ -376,6 +377,7 @@ MonoBehaviour:
     - spawnDelay: 10
   - worldSize: 96
     numIslands: 20
+    surviveTime: 60
     numShips: 2
     numDolphins: 3
     touristSpawns:
@@ -386,6 +388,7 @@ MonoBehaviour:
     - spawnDelay: 7
   - worldSize: 128
     numIslands: 70
+    surviveTime: 60
     numShips: 3
     numDolphins: 3
     touristSpawns:
@@ -398,6 +401,7 @@ MonoBehaviour:
     - spawnDelay: 5
   - worldSize: 180
     numIslands: 125
+    surviveTime: 60
     numShips: 3
     numDolphins: 3
     touristSpawns:
@@ -412,6 +416,7 @@ MonoBehaviour:
   menuLevel:
     worldSize: 256
     numIslands: 64
+    surviveTime: 60
     numShips: 3
     numDolphins: 3
     touristSpawns: []
@@ -455,7 +460,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 16
   lineRenderer: {fileID: 582069788}
 --- !u!1 &582069787
 GameObject:

@@ -30,7 +30,9 @@ public class GameController : MonoBehaviour
     private int shipsLeftToSpawn;
     private List<TouristData> touristShipsToSpawn;
     private float spawnTimer;
+    private float surviveeTimer;
     private bool isQuitting = false;
+    private int lastLevelGenerated = -1;
 
     public enum GAME_STATE
     {
@@ -69,7 +71,7 @@ public class GameController : MonoBehaviour
     [ContextMenu("Generate Menu Level")]
     public void generateMenuLevel()
     {
-        mapGenerator.generateMap(menuLevel);
+        map = mapGenerator.generateMap(menuLevel);
     }
 
     [ContextMenu("Win Level")]
@@ -102,6 +104,7 @@ public class GameController : MonoBehaviour
 
     public void startLevel(int levelNumber)
     {
+        surviveeTimer = 0;
         for (int i = 0; i < aliveDolphins.Count; i++)
         {
             Destroy(aliveDolphins[i].gameObject);
@@ -118,10 +121,21 @@ public class GameController : MonoBehaviour
         }
 
         patrolBoats.Clear();
+        
+        for (int i = 0; i < touristBoats.Count; i++)
+        {
+            if (touristBoats[i] && touristBoats[i].gameObject)
+            {
+                Destroy(touristBoats[i].gameObject);
+            }
+        }
+
+        touristBoats.Clear();
 
         if (levels.Count >= levelNumber)
         {
-            generate(levels[levelNumber]);
+            generate(levels[levelNumber], lastLevelGenerated != currentLevelNum);
+            lastLevelGenerated = currentLevelNum;
         }
         else
         {
@@ -159,6 +173,14 @@ public class GameController : MonoBehaviour
                     touristShipsToSpawn.RemoveAt(0);
                 }
             }
+
+            surviveeTimer += Time.deltaTime;
+
+            if (surviveeTimer >= levels[currentLevelNum].surviveTime)
+            {
+                Debug.Log("Win Level");
+                winLevel();
+            }
         }
     }
 
@@ -178,9 +200,13 @@ public class GameController : MonoBehaviour
     }
 
 
-    private void generate(LevelData levelData)
+    private void generate(LevelData levelData, bool newMap)
     {
-        map = mapGenerator.generateMap(levelData);
+        if (newMap)
+        {
+            map = mapGenerator.generateMap(levelData);
+        }
+
         generateEntities(levelData);
     }
 
