@@ -117,6 +117,7 @@ public class TouristBoatController : MonoBehaviour
                 accel += puAccel;
                 touristStatus = TouristStatus.PursuingDolphin;
             }
+            rb.velocity = Vector3.zero;
         }
 
         sb.Steer(accel);

@@ -453,6 +453,7 @@ MonoBehaviour:
   accel: {x: 0, y: 0, z: 0}
   evadeThreshold: 5
   wallAvoidWeight: 4
+  touristStatus: 0
 --- !u!114 &3054030194625311869
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -499,10 +500,10 @@ MonoBehaviour:
   castMask:
     serializedVersion: 2
     m_Bits: 64
-  wallAvoidDistance: 10
-  mainWhiskerLen: 15
-  sideWhiskerLen: 15
-  sideWhiskerAngle: 15
+  wallAvoidDistance: 5
+  mainWhiskerLen: 5
+  sideWhiskerLen: 5
+  sideWhiskerAngle: 10
 --- !u!114 &-4104252552280471837
 MonoBehaviour:
   m_ObjectHideFlags: 0
