@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 using UnityMovementAI;
 
@@ -12,6 +13,7 @@ public class GameController : MonoBehaviour
     public LevelData menuLevel;
     public List<MovementAIRigidbody> aliveDolphins;
     public List<MovementAIRigidbody> patrolBoats;
+    public List<MovementAIRigidbody> touristShips;
 
     public GameObject[] playerShipsPrefabs;
     public GameObject[] touristShipsPrefabs;
@@ -168,11 +170,21 @@ public class GameController : MonoBehaviour
     {
         this.patrolBoats.Add(boat);
     }
-
+    
+    public void addTouristShip(MovementAIRigidbody ship)
+    {
+        this.touristShips.Add(ship);
+    }
     public void addDolphin(MovementAIRigidbody dolphin)
     {
         this.aliveDolphins.Add(dolphin);
     }
+    public void removeTouristShip(MovementAIRigidbody ship)
+    {
+        this.touristShips.Remove(ship);
+    }
+
+
     
     public void removePatrolBoat(MovementAIRigidbody boat)
     {
