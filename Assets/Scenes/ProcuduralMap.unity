@@ -378,17 +378,37 @@ MonoBehaviour:
     numIslands: 20
     numShips: 2
     numDolphins: 3
-    touristSpawns: []
+    touristSpawns:
+    - spawnDelay: 0
+    - spawnDelay: 4
+    - spawnDelay: 8
+    - spawnDelay: 7
+    - spawnDelay: 7
   - worldSize: 128
     numIslands: 70
     numShips: 3
     numDolphins: 3
-    touristSpawns: []
+    touristSpawns:
+    - spawnDelay: 0
+    - spawnDelay: 4
+    - spawnDelay: 8
+    - spawnDelay: 7
+    - spawnDelay: 7
+    - spawnDelay: 5
+    - spawnDelay: 5
   - worldSize: 180
     numIslands: 125
     numShips: 3
     numDolphins: 3
-    touristSpawns: []
+    touristSpawns:
+    - spawnDelay: 0
+    - spawnDelay: 4
+    - spawnDelay: 8
+    - spawnDelay: 7
+    - spawnDelay: 7
+    - spawnDelay: 7
+    - spawnDelay: 7
+    - spawnDelay: 7
   menuLevel:
     worldSize: 256
     numIslands: 64
