@@ -47,6 +47,7 @@
             <e p="Wander1.cs" t="Include" />
             <e p="Wander2.cs" t="Include" />
           </e>
+          <e p="CameraTargetMovement.cs" t="Include" />
           <e p="DolphinController.cs" t="Include" />
           <e p="Example.cs" t="Include" />
           <e p="GameController.cs" t="Include" />

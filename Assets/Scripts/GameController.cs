@@ -30,7 +30,9 @@ public class GameController : MonoBehaviour
     private int shipsLeftToSpawn;
     private List<TouristData> touristShipsToSpawn;
     private float spawnTimer;
+    private float surviveeTimer;
     private bool isQuitting = false;
+    private int lastLevelGenerated = -1;
 
     public enum GAME_STATE
     {
@@ -69,7 +71,7 @@ public class GameController : MonoBehaviour
     [ContextMenu("Generate Menu Level")]
     public void generateMenuLevel()
     {
-        mapGenerator.generateMap(menuLevel);
+        map = mapGenerator.generateMap(menuLevel);
     }
 
     [ContextMenu("Win Level")]
@@ -102,6 +104,7 @@ public class GameController : MonoBehaviour
 
     public void startLevel(int levelNumber)
     {
+        surviveeTimer = 0;
         for (int i = 0; i < aliveDolphins.Count; i++)
         {
             Destroy(aliveDolphins[i].gameObject);
@@ -118,10 +121,21 @@ public class GameController : MonoBehaviour
         }
 
         patrolBoats.Clear();
+        
+        for (int i = 0; i < touristBoats.Count; i++)
+        {
+            if (touristBoats[i] && touristBoats[i].gameObject)
+            {
+                Destroy(touristBoats[i].gameObject);
+            }
+        }
+
+        touristBoats.Clear();
 
         if (levels.Count >= levelNumber)
         {
-            generate(levels[levelNumber]);
+            generate(levels[levelNumber], lastLevelGenerated != currentLevelNum);
+            lastLevelGenerated = currentLevelNum;
         }
         else
         {
@@ -159,6 +173,14 @@ public class GameController : MonoBehaviour
                     touristShipsToSpawn.RemoveAt(0);
                 }
             }
+
+            surviveeTimer += Time.deltaTime;
+
+            if (surviveeTimer >= levels[currentLevelNum].surviveTime)
+            {
+                Debug.Log("Win Level");
+                winLevel();
+            }
         }
     }
 
@@ -178,9 +200,13 @@ public class GameController : MonoBehaviour
     }
 
 
-    private void generate(LevelData levelData)
+    private void generate(LevelData levelData, bool newMap)
     {
-        map = mapGenerator.generateMap(levelData);
+        if (newMap)
+        {
+            map = mapGenerator.generateMap(levelData);
+        }
+
         generateEntities(levelData);
     }
 
@@ -213,14 +239,15 @@ public class GameController : MonoBehaviour
 
     private Vector3 getEdgeLocation()
     {
+        float offScreenAmount = 5;
         if (Random.Range(0, 1f) > .5f)
         {
             // Top or bottom spawn
-            return new Vector3(Random.Range(0, map.GetLength(0)), 0, Random.Range(0, 1f) > .5f ? 0 : map.GetLength(1));
+            return new Vector3(Random.Range(0, map.GetLength(0)), 0, Random.Range(0, 1f) > .5f ? -offScreenAmount : map.GetLength(1) + offScreenAmount);
         }
 
         // Left or right spawn
-        return new Vector3(Random.Range(0, 1f) > .5f ? 0 : map.GetLength(0), 0, Random.Range(0, map.GetLength(1)));
+        return new Vector3(Random.Range(0, 1f) > .5f ? -offScreenAmount : map.GetLength(0) + offScreenAmount, 0, Random.Range(0, map.GetLength(1)));
     }
 
     private Vector3 getWaterLocation()
@@ -287,8 +314,8 @@ public class GameController : MonoBehaviour
             List<Vector3> currentPath = shipPaths[i];
 
             GameObject gameObject = Instantiate(playerShipsPrefabs[Random.Range(0, playerShipsPrefabs.Length)],
-                new Vector3(currentPath[0].x, 0, currentPath[0].y), Quaternion.Euler(0, Random.Range(0, 360), 0));
-            gameObject.GetComponent<Rigidbody>().position = new Vector3(currentPath[i].x, 0, currentPath[i].y);
+                new Vector3(currentPath[0].x, 0, currentPath[0].z), Quaternion.Euler(0, Random.Range(0, 360), 0));
+            gameObject.GetComponent<Rigidbody>().position = new Vector3(currentPath[i].x, 0, currentPath[i].z);
             gameObject.GetComponent<PlayerBoatsController>().path = new LinePath(currentPath.ToArray());
         }
 
@@ -303,11 +330,16 @@ public class GameController : MonoBehaviour
             return map[x, y] == 0;
         }
 
-        return false;
+        return true;
     }
 
     private void OnApplicationQuit()
     {
         isQuitting = true;
+    }
+
+    public int getMapSize()
+    {
+        return map.GetLength(0);
     }
 }

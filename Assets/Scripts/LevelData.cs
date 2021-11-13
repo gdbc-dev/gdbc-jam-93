@@ -6,7 +6,7 @@ public class LevelData
 {
     public int worldSize = 128;
     public int numIslands = 35;
-
+    public float surviveTime = 60;
     public int numShips = 3;
     public int numDolphins = 3;
     public List<TouristData> touristSpawns;

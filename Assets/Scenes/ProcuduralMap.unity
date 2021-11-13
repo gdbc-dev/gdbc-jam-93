@@ -368,6 +368,7 @@ MonoBehaviour:
   levels:
   - worldSize: 64
     numIslands: 10
+    surviveTime: 30
     numShips: 1
     numDolphins: 2
     touristSpawns:
@@ -376,22 +377,46 @@ MonoBehaviour:
     - spawnDelay: 10
   - worldSize: 96
     numIslands: 20
+    surviveTime: 60
     numShips: 2
     numDolphins: 3
-    touristSpawns: []
+    touristSpawns:
+    - spawnDelay: 0
+    - spawnDelay: 4
+    - spawnDelay: 8
+    - spawnDelay: 7
+    - spawnDelay: 7
   - worldSize: 128
     numIslands: 70
+    surviveTime: 60
     numShips: 3
     numDolphins: 3
-    touristSpawns: []
+    touristSpawns:
+    - spawnDelay: 0
+    - spawnDelay: 4
+    - spawnDelay: 8
+    - spawnDelay: 7
+    - spawnDelay: 7
+    - spawnDelay: 5
+    - spawnDelay: 5
   - worldSize: 180
     numIslands: 125
+    surviveTime: 60
     numShips: 3
     numDolphins: 3
-    touristSpawns: []
+    touristSpawns:
+    - spawnDelay: 0
+    - spawnDelay: 4
+    - spawnDelay: 8
+    - spawnDelay: 7
+    - spawnDelay: 7
+    - spawnDelay: 7
+    - spawnDelay: 7
+    - spawnDelay: 7
   menuLevel:
     worldSize: 256
     numIslands: 64
+    surviveTime: 60
     numShips: 3
     numDolphins: 3
     touristSpawns: []
@@ -435,7 +460,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 16
   lineRenderer: {fileID: 582069788}
 --- !u!1 &582069787
 GameObject:
@@ -790,7 +815,6 @@ MonoBehaviour:
   - {fileID: 1737419297715478, guid: 4f925478599cb734590ff58c49a21803, type: 3}
   waterDoodads:
   - {fileID: 1889486365217932, guid: 90c7fc433604f96478dc023f03f17ad7, type: 3}
-  - {fileID: 1517687235147230, guid: 53e28efe3a8e4864aa13ca028c62fe87, type: 3}
   waterBesideLand:
   - {fileID: 1815794713128316, guid: 035adeb57cfb8c64e9e6985908f63572, type: 3}
   - {fileID: 1486004834697146, guid: 5881b4c54ede2b1468377a625b5a05fe, type: 3}
