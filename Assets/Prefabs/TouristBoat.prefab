@@ -341,6 +341,7 @@ GameObject:
   - component: {fileID: 3054030194625311869}
   - component: {fileID: 3054030194625311865}
   - component: {fileID: 3054030194625311868}
+  - component: {fileID: -4104252552280471837}
   m_Layer: 0
   m_Name: TouristBoat
   m_TagString: Tourist
@@ -501,6 +502,19 @@ MonoBehaviour:
   mainWhiskerLen: 30
   sideWhiskerLen: 30
   sideWhiskerAngle: 15
+--- !u!114 &-4104252552280471837
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3054030194625311861}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2da78e0f74f9cf449361cf180272705, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxPrediction: 1
 --- !u!1 &3054030194626733507
 GameObject:
   m_ObjectHideFlags: 0

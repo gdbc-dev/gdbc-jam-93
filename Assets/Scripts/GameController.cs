@@ -2,12 +2,14 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
+using UnityMovementAI;
 
 public class GameController : MonoBehaviour
 {
     public MapGenerator mapGenerator;
     public List<LevelData> levels;
     public LevelData menuLevel;
+    public List<MovementAIRigidbody> aliveDolphins;
 
     public GameObject[] playerShipsPrefabs;
     public GameObject[] touristShipsPrefabs;
