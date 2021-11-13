@@ -1,20 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ContentModelStore">
-    <e p="C:\Users\Railor\.Rider2019.1\system\extResources" t="IncludeRecursive" />
-    <e p="C:\Users\Railor\.Rider2019.1\system\resharper-host\local\Transient\ReSharperHost\v191\SolutionCaches\_gdbc-jam-93.-1590298498.00" t="ExcludeRecursive" />
-    <e p="C:\Users\Railor\Documents\Coding\gdbc-jam-93" t="IncludeRecursive">
+    <e p="C:\Users\tyson\.Rider2019.2\system\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\tyson\.Rider2019.2\system\resharper-host\local\Transient\ReSharperHost\v192\SolutionCaches\_gdbc-jam-93.2134836114.00" t="ExcludeRecursive" />
+    <e p="C:\Users\tyson\Documents\Coding\gdbc-jam-93" t="IncludeRecursive">
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
-        <e p="Low Poly Paradise Islands" t="Include">
-          <e p="Read Me.txt" t="Include" />
-        </e>
         <e p="Scripts" t="Include">
+          <e p="AI" t="Include">
+            <e p="_Examples" t="Include">
+              <e p="ArriveUnit.cs" t="Include" />
+              <e p="ColAvoidUnit.cs" t="Include" />
+              <e p="EvadeUnit.cs" t="Include" />
+              <e p="FleeUnit.cs" t="Include" />
+              <e p="FlockingUnit.cs" t="Include" />
+              <e p="FollowPathUnit.cs" t="Include" />
+              <e p="HideUnit.cs" t="Include" />
+              <e p="InterposeUnit.cs" t="Include" />
+              <e p="OffsetPursuitUnit.cs" t="Include" />
+              <e p="PursueUnit.cs" t="Include" />
+              <e p="SeekUnit.cs" t="Include" />
+              <e p="WallAvoidanceUnit.cs" t="Include" />
+              <e p="Wander1Unit.cs" t="Include" />
+              <e p="Wander2Unit.cs" t="Include" />
+              <e p="WanderAvoidUnit.cs" t="Include" />
+            </e>
+            <e p="Cohesion.cs" t="Include" />
+            <e p="CollisionAvoidance.cs" t="Include" />
+            <e p="Evade.cs" t="Include" />
+            <e p="Flee.cs" t="Include" />
+            <e p="FollowPath.cs" t="Include" />
+            <e p="Hide.cs" t="Include" />
+            <e p="LinePath.cs" t="Include" />
+            <e p="MovementAIRigidbody.cs" t="Include" />
+            <e p="NearSensor.cs" t="Include" />
+            <e p="OffsetPursuit.cs" t="Include" />
+            <e p="Pursue.cs" t="Include" />
+            <e p="Separation.cs" t="Include" />
+            <e p="SteeringBasics.cs" t="Include" />
+            <e p="VelocityMatch.cs" t="Include" />
+            <e p="WallAvoidance.cs" t="Include" />
+            <e p="Wander1.cs" t="Include" />
+            <e p="Wander2.cs" t="Include" />
+          </e>
           <e p="Example.cs" t="Include" />
           <e p="Generation" t="Include">
             <e p="MapGenerator.cs" t="Include" />
             <e p="Noise.cs" t="Include" />
             <e p="NoiseSettings.cs" t="Include" />
+          </e>
+          <e p="PlayerBoatsController.cs" t="Include" />
+          <e p="TouristBoatController.cs" t="Include" />
+        </e>
+        <e p="Third Party Asset Packs" t="Include">
+          <e p="Dolphin" t="Include">
+            <e p="Scripts" t="Include">
+              <e p="ChangeBlendShape.cs" t="Include" />
+              <e p="ChangeButtonText.cs" t="Include" />
+              <e p="MouseOrbitImprovedMod.cs" t="Include" />
+              <e p="SimpleAnimate.cs" t="Include" />
+            </e>
+          </e>
+          <e p="Low Poly Paradise Islands" t="Include">
+            <e p="Read Me.txt" t="Include" />
           </e>
         </e>
       </e>
