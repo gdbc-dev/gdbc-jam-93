@@ -10,6 +10,7 @@ public class GameController : MonoBehaviour
     public List<LevelData> levels;
     public LevelData menuLevel;
     public List<MovementAIRigidbody> aliveDolphins;
+    public List<MovementAIRigidbody> patrolBoats;
 
     public GameObject[] playerShipsPrefabs;
     public GameObject[] touristShipsPrefabs;
@@ -22,6 +23,9 @@ public class GameController : MonoBehaviour
     private void Start()
     {
         generateMenuLevel();
+
+        // needs some code to populate the dolphin and patrol boats list
+        // could do find objects with tags or add them when they are spawned?
     }
 
     [ContextMenu("Start Game")]
