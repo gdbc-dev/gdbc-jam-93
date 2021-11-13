@@ -333,6 +333,73 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1 &211445439
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 211445441}
+  - component: {fileID: 211445440}
+  m_Layer: 0
+  m_Name: GameController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &211445440
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 211445439}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 601ae86d2cfd4066b6cbcf8eb03646b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mapGenerator: {fileID: 1593673958}
+  levels:
+  - worldSize: 64
+    numIslands: 10
+    numShips: 1
+    numTourists: 2
+  - worldSize: 96
+    numIslands: 20
+    numShips: 2
+    numTourists: 3
+  - worldSize: 128
+    numIslands: 70
+    numShips: 3
+    numTourists: 5
+  - worldSize: 180
+    numIslands: 125
+    numShips: 3
+    numTourists: 7
+  menuLevel:
+    worldSize: 256
+    numIslands: 64
+    numShips: 3
+    numTourists: 3
+  currentLevel: 0
+--- !u!4 &211445441
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 211445439}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 449.48813, y: -547.4269, z: 638.7328}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1010105445
 GameObject:
   m_ObjectHideFlags: 0
@@ -462,7 +529,7 @@ GameObject:
   - component: {fileID: 1593673959}
   - component: {fileID: 1593673958}
   m_Layer: 0
-  m_Name: TerrainManager
+  m_Name: MapGenerator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -480,7 +547,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfdc7c37a6174eb9a14e30f410b054f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  groundTilemap: {fileID: 2026053852}
   noiseSettings:
     normalizeMode: 0
     scale: 25
@@ -490,14 +556,12 @@ MonoBehaviour:
     seedOffset: 0
     offset: {x: 5.52, y: -35.49}
   size: 128
-  groundTile: {fileID: 11400000, guid: 8903e93d8628a324cbf7129ba37269e1, type: 2}
   distanceFalloff: 0.26
   minHeightForLand: 0.58
   autoGenerate: 0
   minIslandSize: 16
   maxIslandSize: 32
   maxIslands: 25
-  groundPrefab: {fileID: 0}
   groundEdgePrefabs:
   - {fileID: 1258712568071856, guid: 0c75154c4fc68e9468d08eebd25883ae, type: 3}
   - {fileID: 1584586519996402, guid: e1d99045198462c469398bb7b073aee1, type: 3}

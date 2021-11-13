@@ -44,11 +44,13 @@
             <e p="Wander2.cs" t="Include" />
           </e>
           <e p="Example.cs" t="Include" />
+          <e p="GameController.cs" t="Include" />
           <e p="Generation" t="Include">
             <e p="MapGenerator.cs" t="Include" />
             <e p="Noise.cs" t="Include" />
             <e p="NoiseSettings.cs" t="Include" />
           </e>
+          <e p="LevelData.cs" t="Include" />
           <e p="PlayerBoatsController.cs" t="Include" />
           <e p="TouristBoatController.cs" t="Include" />
         </e>

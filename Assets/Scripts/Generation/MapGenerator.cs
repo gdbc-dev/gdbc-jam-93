@@ -7,11 +7,9 @@ using Random = UnityEngine.Random;
 
 public class MapGenerator : MonoBehaviour
 {
-    public Tilemap groundTilemap;
     public NoiseSettings noiseSettings;
     public int size = 180;
 
-    public TileBase groundTile;
     public float distanceFalloff = .6f;
     public float minHeightForLand = .5f;
 
@@ -20,7 +18,6 @@ public class MapGenerator : MonoBehaviour
     public int maxIslandSize = 32;
     private float timer = 0;
     public int maxIslands = 25;
-    public GameObject groundPrefab;
     public GameObject[] groundEdgePrefabs;
     public GameObject[] groundMainsPrefab;
     public GameObject[] outerDoodads;
@@ -32,7 +29,6 @@ public class MapGenerator : MonoBehaviour
 
     private void Start()
     {
-        generateMap();
     }
 
     public void Update()
@@ -42,84 +38,34 @@ public class MapGenerator : MonoBehaviour
             timer += Time.deltaTime;
             if (timer >= 0)
             {
-                generateMap();
+                editorGenerateMap();
                 timer -= .5f;
             }
         }
 
         if (Input.GetKeyDown(KeyCode.K))
         {
-            generateMap();
+            editorGenerateMap();
         }
     }
-
-    int triangleIndex = 0;
-
-    [ContextMenu("Generate  Mesh")]
-    private void generateMesh()
-    {
-        triangleIndex = 0;
-        int width = 128;
-        int height = 128;
-        float scale = 5;
-        int newSize = width * height;
-        Vector3[] vertices = new Vector3[newSize * 4];
-        Vector2[] uvs = new Vector2[newSize * 4];
-        Vector3[] normals = new Vector3[newSize * 4];
-        int[] triangles = new int[newSize * 6];
-        for (int y = 0; y < height; y++)
-        {
-            for (int x = 0; x < width; x++)
-            {
-                int vertIndex = (y * width + x) * 4;
-                vertices[vertIndex] = new Vector3(x * scale, 0, (y + 1) * scale);
-                vertices[vertIndex + 1] = new Vector3((x + 1) * scale, 0, (y + 1) * scale);
-                vertices[vertIndex + 2] = new Vector3((x + 1) * scale, 0, y * scale);
-                vertices[vertIndex + 3] = new Vector3(x * scale, 0, y * scale);
-                normals[vertIndex] = Vector3.down;
-                normals[vertIndex + 1] = Vector3.down;
-                normals[vertIndex + 2] = Vector3.down;
-                normals[vertIndex + 3] = Vector3.down;
-                uvs[vertIndex] = new Vector2(vertices[vertIndex].x / width * scale, vertices[vertIndex].z / height * scale);
-                uvs[vertIndex + 1] = new Vector2(vertices[vertIndex + 1].x / width * scale, vertices[vertIndex + 1].z / height * scale);
-                uvs[vertIndex + 2] = new Vector2(vertices[vertIndex + 2].x / width * scale, vertices[vertIndex + 2].z / height * scale);
-                uvs[vertIndex + 3] = new Vector2(vertices[vertIndex + 3].x / width * scale, vertices[vertIndex + 3].z / height * scale);
-//                normals[vertIndex] = new Vector3(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
-//                normals[vertIndex + 1] = new Vector3(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
-//                normals[vertIndex + 2] = new Vector3(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
-//                normals[vertIndex + 3] = new Vector3(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
-                AddTriangle(triangles, vertIndex, vertIndex + 2, vertIndex + 3);
-                AddTriangle(triangles, vertIndex, vertIndex + 1, vertIndex + 2);
-            }
-        }
-
-        Mesh mesh = new Mesh();
-        mesh.vertices = vertices;
-        mesh.triangles = triangles;
-        mesh.uv = uvs;
-//        mesh.normals = normals;
-        mesh.RecalculateNormals();
-
-        AssetDatabase.CreateAsset(mesh, "Assets/Meshes/waterMesh2.mesh");
-        AssetDatabase.SaveAssets();
-    }
-
-    public void AddTriangle(int[] triangles, int a, int b, int c)
-    {
-        triangles[triangleIndex] = a;
-        triangles[triangleIndex + 1] = b;
-        triangles[triangleIndex + 2] = c;
-        triangleIndex += 3;
-    }
-
 
     [ContextMenu("New Map")]
-    private void generateMap()
+    public void editorGenerateMap()
     {
+        generateMap(new LevelData
+        {
+            numIslands = maxIslands,
+            worldSize = size
+        });
+    }
+
+
+    public void generateMap(LevelData levelData)
+    {
+        int numIslands = levelData.numIslands;
+        int worldSize = levelData.worldSize;
         List<IslandData> islands = new List<IslandData>();
-        for (int i = 0;
-            i < maxIslands;
-            i++)
+        for (int i = 0; i < numIslands; i++)
         {
             IslandData islandData = generateIslandData();
             if (islandData != null)
@@ -128,7 +74,7 @@ public class MapGenerator : MonoBehaviour
             }
         }
 
-        int[,] map = new int[size, size];
+        int[,] map = new int[worldSize, worldSize];
 
         List<RectInt> usedBounds = new List<RectInt>();
         for (int i = 0;
@@ -137,8 +83,8 @@ public class MapGenerator : MonoBehaviour
         {
             for (int attempts = 0; attempts < 10; attempts++)
             {
-                RectInt newPlacement = new RectInt(Random.Range(0, size - islands[i].width),
-                    Random.Range(0, size - islands[i].height), islands[i].width, islands[i].height);
+                RectInt newPlacement = new RectInt(Random.Range(0, worldSize - islands[i].width),
+                    Random.Range(0, worldSize - islands[i].height), islands[i].width, islands[i].height);
 
                 bool valid = true;
                 for (int j = 0; j < usedBounds.Count; j++)
@@ -161,19 +107,15 @@ public class MapGenerator : MonoBehaviour
             }
         }
 
-        for (int i = 0;
-            i < grounds.Count;
-            i++)
+        for (int i = 0; i < grounds.Count; i++)
         {
             Destroy(grounds[i]);
         }
 
         grounds.Clear();
-        for (int x = 0;
-            x < size;
-            x++)
+        for (int x = 0; x < worldSize; x++)
         {
-            for (int y = 0; y < size; y++)
+            for (int y = 0; y < worldSize; y++)
             {
                 if (map[x, y] > 0)
                 {
@@ -378,6 +320,69 @@ public class MapGenerator : MonoBehaviour
         }
 
         return intNoiseMap;
+    }
+
+    int triangleIndex = 0;
+
+    [ContextMenu("Generate  Mesh")]
+    private void generateMesh()
+    {
+        triangleIndex = 0;
+        int width = 128;
+        int height = 128;
+        float scale = 5;
+        int newSize = width * height;
+        Vector3[] vertices = new Vector3[newSize * 4];
+        Vector2[] uvs = new Vector2[newSize * 4];
+        Vector3[] normals = new Vector3[newSize * 4];
+        int[] triangles = new int[newSize * 6];
+        for (int y = 0; y < height; y++)
+        {
+            for (int x = 0; x < width; x++)
+            {
+                int vertIndex = (y * width + x) * 4;
+                vertices[vertIndex] = new Vector3(x * scale, 0, (y + 1) * scale);
+                vertices[vertIndex + 1] = new Vector3((x + 1) * scale, 0, (y + 1) * scale);
+                vertices[vertIndex + 2] = new Vector3((x + 1) * scale, 0, y * scale);
+                vertices[vertIndex + 3] = new Vector3(x * scale, 0, y * scale);
+                normals[vertIndex] = Vector3.down;
+                normals[vertIndex + 1] = Vector3.down;
+                normals[vertIndex + 2] = Vector3.down;
+                normals[vertIndex + 3] = Vector3.down;
+                uvs[vertIndex] = new Vector2(vertices[vertIndex].x / width * scale,
+                    vertices[vertIndex].z / height * scale);
+                uvs[vertIndex + 1] = new Vector2(vertices[vertIndex + 1].x / width * scale,
+                    vertices[vertIndex + 1].z / height * scale);
+                uvs[vertIndex + 2] = new Vector2(vertices[vertIndex + 2].x / width * scale,
+                    vertices[vertIndex + 2].z / height * scale);
+                uvs[vertIndex + 3] = new Vector2(vertices[vertIndex + 3].x / width * scale,
+                    vertices[vertIndex + 3].z / height * scale);
+//                normals[vertIndex] = new Vector3(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
+//                normals[vertIndex + 1] = new Vector3(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
+//                normals[vertIndex + 2] = new Vector3(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
+//                normals[vertIndex + 3] = new Vector3(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
+                AddTriangle(triangles, vertIndex, vertIndex + 2, vertIndex + 3);
+                AddTriangle(triangles, vertIndex, vertIndex + 1, vertIndex + 2);
+            }
+        }
+
+        Mesh mesh = new Mesh();
+        mesh.vertices = vertices;
+        mesh.triangles = triangles;
+        mesh.uv = uvs;
+//        mesh.normals = normals;
+        mesh.RecalculateNormals();
+
+        AssetDatabase.CreateAsset(mesh, "Assets/Meshes/waterMesh2.mesh");
+        AssetDatabase.SaveAssets();
+    }
+
+    public void AddTriangle(int[] triangles, int a, int b, int c)
+    {
+        triangles[triangleIndex] = a;
+        triangles[triangleIndex + 1] = b;
+        triangles[triangleIndex + 2] = c;
+        triangleIndex += 3;
     }
 
     private class IslandData
