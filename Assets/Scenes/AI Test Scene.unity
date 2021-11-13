@@ -1220,11 +1220,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8953457121610363347, guid: 526253674b80e40b39b20d78063e06f4, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8953457121610363358, guid: 526253674b80e40b39b20d78063e06f4, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8953457121610363358, guid: 526253674b80e40b39b20d78063e06f4, type: 3}
       propertyPath: pursueTarget
@@ -1260,17 +1260,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 526253674b80e40b39b20d78063e06f4, type: 3}
---- !u!114 &621437524 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8953457121610363359, guid: 526253674b80e40b39b20d78063e06f4, type: 3}
-  m_PrefabInstance: {fileID: 621437523}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f7857a346b86a4e4ea2b03e8db88b9b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &638974559
 GameObject:
   m_ObjectHideFlags: 0
@@ -2300,7 +2289,6 @@ MonoBehaviour:
   - {fileID: 1246844840}
   patrolBoats:
   - {fileID: 2008592424}
-  - {fileID: 621437524}
   playerShipsPrefabs: []
   touristShipsPrefabs: []
   dolphinsPrefabs: []
@@ -3009,10 +2997,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3054030194625311868, guid: 770d1e92289a846b189c1dfd1e413429, type: 3}
-      propertyPath: wallAvoidDistance
-      value: 20
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 770d1e92289a846b189c1dfd1e413429, type: 3}
 --- !u!1001 &8953457123451093495
@@ -3028,7 +3012,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8953457121610363346, guid: 526253674b80e40b39b20d78063e06f4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 15.5
       objectReference: {fileID: 0}
     - target: {fileID: 8953457121610363346, guid: 526253674b80e40b39b20d78063e06f4, type: 3}
       propertyPath: m_LocalPosition.y
@@ -3036,7 +3020,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8953457121610363346, guid: 526253674b80e40b39b20d78063e06f4, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 97.7
       objectReference: {fileID: 0}
     - target: {fileID: 8953457121610363346, guid: 526253674b80e40b39b20d78063e06f4, type: 3}
       propertyPath: m_LocalRotation.w
@@ -3076,7 +3060,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8953457121610363358, guid: 526253674b80e40b39b20d78063e06f4, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8953457121610363358, guid: 526253674b80e40b39b20d78063e06f4, type: 3}
       propertyPath: pursueTarget

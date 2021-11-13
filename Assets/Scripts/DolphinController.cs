@@ -6,45 +6,44 @@ public class DolphinController : MonoBehaviour
 {
     [SerializeField] float deathTimer;
     [SerializeField] float maxDeathTime;
+    public bool isUnwell;
 
     List<GameObject> nearbyTourists = new List<GameObject>();
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     void Update()
     {
-        if (nearbyTourists.Count > 0)
+        if (!isUnwell)
         {
-            deathTimer += Time.deltaTime;
-
-            if (deathTimer > maxDeathTime)
+            if (nearbyTourists.Count > 0)
             {
-                print("This poor dolphin has died");
+                deathTimer += Time.deltaTime;
+
+                if (deathTimer > maxDeathTime)
+                {
+                    isUnwell = true;
+                    print("This poor dolphin is now very unwell");
+                }
             }
         }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Tourist"))
+        if (other.CompareTag("Tourist") && !isUnwell)
         {
             if (nearbyTourists.Count == 0)
             {
                 print("Dolphin is being photographed!!!");
                 deathTimer = 0;
             }
-            nearbyTourists.Add(other.gameObject);            
+            nearbyTourists.Add(other.gameObject);
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Tourist"))
+        if (other.CompareTag("Tourist") && !isUnwell)
         {
             if (nearbyTourists.Contains(other.gameObject))
             {

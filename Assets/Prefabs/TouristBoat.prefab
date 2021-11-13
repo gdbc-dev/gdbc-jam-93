@@ -481,7 +481,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52e7f349139dea54da032182166c26d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxPrediction: 1
+  maxPrediction: 0
 --- !u!114 &3054030194625311868
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -498,10 +498,10 @@ MonoBehaviour:
   wallDetection: 1
   castMask:
     serializedVersion: 2
-    m_Bits: 0
-  wallAvoidDistance: 20
-  mainWhiskerLen: 30
-  sideWhiskerLen: 30
+    m_Bits: 64
+  wallAvoidDistance: 10
+  mainWhiskerLen: 15
+  sideWhiskerLen: 15
   sideWhiskerAngle: 15
 --- !u!114 &-4104252552280471837
 MonoBehaviour:

@@ -162,10 +162,10 @@ MonoBehaviour:
   wallDetection: 1
   castMask:
     serializedVersion: 2
-    m_Bits: 4294967291
-  wallAvoidDistance: 15
-  mainWhiskerLen: 30
-  sideWhiskerLen: 30
+    m_Bits: 64
+  wallAvoidDistance: 10
+  mainWhiskerLen: 15
+  sideWhiskerLen: 15
   sideWhiskerAngle: 15
 --- !u!114 &8953457121610363354
 MonoBehaviour:
