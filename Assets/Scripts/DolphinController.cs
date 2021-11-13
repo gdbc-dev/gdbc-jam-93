@@ -61,4 +61,10 @@ public class DolphinController : MonoBehaviour
             }
         }
     }
+
+    private void OnDestroy()
+    {
+        GameController.instance.removeDolphin(
+            GetComponent<MovementAIRigidbody>());
+    }
 }
