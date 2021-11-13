@@ -6,6 +6,7 @@ using UnityMovementAI;
 
 public class GameController : MonoBehaviour
 {
+    public static GameController instance;
     public MapGenerator mapGenerator;
     public List<LevelData> levels;
     public LevelData menuLevel;
@@ -21,6 +22,11 @@ public class GameController : MonoBehaviour
     private bool isPlayingGame = false;
 
     [SerializeField] private bool generateMenuLevelEnabled = true;
+
+    private void Awake()
+    {
+        instance = this;
+    }
 
     private void Start()
     {
@@ -104,5 +110,25 @@ public class GameController : MonoBehaviour
     private Vector3 getWaterLocation()
     {
         return new Vector3();
+    }
+
+    public void addPatrolBoat(MovementAIRigidbody boat)
+    {
+        this.patrolBoats.Add(boat);
+    }
+
+    public void addDolphin(MovementAIRigidbody dolphin)
+    {
+        this.aliveDolphins.Add(dolphin);
+    }
+    
+    public void removePatrolBoat(MovementAIRigidbody boat)
+    {
+        this.patrolBoats.Remove(boat);
+    }
+
+    public void removeDolphin(MovementAIRigidbody dolphin)
+    {
+        this.aliveDolphins.Remove(dolphin);
     }
 }

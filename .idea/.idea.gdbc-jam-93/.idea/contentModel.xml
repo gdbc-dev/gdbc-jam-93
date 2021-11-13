@@ -6,6 +6,9 @@
     <e p="C:\Users\tyson\Documents\Coding\gdbc-jam-93" t="IncludeRecursive">
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
+        <e p="Jonnys Assets" t="Include">
+          <e p="MoveBoat.cs" t="Include" />
+        </e>
         <e p="Scripts" t="Include">
           <e p="AI" t="Include">
             <e p="_Examples" t="Include">
@@ -43,6 +46,7 @@
             <e p="Wander1.cs" t="Include" />
             <e p="Wander2.cs" t="Include" />
           </e>
+          <e p="DolphinController.cs" t="Include" />
           <e p="Example.cs" t="Include" />
           <e p="GameController.cs" t="Include" />
           <e p="Generation" t="Include">
