@@ -107,17 +107,17 @@ public class TouristBoatController : MonoBehaviour
                     accel += puAccel;
                     touristStatus = TouristStatus.PursuingDolphin;
                 }
+                else
+                {
+                    rb.velocity = Vector3.zero;
+                    touristStatus = TouristStatus.Idle;
+                }
             }
         }
         else
         {
-            if (puTarget != null)
-            {
-                puAccel = pu.GetSteering(puTarget);
-                accel += puAccel;
-                touristStatus = TouristStatus.PursuingDolphin;
-            }
             rb.velocity = Vector3.zero;
+            touristStatus = TouristStatus.Idle;
         }
 
         sb.Steer(accel);
