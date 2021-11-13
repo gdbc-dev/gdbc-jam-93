@@ -18,10 +18,11 @@ public class MapGenerator : MonoBehaviour
     public int minIslandSize = 16;
     public int maxIslandSize = 32;
     private float timer = 0;
+    public GameObject groundPrefab;
+    public List<GameObject> grounds;
 
     private void Start()
     {
-        
         generateMap();
     }
 
@@ -42,6 +43,7 @@ public class MapGenerator : MonoBehaviour
             generateMap();
         }
     }
+
     [ContextMenu("New Map")]
     private void generateMap()
     {
@@ -85,12 +87,20 @@ public class MapGenerator : MonoBehaviour
             }
         }
 
+        for (int i = 0; i < grounds.Count; i++)
+        {
+            Destroy(grounds[i]);
+        }
+
+        grounds.Clear();
+
         for (int x = 0; x < size; x++)
         {
             for (int y = 0; y < size; y++)
             {
                 if (map[x, y] > 0)
                 {
+                    grounds.Add(Instantiate(groundPrefab, new Vector3(x, 0, y), Quaternion.identity));
                     groundTilemap.SetTile(new Vector3Int(x, y, 0), groundTile);
                 }
                 else
@@ -138,7 +148,7 @@ public class MapGenerator : MonoBehaviour
 
     private int[,] trimNoise(int[,] noise, int baseWidth, int baseHeight)
     {
-        Vector2Int min = new Vector2Int(9999,9999);
+        Vector2Int min = new Vector2Int(9999, 9999);
         Vector2Int max = new Vector2Int(-1000, -1000);
         for (int x = 0; x < baseWidth; x++)
         {
@@ -155,7 +165,7 @@ public class MapGenerator : MonoBehaviour
                     {
                         max.x = x;
                     }
-                    
+
                     if (y < min.y)
                     {
                         min.y = y;
@@ -173,7 +183,7 @@ public class MapGenerator : MonoBehaviour
         {
             return null;
         }
-        
+
         int[,] newNoise = new int[max.x - min.x, max.y - min.y];
 
         for (int x = min.x; x < max.x; x++)
