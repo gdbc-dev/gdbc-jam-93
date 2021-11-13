@@ -6,7 +6,7 @@ using UnityMovementAI;
 public class TouristBoatController : MonoBehaviour
 {
     // Components
-    Rigidbody2D rb;
+    Rigidbody rb;
     SteeringBasics sb;
     Evade evade;
     WallAvoidance wa;
@@ -19,6 +19,9 @@ public class TouristBoatController : MonoBehaviour
     [SerializeField] float wallAvoidWeight;
     float distanceCheckFrequency = 1;
     float timeOfNextDistanceCheck;
+    private enum TouristStatus { Idle, PursuingDolphin, EvadingPatrol};
+    [SerializeField] private TouristStatus touristStatus;
+    public bool inRangeOfDolphin;
 
     // Start is called before the first frame update
     void Start()
@@ -27,36 +30,57 @@ public class TouristBoatController : MonoBehaviour
         evade = GetComponent<Evade>();
         wa = GetComponent<WallAvoidance>();
         pu = GetComponent<Pursue>();
-
-        puTarget = ReturnNearestaIRigidbody(GameController.instance.aliveDolphins);
-        evadeTarget = ReturnNearestaIRigidbody(GameController.instance.patrolBoats);
+        rb = GetComponent<Rigidbody>();
     }
 
     private void OnEnable()
     {
-        GameController.instance.addTouristBoat(GetComponent<MovementAIRigidbody>());
+        GameController.instance.addTouristBoat(
+            GetComponent<MovementAIRigidbody>());
     }
 
     private void Update()
     {
-        // check if you should be evading a closer patrol boat
-        if (Time.time > timeOfNextDistanceCheck)
-        {
-            timeOfNextDistanceCheck = Time.time + distanceCheckFrequency;
-
-            var nearestPatrol = ReturnNearestaIRigidbody(
-                GameController.instance.patrolBoats);
-
-            if (evadeTarget != nearestPatrol)
-            {
-                evadeTarget = nearestPatrol;
-            }
-        }
-
-        if (!puTarget.gameObject)
+        // check if dolphin has been destroyed
+        if (!puTarget)
         {
             puTarget = ReturnNearestaIRigidbody(
                 GameController.instance.aliveDolphins);
+            inRangeOfDolphin = false;
+        }
+        if (!evadeTarget)
+        {
+            evadeTarget = ReturnNearestaIRigidbody(
+                GameController.instance.patrolBoats);
+        }
+
+        if (puTarget == null)
+        {
+            puTarget = ReturnNearestaIRigidbody(
+                GameController.instance.aliveDolphins);
+            inRangeOfDolphin = false;
+        }
+        if (evadeTarget == null)
+        {
+            evadeTarget = ReturnNearestaIRigidbody(
+                GameController.instance.patrolBoats);
+        }
+
+        // check if you should be evading a closer patrol boat
+        if (evadeTarget != null)
+        {
+            if (Time.time > timeOfNextDistanceCheck)
+            {
+                timeOfNextDistanceCheck = Time.time + distanceCheckFrequency;
+
+                var nearestPatrol = ReturnNearestaIRigidbody(
+                    GameController.instance.patrolBoats);
+
+                if (evadeTarget != nearestPatrol)
+                {
+                    evadeTarget = nearestPatrol;
+                }
+            }
         }
     }
 
@@ -67,19 +91,40 @@ public class TouristBoatController : MonoBehaviour
         accel = Vector3.zero;
 
         // always avoid walls!
-        waAccel = wa.GetSteering();
-        accel += waAccel * wallAvoidWeight;
+        if (!inRangeOfDolphin)
+        {
+            waAccel = wa.GetSteering();
+            accel += waAccel * wallAvoidWeight;
+        }
 
         // check if you should be evading
-        evadeAccel = evade.GetSteering(evadeTarget);
-        if (evadeAccel.magnitude > evadeThreshold)
+        if (evadeTarget != null)
         {
-            accel += evadeAccel;
+            evadeAccel = evade.GetSteering(evadeTarget);
+            if (evadeAccel.magnitude > evadeThreshold)
+            {
+                accel += evadeAccel;
+                touristStatus = TouristStatus.EvadingPatrol;
+            }
+            else
+            {
+                if (puTarget != null)
+                {
+                    puAccel = pu.GetSteering(puTarget);
+                    accel += puAccel;
+                    touristStatus = TouristStatus.PursuingDolphin;
+                }
+                else
+                {
+                    rb.velocity = Vector3.zero;
+                    touristStatus = TouristStatus.Idle;
+                }
+            }
         }
         else
         {
-            puAccel = pu.GetSteering(puTarget);
-            accel += puAccel;
+            rb.velocity = Vector3.zero;
+            touristStatus = TouristStatus.Idle;
         }
 
         sb.Steer(accel);

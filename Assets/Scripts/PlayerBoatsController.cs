@@ -6,7 +6,7 @@ using UnityMovementAI;
 public class PlayerBoatsController : MonoBehaviour
 {
     // Components
-    Rigidbody2D rb;
+    Rigidbody rb;
     SteeringBasics sb;
     FollowPath fp;
     WallAvoidance wa;
@@ -41,6 +41,7 @@ public class PlayerBoatsController : MonoBehaviour
         fp = GetComponent<FollowPath>();
         wa = GetComponent<WallAvoidance>();
         pu = GetComponent<Pursue>();
+        rb = GetComponent<Rigidbody>();
 
         path.CalcDistances();
         centrePointOfPatrol = ReturnCentrePointOfPatrolRoute(path.nodes);
