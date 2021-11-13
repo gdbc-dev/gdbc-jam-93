@@ -86,17 +86,18 @@ public class GameController : MonoBehaviour
     {
         for (int i = 0; i < aliveDolphins.Count; i++)
         {
-            Destroy(aliveDolphins[i]);
+            Destroy(aliveDolphins[i].gameObject);
         }
         
         aliveDolphins.Clear();
         
         for (int i = 0; i < patrolBoats.Count; i++)
         {
-            Destroy(patrolBoats[i]);
+            Destroy(patrolBoats[i].gameObject);
         }
         
         patrolBoats.Clear();
+        
         isPlayingGame = true;
         if (levels.Count >= levelNumber)
         {
