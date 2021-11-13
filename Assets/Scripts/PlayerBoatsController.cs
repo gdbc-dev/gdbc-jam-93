@@ -18,12 +18,15 @@ public class PlayerBoatsController : MonoBehaviour
     Vector3 accel;
     List<MovementAIRigidbody> futureTargets = new List<MovementAIRigidbody>();
     Vector3 centrePointOfPatrol;
+    float distanceCheckFrequency = 1;
+    float timeOfNextDistanceCheck;
 
     // Behaviour Settings
     [SerializeField] bool pathLoop;
     [SerializeField] bool reversePath;
     [SerializeField] float wallAvoidWeight;
     [SerializeField] float maxPursueDistance; // how far to stray from patrol
+    // the max pursue distance should possibly be dynamic based on size of patrol route?
 
 
     // Start is called before the first frame update
@@ -43,10 +46,14 @@ public class PlayerBoatsController : MonoBehaviour
         // check if you're pursuing too far away from the patrol route
         if (pursueTarget != null)
         {
-            if (Vector3.Distance(transform.position,centrePointOfPatrol) >
-                maxPursueDistance)
+            if (Time.time > timeOfNextDistanceCheck)
             {
-                pursueTarget = null;
+                timeOfNextDistanceCheck = Time.time + distanceCheckFrequency;
+                if (Vector3.Distance(transform.position, centrePointOfPatrol) >
+                maxPursueDistance)
+                {
+                    pursueTarget = null;
+                }
             }
         }
     }

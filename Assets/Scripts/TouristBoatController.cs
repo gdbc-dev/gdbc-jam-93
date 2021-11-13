@@ -11,12 +11,15 @@ public class TouristBoatController : MonoBehaviour
     Evade evade;
     WallAvoidance wa;
     Pursue pu;
+    GameController gc;
 
     // Variables
     [SerializeField] MovementAIRigidbody evadeTarget, puTarget;
     [SerializeField] Vector3 evadeAccel, arriveAccel, waAccel, puAccel, accel;
     [SerializeField] float evadeThreshold;
     [SerializeField] float wallAvoidWeight;
+    float distanceCheckFrequency = 1;
+    float timeOfNextDistanceCheck;
 
     // Start is called before the first frame update
     void Start()
@@ -25,8 +28,25 @@ public class TouristBoatController : MonoBehaviour
         evade = GetComponent<Evade>();
         wa = GetComponent<WallAvoidance>();
         pu = GetComponent<Pursue>();
+        gc = GameObject.Find("Main Camera").GetComponent<GameController>();
 
-        //SelectNearestTargetDolphin()
+        puTarget = ReturnNearestaIRigidbody(gc.aliveDolphins);
+    }
+
+    private void Update()
+    {
+        // check if you should be evading a closer patrol boat
+        if (Time.time > timeOfNextDistanceCheck)
+        {
+            timeOfNextDistanceCheck = Time.time + distanceCheckFrequency;
+
+            var nearestPatrol = ReturnNearestaIRigidbody(gc.patrolBoats);
+
+            if (evadeTarget != nearestPatrol)
+            {
+                evadeTarget = nearestPatrol;
+            }
+        }
     }
 
     // Update is called once per frame
@@ -56,10 +76,10 @@ public class TouristBoatController : MonoBehaviour
         sb.LookWhereYoureGoing();
     }
 
-    private MovementAIRigidbody SelectNearestTargetDolphin(
-        List<MovementAIRigidbody> _dolphins)
+    private MovementAIRigidbody ReturnNearestaIRigidbody(
+        List<MovementAIRigidbody> aIRigidbodies)
     {
-        if (_dolphins.Count == 0)
+        if (aIRigidbodies.Count == 0)
         {
             return null;
         }
@@ -67,14 +87,14 @@ public class TouristBoatController : MonoBehaviour
         MovementAIRigidbody nearestTarget = null;
         float minDist = float.PositiveInfinity;
 
-        foreach (MovementAIRigidbody dolphin in _dolphins)
+        foreach (MovementAIRigidbody aIRigidbody in aIRigidbodies)
         {
             var thisDist = Vector3.Distance(
-                dolphin.transform.position, transform.position);
+                aIRigidbody.transform.position, transform.position);
             if (thisDist < minDist)
             {
                 minDist = thisDist;
-                nearestTarget = dolphin;
+                nearestTarget = aIRigidbody;
             }
         }
         return nearestTarget;

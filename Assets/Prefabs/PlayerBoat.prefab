@@ -101,7 +101,7 @@ MonoBehaviour:
   pathLoop: 1
   reversePath: 0
   wallAvoidWeight: 4
-  maxPursueDistance: 100
+  maxPursueDistance: 200
 --- !u!54 &8953457121610363357
 Rigidbody:
   m_ObjectHideFlags: 0

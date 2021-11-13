@@ -444,11 +444,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d32c432cd920042288578cabc44241ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  arriveTarget: {fileID: 0}
   evadeTarget: {fileID: 0}
+  puTarget: {fileID: 0}
   evadeAccel: {x: 0, y: 0, z: 0}
   arriveAccel: {x: 0, y: 0, z: 0}
   waAccel: {x: 0, y: 0, z: 0}
+  puAccel: {x: 0, y: 0, z: 0}
   accel: {x: 0, y: 0, z: 0}
   evadeThreshold: 5
   wallAvoidWeight: 4
@@ -498,7 +499,7 @@ MonoBehaviour:
   castMask:
     serializedVersion: 2
     m_Bits: 256
-  wallAvoidDistance: 25
+  wallAvoidDistance: 20
   mainWhiskerLen: 30
   sideWhiskerLen: 30
   sideWhiskerAngle: 15
