@@ -436,6 +436,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   planningPhaseController: {fileID: 211445442}
   actionScreenUi: {fileID: 497946144}
+  planningScreenUI: {fileID: 9160605817401030083}
   mapGenerator: {fileID: 1593673958}
   levels:
   - worldSize: 64
@@ -1026,11 +1027,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2949713834851094443, guid: f6f3af390e4634ddfa280918a1f66e58, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.0000000038852046
+      value: 3.5527133e-15
       objectReference: {fileID: 0}
     - target: {fileID: 2949713834851094443, guid: f6f3af390e4634ddfa280918a1f66e58, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.000000017157424
+      value: -7.1054265e-15
       objectReference: {fileID: 0}
     - target: {fileID: 2949713834851094444, guid: f6f3af390e4634ddfa280918a1f66e58, type: 3}
       propertyPath: m_Follow
@@ -1070,11 +1071,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2949713835305622233, guid: f6f3af390e4634ddfa280918a1f66e58, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.00000005650388
+      value: -0.00000004251147
       objectReference: {fileID: 0}
     - target: {fileID: 2949713835305622233, guid: f6f3af390e4634ddfa280918a1f66e58, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.000000045139455
+      value: 0.000000033961292
       objectReference: {fileID: 0}
     - target: {fileID: 2949713835305622233, guid: f6f3af390e4634ddfa280918a1f66e58, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -2268,11 +2269,11 @@ RectTransform:
   m_Father: {fileID: 9160605817401030082}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 217.63403, y: 120}
-  m_SizeDelta: {x: 204.7318, y: 240}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 1, y: 0.5}
+  m_AnchorMax: {x: 1, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 204.73181, y: 240}
+  m_Pivot: {x: 1, y: 0.5}
 --- !u!114 &1546679491
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2716,6 +2717,10 @@ PrefabInstance:
     - target: {fileID: 9042154932088878219, guid: 2268b00a25f784e44ae16922114d7c8d, type: 3}
       propertyPath: m_Name
       value: ActionScreenContainer
+      objectReference: {fileID: 0}
+    - target: {fileID: 9042154932088878219, guid: 2268b00a25f784e44ae16922114d7c8d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9042154932599984025, guid: 2268b00a25f784e44ae16922114d7c8d, type: 3}
       propertyPath: m_Sprite
@@ -3992,7 +3997,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 1341, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &9160605817401030083
@@ -4268,11 +4273,11 @@ RectTransform:
   m_Father: {fileID: 9160605817401030082}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 1}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -204.73, y: -380}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 0}
+  m_AnchoredPosition: {x: 0, y: 25}
   m_SizeDelta: {x: 200, y: 40}
-  m_Pivot: {x: 1, y: 1}
+  m_Pivot: {x: 0.5, y: 0}
 --- !u!1 &9160605818494228180
 GameObject:
   m_ObjectHideFlags: 0
