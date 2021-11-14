@@ -11,6 +11,8 @@ public class DolphinController : MonoBehaviour
 
     List<GameObject> nearbyTourists = new List<GameObject>();
 
+    Vector3 destination;
+
     private void OnEnable()
     {
         // add to the dolphins list
@@ -34,6 +36,22 @@ public class DolphinController : MonoBehaviour
                     // needs to remove itself from the alive dolphins
                     // and then that list needs to inform the tourists
                 }
+            }
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        if (nearbyTourists.Count == 0)
+        {
+            if (destination != null)
+            {
+                // go to the destination
+            }
+            else
+            {
+                // pick a random destination within a sphere of possible locations
+                // within the bounds of the map
             }
         }
     }

@@ -77,7 +77,6 @@ public class TouristBoatController : MonoBehaviour
                 if (evadeTarget == null)
                 {
                     touristStatus = TouristStatus.Idle;
-                    
                 }
 
                 // check if you should be evading a closer patrol boat
@@ -125,7 +124,7 @@ public class TouristBoatController : MonoBehaviour
                 // check if dolphin is dead!
                 if (!puTarget)
                 {
-                    puTarget = null;
+                    touristStatus = TouristStatus.PursuingDolphin;
                 }
                 break;
 

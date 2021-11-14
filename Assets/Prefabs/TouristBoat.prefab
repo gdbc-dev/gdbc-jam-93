@@ -4994,14 +4994,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxAcceleration: 90
-  wallDetection: 1
+  wallDetection: 0
   castMask:
     serializedVersion: 2
     m_Bits: 64
-  wallAvoidDistance: 7
+  wallAvoidDistance: 6
   mainWhiskerLen: 7
-  sideWhiskerLen: 7
-  sideWhiskerAngle: 10
+  sideWhiskerLen: 3
+  sideWhiskerAngle: 45
 --- !u!114 &-4104252552280471837
 MonoBehaviour:
   m_ObjectHideFlags: 0
