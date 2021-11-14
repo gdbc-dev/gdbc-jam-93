@@ -88,9 +88,9 @@ MonoBehaviour:
   maxVelocity: 3.5
   maxAcceleration: 10
   turnSpeed: 20
-  targetRadius: 0.005
-  slowRadius: 1
-  timeToTarget: 0.1
+  targetRadius: 1
+  slowRadius: 2
+  timeToTarget: 0.5
   smoothing: 1
   numSamplesForSmoothing: 5
 --- !u!114 &2247871321388444471

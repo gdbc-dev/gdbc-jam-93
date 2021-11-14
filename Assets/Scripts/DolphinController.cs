@@ -17,10 +17,13 @@ public class DolphinController : MonoBehaviour
 
     Vector3 destination;
 
+    SteeringBasics sb;
+
     private void OnEnable()
     {
         // add to the dolphins list
         GameController.instance.addDolphin(GetComponent<MovementAIRigidbody>());
+        sb = GetComponent<SteeringBasics>();
     }
 
     // Update is called once per frame
@@ -51,12 +54,20 @@ public class DolphinController : MonoBehaviour
         {
             if (destination != null)
             {
-                // go to the destination
+                var accel = sb.Arrive(destination);
+                sb.Steer(accel);
+                sb.LookWhereYoureGoing();
             }
             else
             {
-                // pick a random destination within a sphere of possible locations
-                // within the bounds of the map
+                var mapRadius = GameController.instance.getMapSize() / 2;
+                do
+                {
+                    destination = Random.insideUnitCircle * mapRadius;
+                }
+                while (GameController.instance.isWater(
+                    (int)destination.x, (int)destination.y));
+                destination = new Vector3((int)destination.x, 0, (int)destination.z);
             }
         }
     }

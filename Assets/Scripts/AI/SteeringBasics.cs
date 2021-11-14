@@ -228,6 +228,13 @@ namespace UnityMovementAI
             return acceleration;
         }
 
+        public float ReturnDistanceToArriveTarget(Vector3 _arrivePos)
+        {
+            Vector3 targetVelocity = _arrivePos - rb.Position;
+            return targetVelocity.magnitude;
+        }
+
+
         public Vector3 Interpose(MovementAIRigidbody target1, MovementAIRigidbody target2)
         {
             Vector3 midPoint = (target1.Position + target2.Position) / 2;
