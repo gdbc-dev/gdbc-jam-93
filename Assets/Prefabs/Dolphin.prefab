@@ -109,9 +109,9 @@ MonoBehaviour:
   deathTimer: 0
   maxDeathTime: 10
   isUnwell: 0
-  audioDistressed: {fileID: 0}
-  audioUnwell: {fileID: 0}
-  audioSource: {fileID: 0}
+  audioDistressed: {fileID: 8300000, guid: 8fe4f2bf940cd8f119194ec54fd753ab, type: 3}
+  audioUnwell: {fileID: 8300000, guid: 4ccbceb387cb21a42b0c6023b51cdc32, type: 3}
+  audioSource: {fileID: -8974444406654415513}
   destination: {x: 0, y: 0, z: 0}
   healthBarTransform: {fileID: 6902794839622302259}
   uiCanvas: {fileID: 8650104843916890435}
