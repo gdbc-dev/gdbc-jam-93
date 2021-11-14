@@ -148,18 +148,27 @@ public class PlayerBoatsController : MonoBehaviour
             {
                 pursueTarget = null;
                 targetTourist = null;
-                // and check if there are any other targets in range to go after
+                // and check if there are any other targets to go after
                 if (futureTargets.Count > 0)
                 {
                     pursueTarget = futureTargets[0];
                     targetTourist = pursueTarget.GetComponent<TouristBoatController>();
+                    if (targetTourist.touristStatus ==
+                        TouristBoatController.TouristStatus.Retreating)
+                    {
+                        futureTargets.Remove(pursueTarget);
+                        pursueTarget = null;
+                        targetTourist = null;
+                    }
                 }
             }
             // if it is one of my potential future targets, remove it from the list
+            /*
             else if (futureTargets.Contains(targetAiRb))
             {
                 futureTargets.Remove(targetAiRb);
             }
+            */
         }
     }
 
