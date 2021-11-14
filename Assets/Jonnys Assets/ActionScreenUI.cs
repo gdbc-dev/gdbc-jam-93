@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using TMPro;
 
 public class ActionScreenUI : MonoBehaviour
 {
@@ -20,6 +21,8 @@ public class ActionScreenUI : MonoBehaviour
 
     //for use with the countdown clock
     public GameObject countdownTimer;
+    public TMP_Text countDownTimerTextObject;
+
     public int totalTimeForLevel;
     private float timeRemaining;
     
@@ -94,7 +97,8 @@ public class ActionScreenUI : MonoBehaviour
     public void CountDownTimer()
     {
         timeRemaining -= Time.deltaTime;
-        countdownTimer.GetComponent<Text>().text = "Time Remaining: " + timeRemaining;
+        
+        countDownTimerTextObject.text = "Time Remaining: " + timeRemaining.ToString("F2");
     }
 
 
