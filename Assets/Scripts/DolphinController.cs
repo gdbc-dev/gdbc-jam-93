@@ -1,7 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityMovementAI;
+using Random = UnityEngine.Random;
 
 public class DolphinController : MonoBehaviour
 {
@@ -15,9 +18,13 @@ public class DolphinController : MonoBehaviour
 
     SteeringBasics sb;
     Rigidbody rb;
+    public Image healthBarTransform;
+    public Canvas uiCanvas;
+    private Camera _camera;
 
     private void OnEnable()
     {
+        _camera = Camera.main;
         // add to the dolphins list
         GameController.instance.addDolphin(GetComponent<MovementAIRigidbody>());
         sb = GetComponent<SteeringBasics>();
@@ -32,6 +39,7 @@ public class DolphinController : MonoBehaviour
             if (nearbyTourists.Count > 0)
             {
                 deathTimer += Time.deltaTime;
+                healthBarTransform.fillAmount = deathTimer / maxDeathTime;
 
                 if (deathTimer > maxDeathTime)
                 {
@@ -41,6 +49,12 @@ public class DolphinController : MonoBehaviour
                 }
             }
         }
+    }
+
+    private void LateUpdate()
+    {
+        uiCanvas.transform.LookAt(uiCanvas.transform.position + _camera.transform.rotation * Vector3.back, _camera.transform.rotation * Vector3.down);
+//        uiCanvas.transform.rotation = Quaternion.Euler(uiCanvas.transform.rotation.eulerAngles.x, _camera.transform.rotation.eulerAngles.y, uiCanvas.transform.rotation.eulerAngles.z);
     }
 
     private void FixedUpdate()

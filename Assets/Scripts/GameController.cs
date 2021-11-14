@@ -113,7 +113,6 @@ public class GameController : MonoBehaviour
     private async void loseInABit()
     {
         Time.timeScale = 0;
-
         await Task.Delay(2500);
         defeatScreen.SetActive(false);
         startLevel(currentLevelNum);
@@ -129,6 +128,7 @@ public class GameController : MonoBehaviour
     [ContextMenu("Lose Level")]
     public void loseLevel()
     {
+        defeatScreen.SetActive(true);
         Debug.Log("Lost Level!!");
         loseInABit();
     }
@@ -381,7 +381,6 @@ public class GameController : MonoBehaviour
         }
 
         remainingTouristBoats--;
-        Debug.Log("Removing tourist boat, there boatsre remaining:: " + remainingTouristBoats);
         actionScreenUi.StartingTouristIcons(remainingTouristBoats);
 
         if (remainingTouristBoats == 0 && touristShipsToSpawn.Count == 0)
