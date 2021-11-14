@@ -9,6 +9,10 @@ public class DolphinController : MonoBehaviour
     [SerializeField] float maxDeathTime;
     public bool isUnwell;
 
+    public AudioClip audioDistressed;
+    public AudioClip audioUnwell;
+    public AudioSource audioSource;
+
     List<GameObject> nearbyTourists = new List<GameObject>();
 
     Vector3 destination;
@@ -32,6 +36,7 @@ public class DolphinController : MonoBehaviour
                 {
                     isUnwell = true;
                     print("This poor dolphin is now very unwell");
+                    audioSource.PlayOneShot(audioUnwell);
                     Destroy(this.gameObject, 5);
                     // needs to remove itself from the alive dolphins
                     // and then that list needs to inform the tourists
@@ -64,6 +69,7 @@ public class DolphinController : MonoBehaviour
             if (nearbyTourists.Count == 0)
             {
                 print("Dolphin is being photographed!!!");
+                audioSource.PlayOneShot(audioDistressed);
                 deathTimer = 0;
             }
             nearbyTourists.Add(other.gameObject);
