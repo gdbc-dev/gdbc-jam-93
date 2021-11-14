@@ -17,7 +17,8 @@ public class PlayerBoatsController : MonoBehaviour
     [SerializeField] MovementAIRigidbody pursueTarget;
     TouristBoatController targetTourist;
     Vector3 accel;
-    List<MovementAIRigidbody> futureTargets = new List<MovementAIRigidbody>();
+    [SerializeField] List<MovementAIRigidbody> futureTargets =
+        new List<MovementAIRigidbody>();
     Vector3 centrePointOfPatrol;
     float distanceCheckFrequency = 1;
     float timeOfNextDistanceCheck;
