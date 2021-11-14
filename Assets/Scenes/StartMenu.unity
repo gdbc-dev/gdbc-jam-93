@@ -1680,7 +1680,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Dolphin Fortress
+  m_text: Dolphender
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 654a9dedb05c549d78dddd997d2b7072, type: 2}
   m_sharedMaterial: {fileID: -5505788154110601672, guid: 654a9dedb05c549d78dddd997d2b7072, type: 2}
@@ -1977,6 +1977,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 16
   lineRenderer: {fileID: 0}
+  finishLineRenderer: {fileID: 0}
+  planningStartImage: {fileID: 0}
+  goodLineMaterial: {fileID: 0}
+  badLineMaterial: {fileID: 0}
   planningCamera: {fileID: 0}
 --- !u!114 &932114958
 MonoBehaviour:
@@ -2058,6 +2062,9 @@ MonoBehaviour:
   dolphinsPrefabs:
   - {fileID: 1103157741332840318, guid: 31b013a4a78da495797d1da3f388dfbf, type: 3}
   environmentPrefabs: []
+  planningCursor: []
+  victoryScreen: {fileID: 0}
+  defeatScreen: {fileID: 0}
   currentLevelNum: 0
   planningCam: {fileID: 0}
   actionCam: {fileID: 0}

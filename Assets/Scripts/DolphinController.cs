@@ -53,6 +53,16 @@ public class DolphinController : MonoBehaviour
                     Destroy(this.gameObject, 0.5f);
                 }
             }
+            else
+            {
+                deathTimer -= Time.deltaTime;
+
+                if (deathTimer <= 0)
+                {
+                    deathTimer = 0;
+                }
+                healthBarTransform.fillAmount = deathTimer / maxDeathTime;
+            }
         }
     }
 
@@ -84,7 +94,7 @@ public class DolphinController : MonoBehaviour
                 else
                 {
                     var mapRadius = GameController.instance.getMapSize() / 2;
-                    destination = new Vector2(Random.Range(0, mapRadius * 2), Random.Range(0, mapRadius * 2));
+                    destination = new Vector2(Random.Range(5, mapRadius * 2), Random.Range(5, mapRadius * 2));
                     int attempts = 0;
                     while (attempts < 1000 && !GameController.instance.planningPhaseController.isValidPath(
                         new Vector2Int((int) transform.position.x, (int) transform.position.z),
@@ -114,7 +124,7 @@ public class DolphinController : MonoBehaviour
                 print("Dolphin is being photographed!!!");
                 audioSource.PlayOneShot(audioDistressed);
                 rb.velocity = Vector3.zero;
-                deathTimer = 0;
+//                deathTimer = 0;
             }
             nearbyTourists.Add(other.gameObject);
             var status = other.GetComponent<TouristBoatController>().touristStatus;
