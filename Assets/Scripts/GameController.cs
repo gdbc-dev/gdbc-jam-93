@@ -305,13 +305,31 @@ public class GameController : MonoBehaviour
         {
             attempts++;
             Vector2Int pos = new Vector2Int(Random.Range(5, map.GetLength(0)), Random.Range(5, map.GetLength(1)));
-            if (isWater(pos.x, pos.y))
+            if (hasWaterAround(pos.x, pos.y, 2))
             {
                 return new Vector3(pos.x, 0, pos.y);
             }
         }
 
         return new Vector3();
+    }
+    
+    private bool hasWaterAround(int currentX, int currentY, int amount)
+    {
+        int surroundCheckAmount = amount;
+
+        for (int x = -surroundCheckAmount; x <= surroundCheckAmount; x++)
+        {
+            for (int y = -surroundCheckAmount; y <= surroundCheckAmount; y++)
+            {
+                if (!isWater(currentX + x, currentY + y))
+                {
+                    return false;
+                }
+            }
+        }
+
+        return true;
     }
 
     public void addPatrolBoat(MovementAIRigidbody boat)
