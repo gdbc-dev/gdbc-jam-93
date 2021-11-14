@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3080454369880992652}
   - component: {fileID: 7892293961533394010}
   - component: {fileID: 3244134494446008069}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Particle System Foamy(2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4836,7 +4836,7 @@ GameObject:
   - component: {fileID: -4104252552280471837}
   - component: {fileID: 5128518477869057517}
   - component: {fileID: 4150111234809777787}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: TouristBoat
   m_TagString: Tourist
   m_Icon: {fileID: 0}
@@ -5217,7 +5217,7 @@ GameObject:
   - component: {fileID: 3058114732315679601}
   - component: {fileID: 5994634740405232733}
   - component: {fileID: 4185810295226577769}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Particle System Foamy(1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10076,6 +10076,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: a25d0a15bd4dca64dbae3cd95784b2a3, type: 3}
       propertyPath: m_Name
       value: Yacht Small B
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: a25d0a15bd4dca64dbae3cd95784b2a3, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a25d0a15bd4dca64dbae3cd95784b2a3, type: 3}

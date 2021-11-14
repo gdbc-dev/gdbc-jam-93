@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6211280488464589610}
   - component: {fileID: 6070244561008303367}
   - component: {fileID: 568548769528263090}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Particle System Foamy(1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4815,7 +4815,7 @@ GameObject:
   - component: {fileID: 1532141868832184799}
   - component: {fileID: 8755083485264296331}
   - component: {fileID: 1281947725695395693}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Spot Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4929,7 +4929,7 @@ GameObject:
   - component: {fileID: 7848129036843544224}
   - component: {fileID: 2894338264120105075}
   - component: {fileID: 4709300922844722008}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Particle System Foamy(2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9751,7 +9751,7 @@ GameObject:
   - component: {fileID: 8953457121610363355}
   - component: {fileID: 8953457121610363354}
   - component: {fileID: 459155415987666805}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: PlayerBoat
   m_TagString: PatrolBoat
   m_Icon: {fileID: 0}
@@ -10021,7 +10021,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8953457122058589226}
   - component: {fileID: 8953457122058589225}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: PursueDetector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10121,6 +10121,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 9b7cc2e501ae9c546b416e06ed63191b, type: 3}
       propertyPath: m_Name
       value: Scout_Boat
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 9b7cc2e501ae9c546b416e06ed63191b, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9b7cc2e501ae9c546b416e06ed63191b, type: 3}
