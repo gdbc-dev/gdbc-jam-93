@@ -69,9 +69,12 @@ public class DolphinController : MonoBehaviour
 
     private void LateUpdate()
     {
-        uiCanvas.transform.LookAt(uiCanvas.transform.position +
-                                  _camera.transform.rotation * Vector3.back,
-            _camera.transform.rotation * Vector3.down);
+        if (uiCanvas && _camera)
+        {
+            uiCanvas.transform.LookAt(uiCanvas.transform.position +
+                                      _camera.transform.rotation * Vector3.back,
+                _camera.transform.rotation * Vector3.down);
+        }
     }
 
     private void FixedUpdate()
@@ -96,14 +99,16 @@ public class DolphinController : MonoBehaviour
                 {
                     var mapRadius = GameController.instance.getMapSize() / 2;
                     int dolphinRadius = 5;
-                    destination = new Vector2(Random.Range(dolphinRadius, mapRadius * 2 - 5), Random.Range(dolphinRadius, mapRadius * 2 - dolphinRadius));
+                    destination = new Vector2(Random.Range(dolphinRadius, mapRadius * 2 - 5),
+                        Random.Range(dolphinRadius, mapRadius * 2 - dolphinRadius));
                     int attempts = 0;
                     while (attempts < 1000 && !GameController.instance.planningPhaseController.isValidPath(
                                new Vector2Int((int) transform.position.x, (int) transform.position.z),
                                new Vector2Int((int) destination.x, (int) destination.y)))
                     {
                         attempts++;
-                        destination = new Vector2(Random.Range(dolphinRadius, mapRadius * 2 - dolphinRadius), Random.Range(dolphinRadius, mapRadius * 2 - dolphinRadius));
+                        destination = new Vector2(Random.Range(dolphinRadius, mapRadius * 2 - dolphinRadius),
+                            Random.Range(dolphinRadius, mapRadius * 2 - dolphinRadius));
                         if (attempts > 250)
                         {
                             destination = Vector3.zero;
@@ -137,7 +142,9 @@ public class DolphinController : MonoBehaviour
                 touristBoatController.touristStatus = TouristBoatController.TouristStatus.Photographing;
                 if (touristBoatController.dialogOnDolphin.Count > 0)
                 {
-                    touristBoatController.bubbleCanvas.setDialog(touristBoatController.dialogOnDolphin[Random.Range(0, touristBoatController.dialogOnDolphin.Count - 1)], 5f);
+                    touristBoatController.bubbleCanvas.setDialog(
+                        touristBoatController.dialogOnDolphin[
+                            Random.Range(0, touristBoatController.dialogOnDolphin.Count - 1)], 5f);
                 }
             }
         }
