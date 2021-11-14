@@ -4993,7 +4993,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxAcceleration: 90
-  wallDetection: 0
+  wallDetection: 1
   castMask:
     serializedVersion: 2
     m_Bits: 64

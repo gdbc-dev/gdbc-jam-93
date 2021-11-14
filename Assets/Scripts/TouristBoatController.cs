@@ -142,6 +142,7 @@ public class TouristBoatController : MonoBehaviour
         // avoid walls, unless in range of the dolphin!
         if (touristStatus != TouristStatus.Photographing)
         {
+            print("I am checking for a wall!");
             waAccel = wa.GetSteering();
             accel += waAccel * wallAvoidWeight;
         }
@@ -238,7 +239,7 @@ public class TouristBoatController : MonoBehaviour
         // if within range of a patrol boat, receive a ticket
         var distToPatrol = Vector3.Distance(transform.position,
             evadeTarget.transform.position);
-        print("Checking distance " + distToPatrol);
+        //print("Checking distance " + distToPatrol);
         if (distToPatrol < ticketDistance)
         {
             touristStatus = TouristStatus.Retreating;
