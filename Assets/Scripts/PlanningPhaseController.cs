@@ -91,14 +91,12 @@ public class PlanningPhaseController : MonoBehaviour
 
     private void StartShipPath()
     {
-        Debug.Log("Start new Ship Path");
         shipPathLists.Add(new List<Vector2Int>());
         currentShipIndex++;
     }
 
     public void finishPlanning()
     {
-        Debug.Log("FInished a ship path");
         if (currentShipIndex + 1 >= shipsToSpawn)
         {
             List<List<Vector3>> shipPaths = new List<List<Vector3>>();

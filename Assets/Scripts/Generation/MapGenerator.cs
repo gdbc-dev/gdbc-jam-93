@@ -130,7 +130,8 @@ public class MapGenerator : MonoBehaviour
                         if (Random.Range(0, 1f) > .85f)
                         {
                             grounds.Add(Instantiate(outerDoodads[Random.Range(0, outerDoodads.Length)],
-                                new Vector3(x, map[x, y], y), Quaternion.Euler(0, Random.Range(0, 360), 0), levelParent));
+                                new Vector3(x, map[x, y], y), Quaternion.Euler(0, Random.Range(0, 360), 0),
+                                levelParent));
                         }
                     }
                     else
@@ -138,12 +139,14 @@ public class MapGenerator : MonoBehaviour
                         if (Random.Range(0, 1f) > .97f)
                         {
                             grounds.Add(Instantiate(largeInnerDoodads[Random.Range(0, largeInnerDoodads.Length)],
-                                new Vector3(x, map[x, y], y), Quaternion.Euler(0, Random.Range(0, 360), 0), levelParent));
+                                new Vector3(x, map[x, y], y), Quaternion.Euler(0, Random.Range(0, 360), 0),
+                                levelParent));
                         }
                         else if (Random.Range(0, 1f) > .75f)
                         {
                             grounds.Add(Instantiate(innerDoodads[Random.Range(0, innerDoodads.Length)],
-                                new Vector3(x, map[x, y], y), Quaternion.Euler(0, Random.Range(0, 360), 0), levelParent));
+                                new Vector3(x, map[x, y], y), Quaternion.Euler(0, Random.Range(0, 360), 0),
+                                levelParent));
                         }
                     }
 
@@ -170,12 +173,9 @@ public class MapGenerator : MonoBehaviour
                                 new Vector3(x, -.8f, y), Quaternion.Euler(0, Random.Range(0, 360), 0), levelParent));
                         }
                     }
-                    else
-                    {
-                    }
 
 //                    groundTilemap.SetTile(new Vector3Int(x, y, 0), null);
-                    if (Random.Range(0, 1f) > .999f)
+                    if (waterDoodads.Length > 0 && Random.Range(0, 1f) > .999f)
                     {
                         grounds.Add(Instantiate(waterDoodads[Random.Range(0, waterDoodads.Length)],
                             new Vector3(x, -1.4f, y), Quaternion.Euler(0, Random.Range(0, 360), 0), levelParent));
@@ -239,7 +239,19 @@ public class MapGenerator : MonoBehaviour
             noise = trimNoise(noise, width, height);
             if (noise == null)
             {
-                continue;
+                return null;
+            }
+
+            HashSet<Vector2Int> waterPositions = floodFill(0, 0, noise);
+            for (int x = 0; x < noise.GetLength(0); x++)
+            {
+                for (int y = 0; y < noise.GetLength(1); y++)
+                {
+                    if (noise[x, y] == 0 && !waterPositions.Contains(new Vector2Int(x, y)))
+                    {
+                        noise[x, y] = 1;
+                    }
+                }
             }
 
             IslandData islandData = new IslandData(noise.GetLength(0), noise.GetLength(1), noise);
@@ -247,6 +259,40 @@ public class MapGenerator : MonoBehaviour
         }
 
         return null;
+    }
+
+    private HashSet<Vector2Int> floodFill(int x, int y, int[,] map)
+    {
+        int width = map.GetLength(0);
+        int height = map.GetLength(1);
+        HashSet<Vector2Int> allPositions = new HashSet<Vector2Int>();
+        List<Vector2Int> notVisited = new List<Vector2Int>();
+        notVisited.Add(new Vector2Int(x, y));
+        allPositions.Add(new Vector2Int(x, y));
+        Vector2Int[] offsets =
+            {new Vector2Int(1, 0), new Vector2Int(-1, 0), new Vector2Int(0, 1), new Vector2Int(0, -1)};
+        Vector2Int current;
+
+        while (notVisited.Count > 0)
+        {
+            current = notVisited[0];
+            notVisited.RemoveAt(0);
+
+            for (int i = 0; i < offsets.Length; i++)
+            {
+                Vector2Int newPos = new Vector2Int(offsets[i].x + current.x, offsets[i].y + current.y);
+                if (newPos.x >= 0 && newPos.y >= 0 && newPos.x < width && newPos.y < height)
+                {
+                    if (map[newPos.x, newPos.y] == 0 && !allPositions.Contains(newPos) && !notVisited.Contains(newPos))
+                    {
+                        notVisited.Add(newPos);
+                        allPositions.Add(newPos);
+                    }
+                }
+            }
+        }
+
+        return allPositions;
     }
 
     private int[,] trimNoise(int[,] noise, int baseWidth, int baseHeight)
