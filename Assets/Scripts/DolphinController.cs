@@ -42,6 +42,7 @@ public class DolphinController : MonoBehaviour
     {
         if (other.CompareTag("Tourist") && !isUnwell)
         {
+            // if this is the first tourist boat to arrive
             if (nearbyTourists.Count == 0)
             {
                 print("Dolphin is being photographed!!!");

@@ -21,6 +21,7 @@ public class TouristBoatController : MonoBehaviour
     float timeOfNextDistanceCheck;
     public enum TouristStatus { Idle, PursuingDolphin, Retreating, Photographing};
     public TouristStatus touristStatus;
+    [SerializeField] float ticketDistance = 5;
 
     // Start is called before the first frame update
     void Start()
@@ -94,6 +95,8 @@ public class TouristBoatController : MonoBehaviour
                             evadeTarget = nearestPatrol;
                         }
                     }
+
+                    CheckIfTouristReceivedTicket();
                 }
                 break;
 
@@ -116,6 +119,13 @@ public class TouristBoatController : MonoBehaviour
                             evadeTarget = nearestPatrol;
                         }
                     }
+
+                    CheckIfTouristReceivedTicket();
+                }
+                // check if dolphin is dead!
+                if (!puTarget)
+                {
+                    puTarget = null;
                 }
                 break;
 
@@ -224,11 +234,19 @@ public class TouristBoatController : MonoBehaviour
         return nearestTarget;
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void CheckIfTouristReceivedTicket()
     {
-        if (other.CompareTag("PatrolBoat)"))
+        // if within range of a patrol boat, receive a ticket
+        var distToPatrol = Vector3.Distance(transform.position,
+            evadeTarget.transform.position);
+        print("Checking distance " + distToPatrol);
+        if (distToPatrol < ticketDistance)
         {
             touristStatus = TouristStatus.Retreating;
+            GameController.instance.removeTouristBoat(
+                GetComponent<MovementAIRigidbody>());
+            this.gameObject.tag = null;
+            print(this.gameObject.name + ": OK, I'm out of here.");
         }
     }
 }
