@@ -67,8 +67,12 @@ public class DolphinController : MonoBehaviour
                 deathTimer = 0;
             }
             nearbyTourists.Add(other.gameObject);
-            other.GetComponent<TouristBoatController>().touristStatus =
-                TouristBoatController.TouristStatus.Photographing;
+            var status = other.GetComponent<TouristBoatController>().touristStatus;
+            if (status != TouristBoatController.TouristStatus.Retreating)
+            {
+                other.GetComponent<TouristBoatController>().touristStatus =
+                    TouristBoatController.TouristStatus.Photographing;
+            }
         }
     }
 
