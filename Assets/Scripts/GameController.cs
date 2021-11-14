@@ -90,19 +90,23 @@ public class GameController : MonoBehaviour
         }
         else
         {
+            Debug.Log("Starting next level!");
             startLevel(currentLevelNum);
         }
     }
-    
+
     [ContextMenu("Restart Level")]
     public void restartLevel()
     {
+        Debug.Log("Restarting Level!!");
         startLevel(currentLevelNum);
     }
 
     [ContextMenu("Lose Level")]
     public void loseLevel()
     {
+        Debug.Log("Lost Level!!");
+
         startLevel(currentLevelNum);
     }
 
@@ -166,6 +170,7 @@ public class GameController : MonoBehaviour
 
         StartPlanningPhase();
     }
+
     private float cursorTimer = 0;
     private int cursorIndex = 0;
 
@@ -178,12 +183,12 @@ public class GameController : MonoBehaviour
             {
                 cursorTimer = 0;
                 cursorIndex = (cursorIndex + 1) % planningCursor.Length;
-                Cursor.SetCursor(planningCursor[cursorIndex], new Vector2(32f, 32f), CursorMode.Auto );
+                Cursor.SetCursor(planningCursor[cursorIndex], new Vector2(32f, 32f), CursorMode.Auto);
             }
         }
         else if (gameState == GAME_STATE.PLAYING)
         {
-            Cursor.SetCursor(null, new Vector2(.5f, .5f), CursorMode.Auto );
+            Cursor.SetCursor(null, new Vector2(.5f, .5f), CursorMode.Auto);
             spawnTimer += Time.deltaTime;
             if (touristShipsToSpawn.Count > 0)
             {
@@ -218,12 +223,14 @@ public class GameController : MonoBehaviour
         actionCam.SetActive(false);
         planningCam.SetActive(true);
         remainingTouristBoats = touristShipsToSpawn.Count;
+        actionScreenUi.StartingTouristIcons(remainingTouristBoats);
     }
 
     public void StartGamePhase()
     {
-        Cursor.SetCursor(null, new Vector2(.5f, .5f), CursorMode.Auto );
-        cameraTarget.transform.position =new Vector3(getMapSize()/2f, cameraTarget.transform.position.y, getMapSize()/2f);
+        Cursor.SetCursor(null, new Vector2(.5f, .5f), CursorMode.Auto);
+        cameraTarget.transform.position =
+            new Vector3(getMapSize() / 2f, cameraTarget.transform.position.y, getMapSize() / 2f);
         actionScreenUi.gameObject.SetActive(true);
         gameState = GAME_STATE.PLAYING;
         Time.timeScale = 1;
@@ -327,10 +334,10 @@ public class GameController : MonoBehaviour
         }
 
         remainingTouristBoats--;
-        this.touristBoats.Remove(ship);
+        Debug.Log("Removing tourist boat, there boatsre remaining:: " + remainingTouristBoats);
         actionScreenUi.StartingTouristIcons(remainingTouristBoats);
 
-        if (this.touristBoats.Count == 0 && touristShipsToSpawn.Count == 0)
+        if (remainingTouristBoats == 0 && touristShipsToSpawn.Count == 0)
         {
             winLevel();
         }
