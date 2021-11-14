@@ -310,7 +310,7 @@ public class GameController : MonoBehaviour
 
     private Vector3 getEdgeLocation()
     {
-        float offScreenAmount = 5;
+        float offScreenAmount = 35;
         if (Random.Range(0, 1f) > .5f)
         {
             // Top or bottom spawn
