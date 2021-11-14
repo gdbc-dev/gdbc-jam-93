@@ -1,7 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityMovementAI;
+using Random = UnityEngine.Random;
 
 public class TouristBoatController : MonoBehaviour
 {
@@ -19,6 +21,7 @@ public class TouristBoatController : MonoBehaviour
     [SerializeField] float wallAvoidWeight;
     float distanceCheckFrequency = 1;
     float timeOfNextDistanceCheck;
+    public FlagBehavior flagBehavior;
 
     public enum TouristStatus
     {
@@ -34,6 +37,11 @@ public class TouristBoatController : MonoBehaviour
 
     public List<string> dialogOnDolphin;
     public List<string> dialogOnFlee;
+
+    private void Awake()
+    {
+        flagBehavior = GetComponent<FlagBehavior>();
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -268,11 +276,12 @@ public class TouristBoatController : MonoBehaviour
 
         if (distToPatrol < ticketDistance)
         {
-            Debug.Log("SEND BUBBLE REQUEST");
             if (dialogOnFlee.Count > 0)
             {
                 bubbleCanvas.setDialog(dialogOnFlee[Random.Range(0, dialogOnFlee.Count - 1)], 5f);
             }
+
+            flagBehavior.ticketed = true;
 
             touristStatus = TouristStatus.Retreating;
             GameController.instance.removeTouristBoat(
