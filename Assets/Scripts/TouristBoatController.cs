@@ -199,7 +199,9 @@ public class TouristBoatController : MonoBehaviour
                 break;
 
             case TouristStatus.Retreating:
-                var arriveAccel = sb.Arrive(new Vector3 (200, 0, 200));
+                Vector3 dest = transform.position.normalized;
+                dest *= 200;
+                var arriveAccel = sb.Arrive(dest);
                 accel += arriveAccel;
                 sb.Steer(accel);
                 sb.LookWhereYoureGoing();

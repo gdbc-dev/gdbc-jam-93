@@ -50,7 +50,7 @@ public class DolphinController : MonoBehaviour
                     isUnwell = true;
                     print("This poor dolphin is now very unwell");
                     audioSource.PlayOneShot(audioUnwell);
-                    Destroy(this.gameObject, 2);
+                    Destroy(this.gameObject, 0.5f);
                 }
             }
         }
@@ -58,8 +58,9 @@ public class DolphinController : MonoBehaviour
 
     private void LateUpdate()
     {
-        uiCanvas.transform.LookAt(uiCanvas.transform.position + _camera.transform.rotation * Vector3.back, _camera.transform.rotation * Vector3.down);
-//        uiCanvas.transform.rotation = Quaternion.Euler(uiCanvas.transform.rotation.eulerAngles.x, _camera.transform.rotation.eulerAngles.y, uiCanvas.transform.rotation.eulerAngles.z);
+        uiCanvas.transform.LookAt(uiCanvas.transform.position +
+            _camera.transform.rotation * Vector3.back,
+            _camera.transform.rotation * Vector3.down);
     }
 
     private void FixedUpdate()
