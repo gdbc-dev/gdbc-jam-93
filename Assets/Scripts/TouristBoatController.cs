@@ -29,6 +29,12 @@ public class TouristBoatController : MonoBehaviour
     };
 
     public TouristStatus touristStatus;
+
+    public AudioClip audioExcited;
+    public AudioClip audioDisappointed; // TODO
+    public AudioClip audioTakingPictures;
+    public AudioSource audioSource;
+
     [SerializeField] float ticketDistance = 5;
     public BubbleCanvas bubbleCanvas;
 
@@ -76,6 +82,9 @@ public class TouristBoatController : MonoBehaviour
                 break;
 
             case TouristStatus.PursuingDolphin:
+                if (!audioSource.isPlaying) {
+                    audioSource.PlayOneShot(audioExcited, 1f);
+                }
                 // check if dolphin or patrol has been destroyed or is null
                 if (!puTarget)
                 {
@@ -119,6 +128,7 @@ public class TouristBoatController : MonoBehaviour
                 break;
 
             case TouristStatus.Retreating:
+                // TODO
                 break;
 
             case TouristStatus.Photographing:
@@ -208,6 +218,9 @@ public class TouristBoatController : MonoBehaviour
                 break;
 
             case TouristStatus.Photographing:
+                //if (!audioSource.isPlaying) {
+                //    audioSource.PlayOneShot(audioTakingPictures, 1f);
+                //}
                 if (evadeTarget != null)
                 {
                     evadeAccel = evade.GetSteering(evadeTarget);
@@ -232,6 +245,19 @@ public class TouristBoatController : MonoBehaviour
 
             default:
                 break;
+        }
+
+        // Play sounds appropriate to state
+        if (!audioSource.isPlaying) {
+            switch (touristStatus)
+            {
+                case TouristStatus.PursuingDolphin:
+                    audioSource.PlayOneShot(audioExcited, 1f);
+                    break;
+                case TouristStatus.Photographing:
+                    audioSource.PlayOneShot(audioTakingPictures, 1f);
+                    break;
+            }
         }
     }
 
