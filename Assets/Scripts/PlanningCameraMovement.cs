@@ -20,10 +20,12 @@ public class PlanningCameraMovement : MonoBehaviour
     {
         // KEY SCROLLING
         var forwardBack = Input.GetAxis("Vertical");
-        transform.Translate(forwardBack * Vector3.forward  * keyScrollSpeed * Time.deltaTime);
+        transform.Translate(forwardBack * Vector3.forward  * keyScrollSpeed *
+            Time.unscaledDeltaTime);
 
         var leftRight = Input.GetAxis("Horizontal");
-        transform.Translate(leftRight * Vector3.right * keyScrollSpeed * Time.deltaTime);
+        transform.Translate(leftRight * Vector3.right * keyScrollSpeed *
+            Time.unscaledDeltaTime);
 
         // KEY TURNING
         /*
@@ -39,7 +41,7 @@ public class PlanningCameraMovement : MonoBehaviour
 
         // MOUSE ZOOM
         var mouseScroll = Input.GetAxis("Mouse ScrollWheel");
-        var adjustment = -1 * mouseScroll * zoomSpeed * Time.deltaTime;
+        var adjustment = -1 * mouseScroll * zoomSpeed * Time.unscaledDeltaTime;
         cam.orthographicSize += adjustment;
     }
 }
