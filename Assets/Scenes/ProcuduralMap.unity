@@ -442,7 +442,7 @@ MonoBehaviour:
     numIslands: 10
     surviveTime: 120
     numShips: 1
-    numDolphins: 2
+    numDolphins: 4
     touristSpawns:
     - spawnDelay: 5
     - spawnDelay: 5
@@ -451,7 +451,7 @@ MonoBehaviour:
     numIslands: 20
     surviveTime: 120
     numShips: 2
-    numDolphins: 3
+    numDolphins: 5
     touristSpawns:
     - spawnDelay: 0
     - spawnDelay: 4
@@ -462,7 +462,7 @@ MonoBehaviour:
     numIslands: 70
     surviveTime: 180
     numShips: 3
-    numDolphins: 3
+    numDolphins: 6
     touristSpawns:
     - spawnDelay: 0
     - spawnDelay: 4
@@ -475,11 +475,28 @@ MonoBehaviour:
     numIslands: 125
     surviveTime: 240
     numShips: 3
-    numDolphins: 3
+    numDolphins: 7
     touristSpawns:
     - spawnDelay: 0
     - spawnDelay: 4
     - spawnDelay: 8
+    - spawnDelay: 7
+    - spawnDelay: 7
+    - spawnDelay: 7
+    - spawnDelay: 7
+    - spawnDelay: 7
+  - worldSize: 180
+    numIslands: 125
+    surviveTime: 240
+    numShips: 4
+    numDolphins: 7
+    touristSpawns:
+    - spawnDelay: 0
+    - spawnDelay: 4
+    - spawnDelay: 8
+    - spawnDelay: 7
+    - spawnDelay: 7
+    - spawnDelay: 7
     - spawnDelay: 7
     - spawnDelay: 7
     - spawnDelay: 7
@@ -1009,11 +1026,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2949713834851094443, guid: f6f3af390e4634ddfa280918a1f66e58, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.000000003954305
+      value: -0.0000000039541557
       objectReference: {fileID: 0}
     - target: {fileID: 2949713834851094443, guid: f6f3af390e4634ddfa280918a1f66e58, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.000000017462582
+      value: 0.000000017461907
       objectReference: {fileID: 0}
     - target: {fileID: 2949713834851094444, guid: f6f3af390e4634ddfa280918a1f66e58, type: 3}
       propertyPath: m_Follow
@@ -1053,11 +1070,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2949713835305622233, guid: f6f3af390e4634ddfa280918a1f66e58, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.00000005650017
+      value: -0.00000005649985
       objectReference: {fileID: 0}
     - target: {fileID: 2949713835305622233, guid: f6f3af390e4634ddfa280918a1f66e58, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.000000045136492
+      value: 0.000000045136236
       objectReference: {fileID: 0}
     - target: {fileID: 2949713835305622233, guid: f6f3af390e4634ddfa280918a1f66e58, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
