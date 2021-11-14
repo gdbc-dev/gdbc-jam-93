@@ -12,6 +12,8 @@ public class PlanningPhaseController : MonoBehaviour
     private GameController gameController;
     public LineRenderer lineRenderer;
 
+    [SerializeField] private Camera planningCamera;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -24,16 +26,23 @@ public class PlanningPhaseController : MonoBehaviour
         if (!isPlanning)
         {
             return;
+
+            
         }
         
 
 
         if (Input.GetMouseButtonDown(0))
         {
+            if (planningCamera == null)
+            {
+                planningCamera = Camera.main;
+            }
+
             RaycastHit hit;
             // Does the ray intersect any objects excluding the player layer
             ;
-            if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit,
+            if (Physics.Raycast(planningCamera.ScreenPointToRay(Input.mousePosition), out hit,
                 Mathf.Infinity, hitMask))
             {
                 Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance,

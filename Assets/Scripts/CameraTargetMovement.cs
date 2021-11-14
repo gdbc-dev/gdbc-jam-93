@@ -7,18 +7,20 @@ public class CameraTargetMovement : MonoBehaviour
 {
     [SerializeField] private float keyScrollSpeed;
     [SerializeField] private float keyTurnSpeed;
-    [SerializeField] private float mouseScrollSpeed;
     [SerializeField] private float zoomSpeed;
     
     Transform cam;
-    CinemachineVirtualCamera planningVcam, actionVcam;
+    CinemachineVirtualCamera actionVcam;
+    CinemachineOrbitalTransposer actionTransposer;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        cam = GameObject.Find("Main Camera").transform;
-        planningVcam = cam.transform.Find("Planning Virtual Camera").
+        cam = GameObject.Find("Action Camera").transform;
+        actionVcam = cam.transform.Find("Action Virtual Camera").
             GetComponent<CinemachineVirtualCamera>();
+        actionTransposer = actionVcam.
+            GetCinemachineComponent<CinemachineOrbitalTransposer>();
     }
 
     // Update is called once per frame
@@ -45,6 +47,7 @@ public class CameraTargetMovement : MonoBehaviour
 
         // MOUSE ZOOM
         var mouseScroll = Input.GetAxis("Mouse ScrollWheel");
-        //vcam.
+        var adjustment = -1 * mouseScroll * zoomSpeed * Time.deltaTime;
+        actionTransposer.m_FollowOffset.y += adjustment;
     }
 }

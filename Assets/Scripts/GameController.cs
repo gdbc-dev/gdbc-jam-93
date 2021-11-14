@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 using UnityMovementAI;
+using Cinemachine;
 
 public class GameController : MonoBehaviour
 {
@@ -34,6 +35,10 @@ public class GameController : MonoBehaviour
     private bool isQuitting = false;
     private int lastLevelGenerated = -1;
 
+    // Camera management
+    [SerializeField] private GameObject planningCam;
+    [SerializeField] private GameObject actionCam;
+
     public enum GAME_STATE
     {
         PLANNING,
@@ -58,8 +63,7 @@ public class GameController : MonoBehaviour
             startGame();
         }
 
-        // needs some code to populate the dolphin and patrol boats list
-        // could do find objects with tags or add them when they are spawned?
+        
     }
 
     [ContextMenu("Start Game")]
@@ -191,12 +195,20 @@ public class GameController : MonoBehaviour
         shipsLeftToSpawn = currentLevel.numShips;
         Time.timeScale = 0;
         planningPhaseController.StartPlanning(shipsLeftToSpawn);
+
+        RepositionPlanningCamera();
+        actionCam.SetActive(false);
+        planningCam.SetActive(true);
     }
 
     public void StartGamePhase()
     {
         gameState = GAME_STATE.PLAYING;
         Time.timeScale = 1;
+
+        RepositionActionCamera();
+        actionCam.SetActive(true);
+        planningCam.SetActive(false);
     }
 
 
@@ -341,5 +353,20 @@ public class GameController : MonoBehaviour
     public int getMapSize()
     {
         return map.GetLength(0);
+    }
+
+    private void RepositionPlanningCamera()
+    {
+        var pos = new Vector3(getMapSize() / 2f, 50, getMapSize() / 2f);
+        planningCam.transform.position = pos;
+    }
+
+    private void RepositionActionCamera()
+    {
+        actionCam.transform.position = planningCam.transform.position;
+        actionCam.transform.Find("Action Virtual Camera").
+            GetComponent<CinemachineVirtualCamera>().
+            GetCinemachineComponent<CinemachineOrbitalTransposer>().
+            m_FollowOffset.y = 90;
     }
 }
