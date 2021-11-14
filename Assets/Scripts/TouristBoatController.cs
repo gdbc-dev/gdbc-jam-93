@@ -31,7 +31,7 @@ public class TouristBoatController : MonoBehaviour
     public TouristStatus touristStatus;
 
     public AudioClip audioExcited;
-    public AudioClip audioDisappointed; // TODO
+    public AudioClip audioDisappointed;
     public AudioClip audioTakingPictures;
     public AudioSource audioSource;
 
@@ -218,9 +218,6 @@ public class TouristBoatController : MonoBehaviour
                 break;
 
             case TouristStatus.Photographing:
-                //if (!audioSource.isPlaying) {
-                //    audioSource.PlayOneShot(audioTakingPictures, 1f);
-                //}
                 if (evadeTarget != null)
                 {
                     evadeAccel = evade.GetSteering(evadeTarget);
@@ -256,6 +253,9 @@ public class TouristBoatController : MonoBehaviour
                     break;
                 case TouristStatus.Photographing:
                     audioSource.PlayOneShot(audioTakingPictures, 1f);
+                    break;
+                case TouristStatus.Retreating:
+                    audioSource.PlayOneShot(audioDisappointed, 1f);
                     break;
             }
         }

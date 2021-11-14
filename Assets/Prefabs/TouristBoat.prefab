@@ -4954,7 +4954,7 @@ MonoBehaviour:
   wallAvoidWeight: 4
   touristStatus: 0
   audioExcited: {fileID: 8300000, guid: e861caa52228c264da37281973042ce4, type: 3}
-  audioDisappointed: {fileID: 0}
+  audioDisappointed: {fileID: 8300000, guid: 52295f27cfa720a378759c4c46eacf39, type: 3}
   audioTakingPictures: {fileID: 8300000, guid: 2511d7d6aa122107db07e6b9e233ecfe, type: 3}
   audioSource: {fileID: -3128778589827175198}
   ticketDistance: 8
