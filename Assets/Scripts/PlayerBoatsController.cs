@@ -21,6 +21,7 @@ public class PlayerBoatsController : MonoBehaviour
     Vector3 centrePointOfPatrol;
     float distanceCheckFrequency = 1;
     float timeOfNextDistanceCheck;
+    public PatrolLights patrolLights;
 
     // Behaviour Settings
     [SerializeField] bool pathLoop;
@@ -50,14 +51,18 @@ public class PlayerBoatsController : MonoBehaviour
 
     private void Update()
     {
+        
         if (!pursueTarget)
         {
             pursueTarget = null;
         }
 
+        patrolLights.inPursuit = pursueTarget != null;
+
         // check if you're pursuing too far away from the patrol route
         if (pursueTarget != null)
         {
+            
             if (targetTourist != null)
             {
                 if (targetTourist.touristStatus ==

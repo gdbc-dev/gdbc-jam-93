@@ -9833,6 +9833,7 @@ MonoBehaviour:
     - {x: 0, y: 0, z: 100}
     - {x: 50, y: 0, z: 150}
   pursueTarget: {fileID: 0}
+  patrolLights: {fileID: 1281947725695395693}
   pathLoop: 1
   reversePath: 0
   wallAvoidWeight: 4
