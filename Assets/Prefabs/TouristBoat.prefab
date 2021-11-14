@@ -4992,8 +4992,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e008bb997f9e8cc42a7861ed1e5b45ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxAcceleration: 90
-  wallDetection: 0
+  maxAcceleration: 50
+  wallDetection: 1
   castMask:
     serializedVersion: 2
     m_Bits: 64
