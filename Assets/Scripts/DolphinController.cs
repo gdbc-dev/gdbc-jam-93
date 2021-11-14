@@ -102,9 +102,8 @@ public class DolphinController : MonoBehaviour
                     {
                         attempts++;
                         destination = Random.insideUnitCircle * mapRadius;
-                        if (attempts > 995)
+                        if (attempts > 250)
                         {
-                            Debug.Log("Never found");
                             destination = Vector3.zero;
                         }
                     }
