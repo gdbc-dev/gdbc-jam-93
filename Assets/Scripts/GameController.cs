@@ -12,6 +12,7 @@ public class GameController : MonoBehaviour
 {
     public PlanningPhaseController planningPhaseController;
     public ActionScreenUI actionScreenUi;
+    public GameObject planningScreenUI;
     public static GameController instance;
     public MapGenerator mapGenerator;
     public List<LevelData> levels;
@@ -251,6 +252,7 @@ public class GameController : MonoBehaviour
     {
         gameState = GAME_STATE.PLANNING;
         actionScreenUi.gameObject.SetActive(false);
+        planningScreenUI.SetActive(true);
         LevelData currentLevel = levels[currentLevelNum];
         Time.timeScale = 0;
         planningPhaseController.StartPlanning(currentLevel.numShips);
@@ -264,6 +266,7 @@ public class GameController : MonoBehaviour
 
     public void StartGamePhase()
     {
+        planningScreenUI.SetActive(false);
         Cursor.SetCursor(null, new Vector2(.5f, .5f), CursorMode.Auto);
         cameraTarget.transform.position =
             new Vector3(getMapSize() / 2f, cameraTarget.transform.position.y, getMapSize() / 2f);
