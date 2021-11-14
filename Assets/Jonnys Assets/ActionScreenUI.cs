@@ -93,7 +93,7 @@ public class ActionScreenUI : MonoBehaviour
     public void FastForward()
     {
         isPaused = false;
-        Time.timeScale = 3;
+        Time.timeScale = 5;
         UpdatePauseIcon();
     }
 
