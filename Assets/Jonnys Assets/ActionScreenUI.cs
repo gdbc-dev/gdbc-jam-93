@@ -34,8 +34,8 @@ public class ActionScreenUI : MonoBehaviour
     void Start()
     {
 //        timeRemaining = totalTimeForLevel;
-        StartingTouristIcons(3);
-        StartingDolphinsIcons(3);
+//        StartingTouristIcons(3);
+//        StartingDolphinsIcons(3);
     }
 
     // Update is called once per frame
