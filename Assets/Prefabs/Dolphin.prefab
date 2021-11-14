@@ -71,7 +71,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 94
+  m_Constraints: 84
   m_CollisionDetection: 0
 --- !u!114 &1103157741332840306
 MonoBehaviour:
@@ -86,8 +86,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxVelocity: 3.5
-  maxAcceleration: 10
-  turnSpeed: 20
+  maxAcceleration: 5
+  turnSpeed: 10
   targetRadius: 1
   slowRadius: 2
   timeToTarget: 0.5
@@ -108,9 +108,13 @@ MonoBehaviour:
   deathTimer: 0
   maxDeathTime: 10
   isUnwell: 0
+<<<<<<< Updated upstream
   audioDistressed: {fileID: 8300000, guid: 8fe4f2bf940cd8f119194ec54fd753ab, type: 3}
   audioUnwell: {fileID: 8300000, guid: 4ccbceb387cb21a42b0c6023b51cdc32, type: 3}
   audioSource: {fileID: -8974444406654415513}
+=======
+  destination: {x: 0, y: 0, z: 0}
+>>>>>>> Stashed changes
 --- !u!135 &6456802816235938905
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -122,7 +126,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 7
+  m_Radius: 5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!82 &-8974444406654415513
 AudioSource:

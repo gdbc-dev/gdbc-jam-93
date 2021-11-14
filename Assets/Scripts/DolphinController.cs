@@ -11,15 +11,17 @@ public class DolphinController : MonoBehaviour
 
     List<GameObject> nearbyTourists = new List<GameObject>();
 
-    Vector3 destination = Vector3.zero;
+    [SerializeField] Vector3 destination = Vector3.zero;
 
     SteeringBasics sb;
+    Rigidbody rb;
 
     private void OnEnable()
     {
         // add to the dolphins list
         GameController.instance.addDolphin(GetComponent<MovementAIRigidbody>());
         sb = GetComponent<SteeringBasics>();
+        rb = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
@@ -35,9 +37,7 @@ public class DolphinController : MonoBehaviour
                 {
                     isUnwell = true;
                     print("This poor dolphin is now very unwell");
-                    Destroy(this.gameObject, 5);
-                    // needs to remove itself from the alive dolphins
-                    // and then that list needs to inform the tourists
+                    Destroy(this.gameObject, 2);
                 }
             }
         }
@@ -45,29 +45,33 @@ public class DolphinController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (nearbyTourists.Count == 0)
+        if (GameController.instance.gameState == GameController.GAME_STATE.PLAYING)
         {
-            if (destination != Vector3.zero)
+            if (nearbyTourists.Count == 0)
             {
-                var accel = sb.Arrive(destination);
-                sb.Steer(accel);
-                sb.LookWhereYoureGoing();
-                var distToArrive = sb.ReturnDistanceToArriveTarget(destination);
-                if (distToArrive < 1)
+                if (destination != Vector3.zero)
                 {
-                    destination = Vector3.zero;
+                    var accel = sb.Arrive(destination);
+                    sb.Steer(accel);
+                    sb.LookWhereYoureGoing();
+                    var distToArrive = sb.ReturnDistanceToArriveTarget(destination);
+                    print(distToArrive);
+                    if (distToArrive < 1)
+                    {
+                        destination = Vector3.zero;
+                    }
                 }
-            }
-            else
-            {
-                var mapRadius = GameController.instance.getMapSize() / 2;
-                do
+                else
                 {
-                    destination = Random.insideUnitCircle * mapRadius;
+                    var mapRadius = GameController.instance.getMapSize() / 2;
+                    do
+                    {
+                        destination = Random.insideUnitCircle * mapRadius;
+                    }
+                    while (GameController.instance.isWater(
+                        (int)destination.x, (int)destination.y));
+                    destination = new Vector3((int)destination.x, 0, (int)destination.z);
                 }
-                while (GameController.instance.isWater(
-                    (int)destination.x, (int)destination.y));
-                destination = new Vector3((int)destination.x, 0, (int)destination.z);
             }
         }
     }
@@ -80,6 +84,7 @@ public class DolphinController : MonoBehaviour
             if (nearbyTourists.Count == 0)
             {
                 print("Dolphin is being photographed!!!");
+                rb.velocity = Vector3.zero;
                 deathTimer = 0;
             }
             nearbyTourists.Add(other.gameObject);
@@ -89,6 +94,10 @@ public class DolphinController : MonoBehaviour
                 other.GetComponent<TouristBoatController>().touristStatus =
                     TouristBoatController.TouristStatus.Photographing;
             }
+        }
+        else if (other.CompareTag("Land"))
+        {
+            destination = Vector3.zero;
         }
     }
 
