@@ -9,6 +9,7 @@ using Cinemachine;
 public class GameController : MonoBehaviour
 {
     public PlanningPhaseController planningPhaseController;
+    public ActionScreenUI actionScreenUi;
     public static GameController instance;
     public MapGenerator mapGenerator;
     public List<LevelData> levels;
@@ -26,19 +27,19 @@ public class GameController : MonoBehaviour
 
     public int currentLevelNum = 0;
 
-    [NonSerialized]
-    public GAME_STATE gameState = GAME_STATE.PLANNING;
+    [NonSerialized] public GAME_STATE gameState = GAME_STATE.PLANNING;
 
-    private int shipsLeftToSpawn;
     private List<TouristData> touristShipsToSpawn;
     private float spawnTimer;
     private float surviveeTimer;
     private bool isQuitting = false;
     private int lastLevelGenerated = -1;
+    private int remainingTouristBoats = 0;
 
     // Camera management
     [SerializeField] private GameObject planningCam;
     [SerializeField] private GameObject actionCam;
+    public GameObject cameraTarget;
 
     public enum GAME_STATE
     {
@@ -63,8 +64,6 @@ public class GameController : MonoBehaviour
         {
             startGame();
         }
-
-        
     }
 
     [ContextMenu("Start Game")]
@@ -93,6 +92,12 @@ public class GameController : MonoBehaviour
             startLevel(currentLevelNum);
         }
     }
+    
+    [ContextMenu("Restart Level")]
+    public void restartLevel()
+    {
+        startLevel(currentLevelNum);
+    }
 
     [ContextMenu("Lose Level")]
     public void loseLevel()
@@ -101,7 +106,7 @@ public class GameController : MonoBehaviour
     }
 
     [ContextMenu("Restart Game")]
-    public void restart()
+    public void restartGame()
     {
         currentLevelNum = 0;
         startLevel(currentLevelNum);
@@ -126,7 +131,7 @@ public class GameController : MonoBehaviour
         }
 
         patrolBoats.Clear();
-        
+
         for (int i = 0; i < touristBoats.Count; i++)
         {
             if (touristBoats[i] && touristBoats[i].gameObject)
@@ -173,6 +178,7 @@ public class GameController : MonoBehaviour
             {
                 if (spawnTimer >= touristShipsToSpawn[0].spawnDelay)
                 {
+                    spawnTimer = 0;
                     Instantiate(touristShipsPrefabs[Random.Range(0, touristShipsPrefabs.Length)],
                         getEdgeLocation(), Quaternion.Euler(0, Random.Range(0, 360), 0));
                     touristShipsToSpawn.RemoveAt(0);
@@ -191,21 +197,26 @@ public class GameController : MonoBehaviour
 
     public void StartPlanningPhase()
     {
+        actionScreenUi.gameObject.SetActive(false);
+
         gameState = GAME_STATE.PLANNING;
         LevelData currentLevel = levels[currentLevelNum];
-        shipsLeftToSpawn = currentLevel.numShips;
         Time.timeScale = 0;
-        planningPhaseController.StartPlanning(shipsLeftToSpawn);
+        planningPhaseController.StartPlanning(currentLevel.numShips);
 
         RepositionPlanningCamera();
         actionCam.SetActive(false);
         planningCam.SetActive(true);
+        remainingTouristBoats = touristShipsToSpawn.Count;
     }
 
     public void StartGamePhase()
     {
+        cameraTarget.transform.position =new Vector3(getMapSize()/2f, cameraTarget.transform.position.y, getMapSize()/2f);
+        actionScreenUi.gameObject.SetActive(true);
         gameState = GAME_STATE.PLAYING;
         Time.timeScale = 1;
+        actionScreenUi.timeRemaining = levels[currentLevelNum].surviveTime;
 
         RepositionActionCamera();
         actionCam.SetActive(true);
@@ -256,11 +267,13 @@ public class GameController : MonoBehaviour
         if (Random.Range(0, 1f) > .5f)
         {
             // Top or bottom spawn
-            return new Vector3(Random.Range(0, map.GetLength(0)), 0, Random.Range(0, 1f) > .5f ? -offScreenAmount : map.GetLength(1) + offScreenAmount);
+            return new Vector3(Random.Range(0, map.GetLength(0)), 0,
+                Random.Range(0, 1f) > .5f ? -offScreenAmount : map.GetLength(1) + offScreenAmount);
         }
 
         // Left or right spawn
-        return new Vector3(Random.Range(0, 1f) > .5f ? -offScreenAmount : map.GetLength(0) + offScreenAmount, 0, Random.Range(0, map.GetLength(1)));
+        return new Vector3(Random.Range(0, 1f) > .5f ? -offScreenAmount : map.GetLength(0) + offScreenAmount, 0,
+            Random.Range(0, map.GetLength(1)));
     }
 
     private Vector3 getWaterLocation()
@@ -292,6 +305,7 @@ public class GameController : MonoBehaviour
     public void addDolphin(MovementAIRigidbody dolphin)
     {
         this.aliveDolphins.Add(dolphin);
+        actionScreenUi.StartingDolphinsIcons(aliveDolphins.Count);
     }
 
     public void removeTouristBoat(MovementAIRigidbody ship)
@@ -300,8 +314,10 @@ public class GameController : MonoBehaviour
         {
             return;
         }
-        
+
+        remainingTouristBoats--;
         this.touristBoats.Remove(ship);
+        actionScreenUi.StartingTouristIcons(remainingTouristBoats);
 
         if (this.touristBoats.Count == 0 && touristShipsToSpawn.Count == 0)
         {
@@ -321,7 +337,9 @@ public class GameController : MonoBehaviour
         {
             return;
         }
+
         this.aliveDolphins.Remove(dolphin);
+        actionScreenUi.StartingDolphinsIcons(aliveDolphins.Count);
 
         if (aliveDolphins.Count == 0)
         {
@@ -342,7 +360,6 @@ public class GameController : MonoBehaviour
             gameObject.GetComponent<PlayerBoatsController>().path = new LinePath(currentPath.ToArray());
         }
 
-        shipsLeftToSpawn = 0;
         StartGamePhase();
     }
 
@@ -376,9 +393,7 @@ public class GameController : MonoBehaviour
     private void RepositionActionCamera()
     {
         actionCam.transform.position = planningCam.transform.position;
-        actionCam.transform.Find("Action Virtual Camera").
-            GetComponent<CinemachineVirtualCamera>().
-            GetCinemachineComponent<CinemachineOrbitalTransposer>().
-            m_FollowOffset.y = 45;
+        actionCam.transform.Find("Action Virtual Camera").GetComponent<CinemachineVirtualCamera>()
+            .GetCinemachineComponent<CinemachineOrbitalTransposer>().m_FollowOffset.y = 45;
     }
 }

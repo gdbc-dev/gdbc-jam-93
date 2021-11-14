@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -24,80 +25,83 @@ public class ActionScreenUI : MonoBehaviour
     public TMP_Text countDownTimerTextObject;
 
     public int totalTimeForLevel;
-    private float timeRemaining;
-    
+    [NonSerialized] public float timeRemaining;
+
+    private bool isPaused = false;
+
 
     // Start is called before the first frame update
     void Start()
     {
         timeRemaining = totalTimeForLevel;
-        StartingTouristIcons();
-        StartingDolphinsIcons();     
+        StartingTouristIcons(3);
+        StartingDolphinsIcons(3);
     }
 
     // Update is called once per frame
     void Update()
     {
         CountDownTimer();
-        
     }
 
 
-    void StartingTouristIcons()
+    public void StartingTouristIcons(int newAmount)
     {
-        for (int i = 0; i < totalNumberOfTouristBoats; i++)
+        totalNumberOfTouristBoats = newAmount;
+        for (int i = 0; i < touristBoatIcons.Length; i++)
         {
-            touristBoatIcons[i].SetActive(true);
+            touristBoatIcons[i].SetActive(i < totalNumberOfTouristBoats);
         }
     }
 
-    void StartingDolphinsIcons()
+    public void StartingDolphinsIcons(int newAmount)
     {
-        for (int i = 0; i < totalNumberOfDolphins; i++)
+        totalNumberOfDolphins = newAmount;
+        for (int i = 0; i < dolphinIcons.Length; i++)
         {
-            dolphinIcons[i].SetActive(true);
+            dolphinIcons[i].SetActive(i < totalNumberOfDolphins);
         }
     }
 
 
     public void Retry()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        GameController.instance.restartLevel();
     }
 
     public void SlowSpeed()
     {
         Time.timeScale = 0.5f;
+        isPaused = false;
+        UpdatePauseIcon();
+    }
+
+    public void UpdatePauseIcon()
+    {
+        pausePlayButton.GetComponent<Image>().sprite = isPaused ? pauseIconSprite : playIconSprite;
+        
     }
 
     public void PausePlay()
     {
-        Debug.Log("clicked");
-        Debug.Log(pausePlayButton.GetComponent<Image>().sprite.name);
-        if(pausePlayButton.GetComponent<Image>().sprite.name == "pauseIcon")
-        {
-            Time.timeScale = 0;
-            pausePlayButton.GetComponent<Image>().sprite = playIconSprite;
-        }
-        else if (pausePlayButton.GetComponent<Image>().sprite.name == "playIcon")
-        {
-            Time.timeScale = 1;
-            pausePlayButton.GetComponent<Image>().sprite = pauseIconSprite;
-        }
-
+        Time.timeScale = isPaused ? 1 : 0;
+        isPaused = !isPaused;
+        UpdatePauseIcon();
     }
 
 
     public void FastForward()
     {
+        isPaused = false;
         Time.timeScale = 3;
+        UpdatePauseIcon();
     }
 
 
     public void CountDownTimer()
     {
         timeRemaining -= Time.deltaTime;
-        
+
         countDownTimerTextObject.text = "Time Remaining: " + timeRemaining.ToString("F2");
     }
 
