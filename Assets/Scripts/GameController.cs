@@ -112,6 +112,10 @@ public class GameController : MonoBehaviour
 
     private async void loseInABit()
     {
+        if (isQuitting)
+        {
+            return;
+        }
         Time.timeScale = 0;
         await Task.Delay(2500);
         defeatScreen.SetActive(false);

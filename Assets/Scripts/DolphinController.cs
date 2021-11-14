@@ -61,6 +61,7 @@ public class DolphinController : MonoBehaviour
                 {
                     deathTimer = 0;
                 }
+
                 healthBarTransform.fillAmount = deathTimer / maxDeathTime;
             }
         }
@@ -69,7 +70,7 @@ public class DolphinController : MonoBehaviour
     private void LateUpdate()
     {
         uiCanvas.transform.LookAt(uiCanvas.transform.position +
-            _camera.transform.rotation * Vector3.back,
+                                  _camera.transform.rotation * Vector3.back,
             _camera.transform.rotation * Vector3.down);
     }
 
@@ -97,8 +98,8 @@ public class DolphinController : MonoBehaviour
                     destination = new Vector2(Random.Range(5, mapRadius * 2), Random.Range(5, mapRadius * 2));
                     int attempts = 0;
                     while (attempts < 1000 && !GameController.instance.planningPhaseController.isValidPath(
-                        new Vector2Int((int) transform.position.x, (int) transform.position.z),
-                        new Vector2Int((int) destination.x, (int) destination.y)))
+                               new Vector2Int((int) transform.position.x, (int) transform.position.z),
+                               new Vector2Int((int) destination.x, (int) destination.y)))
                     {
                         attempts++;
                         destination = Random.insideUnitCircle * mapRadius;
@@ -107,7 +108,8 @@ public class DolphinController : MonoBehaviour
                             destination = Vector3.zero;
                         }
                     }
-                    destination = new Vector3((int)destination.x, 0, (int)destination.y);
+
+                    destination = new Vector3((int) destination.x, 0, (int) destination.y);
                 }
             }
         }
@@ -125,12 +127,17 @@ public class DolphinController : MonoBehaviour
                 rb.velocity = Vector3.zero;
 //                deathTimer = 0;
             }
+
             nearbyTourists.Add(other.gameObject);
             var status = other.GetComponent<TouristBoatController>().touristStatus;
             if (status != TouristBoatController.TouristStatus.Retreating)
             {
-                other.GetComponent<TouristBoatController>().touristStatus =
-                    TouristBoatController.TouristStatus.Photographing;
+                TouristBoatController touristBoatController = other.GetComponent<TouristBoatController>();
+                touristBoatController.touristStatus = TouristBoatController.TouristStatus.Photographing;
+                if (touristBoatController.dialogOnDolphin.Count > 0)
+                {
+                    touristBoatController.bubbleCanvas.setDialog(touristBoatController.dialogOnDolphin[Random.Range(0, touristBoatController.dialogOnDolphin.Count - 1)], 5f);
+                }
             }
         }
         else if (other.gameObject.layer == 6)

@@ -22,11 +22,15 @@ public class PlayerBoatsController : MonoBehaviour
     float distanceCheckFrequency = 1;
     float timeOfNextDistanceCheck;
     public PatrolLights patrolLights;
+    public BubbleCanvas bubbleCanvas;
+
+    public List<string> onFoundTourist;
 
     // Behaviour Settings
     [SerializeField] bool pathLoop;
     [SerializeField] bool reversePath;
     [SerializeField] float wallAvoidWeight;
+
     [SerializeField] float maxPursueDistance; // how far to stray from patrol
     // the max pursue distance should possibly be dynamic based on size of patrol route?
 
@@ -51,7 +55,6 @@ public class PlayerBoatsController : MonoBehaviour
 
     private void Update()
     {
-        
         if (!pursueTarget)
         {
             pursueTarget = null;
@@ -62,7 +65,6 @@ public class PlayerBoatsController : MonoBehaviour
         // check if you're pursuing too far away from the patrol route
         if (pursueTarget != null)
         {
-            
             if (targetTourist != null)
             {
                 if (targetTourist.touristStatus ==
@@ -77,7 +79,7 @@ public class PlayerBoatsController : MonoBehaviour
             {
                 timeOfNextDistanceCheck = Time.time + distanceCheckFrequency;
                 if (Vector3.Distance(transform.position, centrePointOfPatrol) >
-                maxPursueDistance)
+                    maxPursueDistance)
                 {
                     pursueTarget = null;
                 }
@@ -104,7 +106,6 @@ public class PlayerBoatsController : MonoBehaviour
         {
             var puAccel = pu.GetSteering(pursueTarget);
             accel += puAccel;
-            
         }
         else
         {
@@ -121,6 +122,11 @@ public class PlayerBoatsController : MonoBehaviour
         // a tourist has been spotted!
         if (other.CompareTag("Tourist"))
         {
+            if (onFoundTourist.Count > 0)
+            {
+                bubbleCanvas.setDialog(onFoundTourist[Random.Range(0, onFoundTourist.Count - 1)], 5f);
+            }
+
             var targetAiRb = other.GetComponent<MovementAIRigidbody>();
             // if you don't have a target, pick it up
             if (pursueTarget == null)
@@ -167,6 +173,7 @@ public class PlayerBoatsController : MonoBehaviour
                     }
                 }
             }
+
             // if it is one of my potential future targets, remove it from the list
             /*
             else if (futureTargets.Contains(targetAiRb))

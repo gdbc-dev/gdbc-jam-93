@@ -19,9 +19,21 @@ public class TouristBoatController : MonoBehaviour
     [SerializeField] float wallAvoidWeight;
     float distanceCheckFrequency = 1;
     float timeOfNextDistanceCheck;
-    public enum TouristStatus { Idle, PursuingDolphin, Retreating, Photographing};
+
+    public enum TouristStatus
+    {
+        Idle,
+        PursuingDolphin,
+        Retreating,
+        Photographing
+    };
+
     public TouristStatus touristStatus;
     [SerializeField] float ticketDistance = 5;
+    public BubbleCanvas bubbleCanvas;
+
+    public List<string> dialogOnDolphin;
+    public List<string> dialogOnFlee;
 
     // Start is called before the first frame update
     void Start()
@@ -49,15 +61,18 @@ public class TouristBoatController : MonoBehaviour
                     puTarget = ReturnNearestaIRigidbody(
                         GameController.instance.aliveDolphins);
                 }
+
                 if (evadeTarget == null)
                 {
                     evadeTarget = ReturnNearestaIRigidbody(
                         GameController.instance.patrolBoats);
                 }
+
                 if (evadeTarget != null && puTarget != null)
                 {
                     touristStatus = TouristStatus.PursuingDolphin;
                 }
+
                 break;
 
             case TouristStatus.PursuingDolphin:
@@ -66,14 +81,17 @@ public class TouristBoatController : MonoBehaviour
                 {
                     puTarget = null;
                 }
+
                 if (!evadeTarget)
                 {
                     evadeTarget = null;
                 }
+
                 if (puTarget == null)
                 {
                     touristStatus = TouristStatus.Idle;
                 }
+
                 if (evadeTarget == null)
                 {
                     touristStatus = TouristStatus.Idle;
@@ -97,6 +115,7 @@ public class TouristBoatController : MonoBehaviour
 
                     CheckIfTouristReceivedTicket();
                 }
+
                 break;
 
             case TouristStatus.Retreating:
@@ -121,11 +140,13 @@ public class TouristBoatController : MonoBehaviour
 
                     CheckIfTouristReceivedTicket();
                 }
+
                 // check if dolphin is dead!
                 if (!puTarget)
                 {
                     touristStatus = TouristStatus.PursuingDolphin;
                 }
+
                 break;
 
             default:
@@ -181,6 +202,7 @@ public class TouristBoatController : MonoBehaviour
                     rb.velocity = Vector3.zero;
                     touristStatus = TouristStatus.Idle;
                 }
+
                 sb.Steer(accel);
                 sb.LookWhereYoureGoing();
                 break;
@@ -194,6 +216,7 @@ public class TouristBoatController : MonoBehaviour
                         accel += evadeAccel;
                     }
                 }
+
                 sb.Steer(accel);
                 sb.LookWhereYoureGoing();
                 break;
@@ -233,6 +256,7 @@ public class TouristBoatController : MonoBehaviour
                 nearestTarget = aIRigidbody;
             }
         }
+
         return nearestTarget;
     }
 
@@ -241,9 +265,15 @@ public class TouristBoatController : MonoBehaviour
         // if within range of a patrol boat, receive a ticket
         var distToPatrol = Vector3.Distance(transform.position,
             evadeTarget.transform.position);
-        
+
         if (distToPatrol < ticketDistance)
         {
+            Debug.Log("SEND BUBBLE REQUEST");
+            if (dialogOnFlee.Count > 0)
+            {
+                bubbleCanvas.setDialog(dialogOnFlee[Random.Range(0, dialogOnFlee.Count - 1)], 5f);
+            }
+
             touristStatus = TouristStatus.Retreating;
             GameController.instance.removeTouristBoat(
                 GetComponent<MovementAIRigidbody>());
