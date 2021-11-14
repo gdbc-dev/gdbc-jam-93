@@ -502,6 +502,7 @@ MonoBehaviour:
   dolphinsPrefabs:
   - {fileID: 1103157741332840318, guid: 31b013a4a78da495797d1da3f388dfbf, type: 3}
   environmentPrefabs: []
+  planningCursor: []
   currentLevelNum: 0
   planningCam: {fileID: 458615313}
   actionCam: {fileID: 254869487}
@@ -537,6 +538,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 16
   lineRenderer: {fileID: 582069788}
+  planningStartImage: {fileID: 0}
   planningCamera: {fileID: 458615316}
 --- !u!1 &254869487 stripped
 GameObject:
@@ -725,11 +727,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2949713834851094443, guid: f6f3af390e4634ddfa280918a1f66e58, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.000000002227203
+      value: -2.8222044e-10
       objectReference: {fileID: 0}
     - target: {fileID: 2949713834851094443, guid: f6f3af390e4634ddfa280918a1f66e58, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.000000009835538
+      value: 0.0000000012463043
       objectReference: {fileID: 0}
     - target: {fileID: 2949713834851094444, guid: f6f3af390e4634ddfa280918a1f66e58, type: 3}
       propertyPath: m_Follow
@@ -769,11 +771,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2949713835305622233, guid: f6f3af390e4634ddfa280918a1f66e58, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.0000000486208
+      value: -0.000000040669576
       objectReference: {fileID: 0}
     - target: {fileID: 2949713835305622233, guid: f6f3af390e4634ddfa280918a1f66e58, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.000000038841872
+      value: 0.00000003248985
       objectReference: {fileID: 0}
     - target: {fileID: 2949713835305622233, guid: f6f3af390e4634ddfa280918a1f66e58, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

@@ -22,6 +22,7 @@ public class GameController : MonoBehaviour
     public GameObject[] touristShipsPrefabs;
     public GameObject[] dolphinsPrefabs;
     public GameObject[] environmentPrefabs;
+    public Texture2D[] planningCursor;
 
     private int[,] map;
 
@@ -165,14 +166,24 @@ public class GameController : MonoBehaviour
 
         StartPlanningPhase();
     }
+    private float cursorTimer = 0;
+    private int cursorIndex = 0;
 
     private void Update()
     {
         if (gameState == GAME_STATE.PLANNING)
         {
+            cursorTimer += Time.unscaledDeltaTime;
+            if (cursorTimer >= .2f)
+            {
+                cursorTimer = 0;
+                cursorIndex = (cursorIndex + 1) % planningCursor.Length;
+                Cursor.SetCursor(planningCursor[cursorIndex], new Vector2(32f, 32f), CursorMode.Auto );
+            }
         }
         else if (gameState == GAME_STATE.PLAYING)
         {
+            Cursor.SetCursor(null, new Vector2(.5f, .5f), CursorMode.Auto );
             spawnTimer += Time.deltaTime;
             if (touristShipsToSpawn.Count > 0)
             {
@@ -197,9 +208,8 @@ public class GameController : MonoBehaviour
 
     public void StartPlanningPhase()
     {
-        actionScreenUi.gameObject.SetActive(false);
-
         gameState = GAME_STATE.PLANNING;
+        actionScreenUi.gameObject.SetActive(false);
         LevelData currentLevel = levels[currentLevelNum];
         Time.timeScale = 0;
         planningPhaseController.StartPlanning(currentLevel.numShips);
@@ -212,6 +222,7 @@ public class GameController : MonoBehaviour
 
     public void StartGamePhase()
     {
+        Cursor.SetCursor(null, new Vector2(.5f, .5f), CursorMode.Auto );
         cameraTarget.transform.position =new Vector3(getMapSize()/2f, cameraTarget.transform.position.y, getMapSize()/2f);
         actionScreenUi.gameObject.SetActive(true);
         gameState = GAME_STATE.PLAYING;
