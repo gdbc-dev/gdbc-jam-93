@@ -128,7 +128,7 @@ MonoBehaviour:
   m_LookaheadTime: 0
   m_LookaheadSmoothing: 0
   m_LookaheadIgnoreY: 0
-  m_HorizontalDamping: 0.5
+  m_HorizontalDamping: 1
   m_VerticalDamping: 0.5
   m_ScreenX: 0.5
   m_ScreenY: 0.5
@@ -220,7 +220,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2949713835305622238}
-  m_LocalRotation: {x: 0.68152595, y: -0.000000089035545, z: 0.00000008291956, w: 0.731794}
+  m_LocalRotation: {x: 0.68152595, y: -0.000000089036, z: 0.00000008292002, w: 0.731794}
   m_LocalPosition: {x: 0, y: 143.0683, z: -10.19}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
