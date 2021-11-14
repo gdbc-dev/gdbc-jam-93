@@ -140,7 +140,7 @@ public class PlanningPhaseController : MonoBehaviour
         }
     }
 
-    private bool isValidPath(Vector2Int start, Vector2Int end)
+    public bool isValidPath(Vector2Int start, Vector2Int end)
     {
         Vector2 slope = new Vector2(end.x + .5f, end.y + .5f) - new Vector2(start.x + .5f, start.y + .5f);
         slope.Normalize();

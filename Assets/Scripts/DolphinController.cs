@@ -78,13 +78,21 @@ public class DolphinController : MonoBehaviour
                 else
                 {
                     var mapRadius = GameController.instance.getMapSize() / 2;
-                    do
+                    destination = Random.insideUnitCircle * mapRadius + new Vector2(mapRadius, mapRadius);
+                    int attempts = 0;
+                    while (attempts < 1000 && !GameController.instance.planningPhaseController.isValidPath(
+                        new Vector2Int((int) transform.position.x, (int) transform.position.z),
+                        new Vector2Int((int) destination.x, (int) destination.y)))
                     {
+                        attempts++;
                         destination = Random.insideUnitCircle * mapRadius;
+                        if (attempts > 995)
+                        {
+                            Debug.Log("Never found");
+                            destination = Vector3.zero;
+                        }
                     }
-                    while (GameController.instance.isWater(
-                        (int)destination.x, (int)destination.y));
-                    destination = new Vector3((int)destination.x, 0, (int)destination.z);
+                    destination = new Vector3((int)destination.x, 0, (int)destination.y);
                 }
             }
         }
