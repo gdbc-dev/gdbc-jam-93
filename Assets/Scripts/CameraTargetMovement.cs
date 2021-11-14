@@ -48,6 +48,6 @@ public class CameraTargetMovement : MonoBehaviour
         // MOUSE ZOOM
         var mouseScroll = Input.GetAxis("Mouse ScrollWheel");
         var adjustment = -1 * mouseScroll * zoomSpeed * Time.deltaTime;
-        actionTransposer.m_FollowOffset.y += adjustment;
+        actionTransposer.m_FollowOffset.y = Mathf.Clamp(actionTransposer.m_FollowOffset.y + adjustment, 3, 90);
     }
 }
