@@ -176,6 +176,10 @@ public class GameController : MonoBehaviour
 
     private void Update()
     {
+        if (generateMenuLevelEnabled)
+        {
+            return;
+        }
         if (gameState == GAME_STATE.PLANNING)
         {
             cursorTimer += Time.unscaledDeltaTime;
