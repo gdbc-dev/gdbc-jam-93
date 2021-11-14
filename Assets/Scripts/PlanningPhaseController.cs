@@ -11,8 +11,10 @@ public class PlanningPhaseController : MonoBehaviour
     private int currentShipIndex = 0;
     private GameController gameController;
     public LineRenderer lineRenderer;
-    public LineRenderer finishLineRenderer ;
+    public LineRenderer finishLineRenderer;
     public GameObject planningStartImage;
+    public Material goodLineMaterial;
+    public Material badLineMaterial;
 
     [SerializeField] private Camera planningCamera;
 
@@ -36,6 +38,31 @@ public class PlanningPhaseController : MonoBehaviour
             return;
         }
 
+        RaycastHit hit;
+        // Does the ray intersect any objects excluding the player layer
+        ;
+        if (Physics.Raycast(planningCamera.ScreenPointToRay(Input.mousePosition), out hit,
+            Mathf.Infinity, hitMask))
+        {
+            if (shipPathLists[currentShipIndex].Count > 0)
+            {
+                Vector3 targetPos = hit.point;
+                Vector2Int newPoint = new Vector2Int((int) targetPos.x, (int) targetPos.z);
+                bool isValid = isValidPath(shipPathLists[currentShipIndex][shipPathLists[currentShipIndex].Count - 1],
+                    newPoint);
+                finishLineRenderer.material = isValid ? goodLineMaterial : badLineMaterial;
+
+                finishLineRenderer.positionCount = 2;
+                Vector2Int lastPos = shipPathLists[currentShipIndex][shipPathLists[currentShipIndex].Count - 1];
+                finishLineRenderer.SetPosition(0, new Vector3(lastPos.x + .5f, 5, lastPos.y + .5f));
+                finishLineRenderer.SetPosition(1, new Vector3(newPoint.x + .5f, 5, newPoint.y + .5f));
+            }
+            else
+            {
+                finishLineRenderer.positionCount = 0;
+            }
+        }
+
         if (Input.GetMouseButtonDown(0))
         {
             if (planningCamera == null)
@@ -43,9 +70,7 @@ public class PlanningPhaseController : MonoBehaviour
                 planningCamera = Camera.main;
             }
 
-            RaycastHit hit;
             // Does the ray intersect any objects excluding the player layer
-            ;
             if (Physics.Raycast(planningCamera.ScreenPointToRay(Input.mousePosition), out hit,
                 Mathf.Infinity, hitMask))
             {
@@ -130,11 +155,6 @@ public class PlanningPhaseController : MonoBehaviour
             {
                 return false;
             }
-
-            if (attempts > 900)
-            {
-                Debug.Log("SO MANY ATTEMPTS");
-            }
         }
 
         return true;
@@ -142,11 +162,11 @@ public class PlanningPhaseController : MonoBehaviour
 
     private bool isValidPathPosition(int currentX, int currentY)
     {
-        int surroundCheckAmount = 2;
+        int surroundCheckAmount = 1;
 
         for (int x = -surroundCheckAmount; x <= surroundCheckAmount; x++)
         {
-            for (int y = surroundCheckAmount; y <= surroundCheckAmount; y++)
+            for (int y = -surroundCheckAmount; y <= surroundCheckAmount; y++)
             {
                 if (!gameController.isWater(currentX + x, currentY + y))
                 {
@@ -194,6 +214,7 @@ public class PlanningPhaseController : MonoBehaviour
 
             Debug.Log("Finish Planning");
             lineRenderer.gameObject.SetActive(false);
+            finishLineRenderer.positionCount = 0;
             isPlanning = false;
             gameController.finishPlanning(shipPaths);
         }
