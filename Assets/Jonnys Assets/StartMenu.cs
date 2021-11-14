@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class StartMenu : MonoBehaviour
 {
@@ -10,6 +11,11 @@ public class StartMenu : MonoBehaviour
     void Start()
     {
         
+    }
+
+    public void StartGame()
+    {
+        SceneManager.LoadScene("ProcuduralMap");
     }
 
     // Update is called once per frame

@@ -858,7 +858,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 426009450}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 762004275}
+        m_TargetAssemblyTypeName: StartMenu, Assembly-CSharp
+        m_MethodName: StartGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &426009450
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1979,6 +1991,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   planningPhaseController: {fileID: 932114957}
+  actionScreenUi: {fileID: 0}
   mapGenerator: {fileID: 701340517}
   levels:
   - worldSize: 64
@@ -2048,6 +2061,7 @@ MonoBehaviour:
   currentLevelNum: 0
   planningCam: {fileID: 0}
   actionCam: {fileID: 0}
+  cameraTarget: {fileID: 0}
   generateMenuLevelEnabled: 1
 --- !u!4 &932114959
 Transform:
