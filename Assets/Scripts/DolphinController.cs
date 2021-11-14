@@ -84,7 +84,7 @@ public class DolphinController : MonoBehaviour
                 else
                 {
                     var mapRadius = GameController.instance.getMapSize() / 2;
-                    destination = Random.insideUnitCircle * mapRadius + new Vector2(mapRadius, mapRadius);
+                    destination = new Vector2(Random.Range(0, mapRadius * 2), Random.Range(0, mapRadius * 2));
                     int attempts = 0;
                     while (attempts < 1000 && !GameController.instance.planningPhaseController.isValidPath(
                         new Vector2Int((int) transform.position.x, (int) transform.position.z),

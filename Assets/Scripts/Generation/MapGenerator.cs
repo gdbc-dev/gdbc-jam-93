@@ -423,8 +423,8 @@ public class MapGenerator : MonoBehaviour
 //        mesh.normals = normals;
         mesh.RecalculateNormals();
 
-        AssetDatabase.CreateAsset(mesh, "Assets/Meshes/waterMesh2.mesh");
-        AssetDatabase.SaveAssets();
+//        AssetDatabase.CreateAsset(mesh, "Assets/Meshes/waterMesh2.mesh");
+//        AssetDatabase.SaveAssets();
     }
 
     public void AddTriangle(int[] triangles, int a, int b, int c)
