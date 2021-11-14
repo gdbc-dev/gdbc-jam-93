@@ -424,6 +424,11 @@ public class GameController : MonoBehaviour
         return map.GetLength(0);
     }
 
+    public Vector3 ReturnCentrePointOfMap()
+    {
+        return new Vector3(getMapSize() / 2, 0, getMapSize() / 2);
+    }
+
     private void RepositionPlanningCamera()
     {
         var pos = new Vector3(getMapSize() / 2f, 50, getMapSize() / 2f);

@@ -446,7 +446,7 @@ MonoBehaviour:
     touristSpawns:
     - spawnDelay: 5
     - spawnDelay: 5
-    - spawnDelay: 10
+    - spawnDelay: 5
   - worldSize: 96
     numIslands: 20
     surviveTime: 120
@@ -959,11 +959,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2949713834851094443, guid: f6f3af390e4634ddfa280918a1f66e58, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -2.0567723e-10
+      value: -0.0000000022023732
       objectReference: {fileID: 0}
     - target: {fileID: 2949713834851094443, guid: f6f3af390e4634ddfa280918a1f66e58, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.0000000018165058
+      value: 0.000000009725897
       objectReference: {fileID: 0}
     - target: {fileID: 2949713834851094444, guid: f6f3af390e4634ddfa280918a1f66e58, type: 3}
       propertyPath: m_Follow
@@ -973,13 +973,9 @@ PrefabInstance:
       propertyPath: m_LookAt
       value: 
       objectReference: {fileID: 1926140005}
-    - target: {fileID: 2949713835203671407, guid: f6f3af390e4634ddfa280918a1f66e58, type: 3}
-      propertyPath: m_HorizontalDamping
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 2949713835203671408, guid: f6f3af390e4634ddfa280918a1f66e58, type: 3}
       propertyPath: m_FollowOffset.y
-      value: 90
+      value: 45
       objectReference: {fileID: 0}
     - target: {fileID: 2949713835305622233, guid: f6f3af390e4634ddfa280918a1f66e58, type: 3}
       propertyPath: m_RootOrder
@@ -991,7 +987,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2949713835305622233, guid: f6f3af390e4634ddfa280918a1f66e58, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 90
+      value: 45
       objectReference: {fileID: 0}
     - target: {fileID: 2949713835305622233, guid: f6f3af390e4634ddfa280918a1f66e58, type: 3}
       propertyPath: m_LocalPosition.z
@@ -999,19 +995,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2949713835305622233, guid: f6f3af390e4634ddfa280918a1f66e58, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.7458229
+      value: 0.781298
       objectReference: {fileID: 0}
     - target: {fileID: 2949713835305622233, guid: f6f3af390e4634ddfa280918a1f66e58, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.6661444
+      value: 0.62415826
       objectReference: {fileID: 0}
     - target: {fileID: 2949713835305622233, guid: f6f3af390e4634ddfa280918a1f66e58, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.00000006913562
+      value: 0.000000048534645
       objectReference: {fileID: 0}
     - target: {fileID: 2949713835305622233, guid: f6f3af390e4634ddfa280918a1f66e58, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.00000006174966
+      value: -0.000000038773045
       objectReference: {fileID: 0}
     - target: {fileID: 2949713835305622233, guid: f6f3af390e4634ddfa280918a1f66e58, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1495,6 +1491,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4205398096892400348, guid: abeb438f69e13400bb0fd87580eee4a1, type: 3}
+      propertyPath: zoomSpeed
+      value: 2500
+      objectReference: {fileID: 0}
+    - target: {fileID: 4205398096892400348, guid: abeb438f69e13400bb0fd87580eee4a1, type: 3}
+      propertyPath: keyScrollSpeed
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 4502448615184120505, guid: abeb438f69e13400bb0fd87580eee4a1, type: 3}
       propertyPath: m_Name
       value: Planning Camera
@@ -1929,7 +1933,7 @@ MonoBehaviour:
   minHeightForLand: 0.58
   autoGenerate: 0
   minIslandSize: 16
-  maxIslandSize: 64
+  maxIslandSize: 60
   maxIslands: 25
   groundEdgePrefabs:
   - {fileID: 1258712568071856, guid: 0c75154c4fc68e9468d08eebd25883ae, type: 3}
