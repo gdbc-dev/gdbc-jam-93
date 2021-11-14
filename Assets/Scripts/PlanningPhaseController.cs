@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,6 +16,9 @@ public class PlanningPhaseController : MonoBehaviour
     public GameObject planningStartImage;
     public Material goodLineMaterial;
     public Material badLineMaterial;
+    [NonSerialized]
+    public List<LineRenderer> previousShipLinerenders;
+    public LineRenderer lineRendererPrefab;
 
     [SerializeField] private Camera planningCamera;
 
@@ -180,6 +184,16 @@ public class PlanningPhaseController : MonoBehaviour
 
     public void StartPlanning(int numShips)
     {
+        if (previousShipLinerenders == null)
+        {
+            previousShipLinerenders = new List<LineRenderer>();
+        }
+        for (int i = 0; i < previousShipLinerenders.Count; i++)
+        {
+            Destroy(previousShipLinerenders[i]);
+        }
+
+        previousShipLinerenders.Clear();
         planningStartImage.SetActive(false);
         lineRenderer.gameObject.SetActive(true);
         shipsToSpawn = numShips;
@@ -212,6 +226,12 @@ public class PlanningPhaseController : MonoBehaviour
                 }
             }
 
+            for (int i = 0; i < previousShipLinerenders.Count; i++)
+            {
+                Destroy(previousShipLinerenders[i]);
+            }
+
+            previousShipLinerenders.Clear();
             Debug.Log("Finish Planning");
             lineRenderer.gameObject.SetActive(false);
             finishLineRenderer.positionCount = 0;
@@ -220,6 +240,20 @@ public class PlanningPhaseController : MonoBehaviour
         }
         else
         {
+            for (int k = 0; k < shipPathLists.Count; k++)
+            {
+                previousShipLinerenders.Add(Instantiate(lineRendererPrefab));
+                previousShipLinerenders[k].positionCount = shipPathLists[k].Count;
+
+                for (int i = 0; i < shipPathLists[k].Count; i++)
+                {
+                    previousShipLinerenders[k].SetPosition(i,
+                        new Vector3(shipPathLists[k][i].x + .5f, 5,
+                            shipPathLists[k][i].y + .5f));
+                }
+            }
+
+            
             Debug.Log("Starting next ship");
             StartShipPath();
         }

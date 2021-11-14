@@ -441,7 +441,7 @@ MonoBehaviour:
   - worldSize: 64
     numIslands: 10
     surviveTime: 120
-    numShips: 1
+    numShips: 4
     numDolphins: 2
     touristSpawns:
     - spawnDelay: 5
@@ -546,6 +546,7 @@ MonoBehaviour:
   planningStartImage: {fileID: 2130462440}
   goodLineMaterial: {fileID: 2100000, guid: f3c55ff6ed6164b46ac37e649d204d66, type: 2}
   badLineMaterial: {fileID: 2100000, guid: 0e28beed50495dd45ab32376502dbe5e, type: 2}
+  lineRendererPrefab: {fileID: 2731910543375229854, guid: 839e9bfded8662a4e8a29242897f6ef5, type: 3}
   planningCamera: {fileID: 458615316}
 --- !u!1 &254869487 stripped
 GameObject:
@@ -1008,11 +1009,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2949713834851094443, guid: f6f3af390e4634ddfa280918a1f66e58, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.0000000023357598
+      value: -0.000000024033806
       objectReference: {fileID: 0}
     - target: {fileID: 2949713834851094443, guid: f6f3af390e4634ddfa280918a1f66e58, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.000000010314916
+      value: 0.00000010613554
       objectReference: {fileID: 0}
     - target: {fileID: 2949713834851094444, guid: f6f3af390e4634ddfa280918a1f66e58, type: 3}
       propertyPath: m_Follow
@@ -1052,11 +1053,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2949713835305622233, guid: f6f3af390e4634ddfa280918a1f66e58, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.00000004883212
+      value: -0.000000042511477
       objectReference: {fileID: 0}
     - target: {fileID: 2949713835305622233, guid: f6f3af390e4634ddfa280918a1f66e58, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.000000039010693
+      value: 0.000000033961296
       objectReference: {fileID: 0}
     - target: {fileID: 2949713835305622233, guid: f6f3af390e4634ddfa280918a1f66e58, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
