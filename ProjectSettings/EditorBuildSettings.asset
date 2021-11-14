@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
+    path: Assets/Scenes/StartMenu.unity
+    guid: 10f137af250b44efb87cafc891611c19
+  - enabled: 1
+    path: Assets/Scenes/ProcuduralMap.unity
+    guid: 91255b62466d0a14daf3e369aa637049
   m_configObjects: {}

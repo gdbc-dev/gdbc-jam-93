@@ -11,6 +11,7 @@ public class PlanningPhaseController : MonoBehaviour
     private int currentShipIndex = 0;
     private GameController gameController;
     public LineRenderer lineRenderer;
+    public GameObject planningStartImage;
 
     [SerializeField] private Camera planningCamera;
 
@@ -53,12 +54,9 @@ public class PlanningPhaseController : MonoBehaviour
                 Vector2Int newPoint = new Vector2Int((int) targetPos.x, (int) targetPos.z);
                 if (gameController.isWater(newPoint.x, newPoint.y))
                 {
-                    Debug.Log("New Point! " + newPoint);
                     if (shipPathLists[currentShipIndex].Count > 0 && Vector2Int.Distance(shipPathLists[currentShipIndex][0], newPoint) < 5f)
                     {
-                        shipPathLists[currentShipIndex].Add(newPoint);
-                        Debug.Log("COmpleted Path");
-
+                        shipPathLists[currentShipIndex].Add(shipPathLists[currentShipIndex][0]);
                         finishPlanning();
                         lineRenderer.positionCount = 0;
                     }
@@ -69,9 +67,11 @@ public class PlanningPhaseController : MonoBehaviour
                         if (shipPathLists[currentShipIndex].Count == 1)
                         {
                             lineRenderer.positionCount = 2;
-
+                            planningStartImage.SetActive(true);
+                            planningStartImage.transform.position = new Vector3(shipPathLists[currentShipIndex][0].x + .5f, 5, shipPathLists[currentShipIndex][0].y + .5f);
                             lineRenderer.SetPosition(0, new Vector3(shipPathLists[currentShipIndex][0].x + .5f, 5, shipPathLists[currentShipIndex][0].y + .5f));
                             lineRenderer.SetPosition(1, new Vector3(shipPathLists[currentShipIndex][0].x + .5f, 5, shipPathLists[currentShipIndex][0].y + .5f));
+                            return;
                         }
 
                         for (int i = 0; i < shipPathLists[currentShipIndex].Count; i++)
@@ -90,6 +90,7 @@ public class PlanningPhaseController : MonoBehaviour
 
     public void StartPlanning(int numShips)
     {
+        planningStartImage.SetActive(false);
         lineRenderer.gameObject.SetActive(true);
         shipsToSpawn = numShips;
         isPlanning = true;
@@ -106,6 +107,8 @@ public class PlanningPhaseController : MonoBehaviour
 
     public void finishPlanning()
     {
+        planningStartImage.SetActive(false);
+
         if (currentShipIndex + 1 >= shipsToSpawn)
         {
             List<List<Vector3>> shipPaths = new List<List<Vector3>>();
@@ -127,7 +130,6 @@ public class PlanningPhaseController : MonoBehaviour
         else
         {
             Debug.Log("Starting next ship");
-
             StartShipPath();
         }
     }

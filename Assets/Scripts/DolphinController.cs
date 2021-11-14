@@ -42,13 +42,15 @@ public class DolphinController : MonoBehaviour
     {
         if (other.CompareTag("Tourist") && !isUnwell)
         {
+            // if this is the first tourist boat to arrive
             if (nearbyTourists.Count == 0)
             {
                 print("Dolphin is being photographed!!!");
                 deathTimer = 0;
             }
             nearbyTourists.Add(other.gameObject);
-            other.GetComponent<TouristBoatController>().inRangeOfDolphin = true;
+            other.GetComponent<TouristBoatController>().touristStatus =
+                TouristBoatController.TouristStatus.Photographing;
         }
     }
 
@@ -59,7 +61,8 @@ public class DolphinController : MonoBehaviour
             if (nearbyTourists.Contains(other.gameObject))
             {
                 nearbyTourists.Remove(other.gameObject);
-                other.GetComponent<TouristBoatController>().inRangeOfDolphin = false;
+                other.GetComponent<TouristBoatController>().touristStatus =
+                    TouristBoatController.TouristStatus.PursuingDolphin;
             }
         }
     }

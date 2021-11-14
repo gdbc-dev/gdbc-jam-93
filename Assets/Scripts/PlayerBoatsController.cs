@@ -15,6 +15,7 @@ public class PlayerBoatsController : MonoBehaviour
     // Variables
     public LinePath path;
     [SerializeField] MovementAIRigidbody pursueTarget;
+    TouristBoatController targetTourist;
     Vector3 accel;
     List<MovementAIRigidbody> futureTargets = new List<MovementAIRigidbody>();
     Vector3 centrePointOfPatrol;
@@ -49,9 +50,24 @@ public class PlayerBoatsController : MonoBehaviour
 
     private void Update()
     {
+        if (!pursueTarget)
+        {
+            pursueTarget = null;
+        }
+
         // check if you're pursuing too far away from the patrol route
         if (pursueTarget != null)
         {
+            if (targetTourist != null)
+            {
+                if (targetTourist.touristStatus ==
+                    TouristBoatController.TouristStatus.Retreating)
+                {
+                    pursueTarget = null;
+                    targetTourist = null;
+                }
+            }
+
             if (Time.time > timeOfNextDistanceCheck)
             {
                 timeOfNextDistanceCheck = Time.time + distanceCheckFrequency;
@@ -105,6 +121,7 @@ public class PlayerBoatsController : MonoBehaviour
             if (pursueTarget == null)
             {
                 pursueTarget = targetAiRb;
+                targetTourist = targetAiRb.GetComponent<TouristBoatController>();
             }
             // if you already do, add it to a list to potentially target in future
             else
@@ -124,10 +141,12 @@ public class PlayerBoatsController : MonoBehaviour
             if (pursueTarget == targetAiRb)
             {
                 pursueTarget = null;
+                targetTourist = null;
                 // and check if there are any other targets in range to go after
                 if (futureTargets.Count > 0)
                 {
                     pursueTarget = futureTargets[0];
+                    targetTourist = pursueTarget.GetComponent<TouristBoatController>();
                 }
             }
             // if it is one of my potential future targets, remove it from the list
