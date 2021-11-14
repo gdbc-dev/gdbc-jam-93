@@ -5000,7 +5000,7 @@ MonoBehaviour:
   wallAvoidDistance: 6
   mainWhiskerLen: 7
   sideWhiskerLen: 3
-  sideWhiskerAngle: 45
+  sideWhiskerAngle: 15
 --- !u!114 &-4104252552280471837
 MonoBehaviour:
   m_ObjectHideFlags: 0
