@@ -75,7 +75,7 @@ public class DolphinController : MonoBehaviour
                     sb.Steer(accel);
                     sb.LookWhereYoureGoing();
                     var distToArrive = sb.ReturnDistanceToArriveTarget(destination);
-                    print(distToArrive);
+                    //print(distToArrive);
                     if (distToArrive < 1)
                     {
                         destination = Vector3.zero;
