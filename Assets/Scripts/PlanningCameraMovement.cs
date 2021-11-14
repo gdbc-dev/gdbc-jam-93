@@ -5,7 +5,6 @@ using UnityEngine;
 public class PlanningCameraMovement : MonoBehaviour
 {
     [SerializeField] private float keyScrollSpeed;
-    [SerializeField] private float keyTurnSpeed;
     [SerializeField] private float zoomSpeed;
 
     Camera cam;

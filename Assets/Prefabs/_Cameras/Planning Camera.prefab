@@ -130,3 +130,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8a593e0d1bd84cad9783fa2d3b8f124, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  keyScrollSpeed: 10
+  zoomSpeed: 50
