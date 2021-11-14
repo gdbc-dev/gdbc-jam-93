@@ -142,7 +142,7 @@ public class TouristBoatController : MonoBehaviour
         // avoid walls, unless in range of the dolphin!
         if (touristStatus != TouristStatus.Photographing)
         {
-            print("I am checking for a wall!");
+            //print("I am checking for a wall!");
             waAccel = wa.GetSteering();
             accel += waAccel * wallAvoidWeight;
         }
@@ -245,7 +245,7 @@ public class TouristBoatController : MonoBehaviour
             touristStatus = TouristStatus.Retreating;
             GameController.instance.removeTouristBoat(
                 GetComponent<MovementAIRigidbody>());
-            this.gameObject.tag = null;
+            //this.gameObject.tag = null;
             print(this.gameObject.name + ": OK, I'm out of here.");
         }
     }

@@ -122,6 +122,12 @@ public class PlayerBoatsController : MonoBehaviour
             {
                 pursueTarget = targetAiRb;
                 targetTourist = targetAiRb.GetComponent<TouristBoatController>();
+                if (targetTourist.touristStatus ==
+                    TouristBoatController.TouristStatus.Retreating)
+                {
+                    pursueTarget = null;
+                    targetTourist = null;
+                }
             }
             // if you already do, add it to a list to potentially target in future
             else
