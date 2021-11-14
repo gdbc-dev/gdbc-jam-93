@@ -16,7 +16,7 @@ public class FlagBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.Rotate(0.0f, 45 * Time.deltaTime, 0.0f, Space.World);
+       
         if (ticketed)
         {
             flag.SetActive(true);
