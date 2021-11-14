@@ -4962,7 +4962,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9cdf64bcab4d4d8468c92f1bc4b23f7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  panicDist: 40
+  panicDist: 8
   decelerateOnStop: 0
   maxAcceleration: 50
   timeToTarget: 0.1

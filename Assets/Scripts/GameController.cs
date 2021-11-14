@@ -295,7 +295,17 @@ public class GameController : MonoBehaviour
 
     public void removeTouristBoat(MovementAIRigidbody ship)
     {
+        if (isQuitting)
+        {
+            return;
+        }
+        
         this.touristBoats.Remove(ship);
+
+        if (this.touristBoats.Count == 0 && touristShipsToSpawn.Count == 0)
+        {
+            winLevel();
+        }
     }
 
 

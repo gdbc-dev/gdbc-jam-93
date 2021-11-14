@@ -368,7 +368,7 @@ MonoBehaviour:
   levels:
   - worldSize: 64
     numIslands: 10
-    surviveTime: 30
+    surviveTime: 120
     numShips: 1
     numDolphins: 2
     touristSpawns:
@@ -377,7 +377,7 @@ MonoBehaviour:
     - spawnDelay: 10
   - worldSize: 96
     numIslands: 20
-    surviveTime: 60
+    surviveTime: 120
     numShips: 2
     numDolphins: 3
     touristSpawns:
@@ -388,7 +388,7 @@ MonoBehaviour:
     - spawnDelay: 7
   - worldSize: 128
     numIslands: 70
-    surviveTime: 60
+    surviveTime: 180
     numShips: 3
     numDolphins: 3
     touristSpawns:
@@ -401,7 +401,7 @@ MonoBehaviour:
     - spawnDelay: 5
   - worldSize: 180
     numIslands: 125
-    surviveTime: 60
+    surviveTime: 240
     numShips: 3
     numDolphins: 3
     touristSpawns:
@@ -431,6 +431,8 @@ MonoBehaviour:
   - {fileID: 1103157741332840318, guid: 31b013a4a78da495797d1da3f388dfbf, type: 3}
   environmentPrefabs: []
   currentLevelNum: 0
+  planningCam: {fileID: 0}
+  actionCam: {fileID: 0}
   generateMenuLevelEnabled: 0
 --- !u!4 &211445441
 Transform:
@@ -462,6 +464,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 16
   lineRenderer: {fileID: 582069788}
+  planningCamera: {fileID: 0}
 --- !u!1 &582069787
 GameObject:
   m_ObjectHideFlags: 0
