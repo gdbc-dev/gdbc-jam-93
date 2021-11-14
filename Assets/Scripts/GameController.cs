@@ -1,10 +1,12 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 using UnityMovementAI;
 using Cinemachine;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
@@ -23,6 +25,8 @@ public class GameController : MonoBehaviour
     public GameObject[] dolphinsPrefabs;
     public GameObject[] environmentPrefabs;
     public Texture2D[] planningCursor;
+    public GameObject victoryScreen;
+    public GameObject defeatScreen;
 
     private int[,] map;
 
@@ -82,17 +86,37 @@ public class GameController : MonoBehaviour
     [ContextMenu("Win Level")]
     public void winLevel()
     {
+        victoryScreen.SetActive(true);
         currentLevelNum++;
+        winInABit();
+    }
+
+    private async void winInABit()
+    {
+        Time.timeScale = 0;
+
+        await Task.Delay(2500);
+        victoryScreen.SetActive(false);
 
         if (currentLevelNum >= levels.Count)
         {
             Debug.Log("Won Game!");
+            SceneManager.LoadScene("StartMenu");
         }
         else
         {
             Debug.Log("Starting next level!");
             startLevel(currentLevelNum);
         }
+    }
+
+    private async void loseInABit()
+    {
+        Time.timeScale = 0;
+
+        await Task.Delay(2500);
+        defeatScreen.SetActive(false);
+        startLevel(currentLevelNum);
     }
 
     [ContextMenu("Restart Level")]
@@ -106,8 +130,7 @@ public class GameController : MonoBehaviour
     public void loseLevel()
     {
         Debug.Log("Lost Level!!");
-
-        startLevel(currentLevelNum);
+        loseInABit();
     }
 
     [ContextMenu("Restart Game")]
@@ -180,6 +203,7 @@ public class GameController : MonoBehaviour
         {
             return;
         }
+
         if (gameState == GAME_STATE.PLANNING)
         {
             cursorTimer += Time.unscaledDeltaTime;
@@ -305,7 +329,7 @@ public class GameController : MonoBehaviour
         while (attempts < 1000)
         {
             attempts++;
-            Vector2Int pos = new Vector2Int(Random.Range(5, map.GetLength(0)), Random.Range(5, map.GetLength(1)));
+            Vector2Int pos = new Vector2Int(Random.Range(15, map.GetLength(0)), Random.Range(15, map.GetLength(1)));
             if (hasWaterAround(pos.x, pos.y, 2))
             {
                 return new Vector3(pos.x, 0, pos.y);
@@ -314,7 +338,7 @@ public class GameController : MonoBehaviour
 
         return new Vector3();
     }
-    
+
     private bool hasWaterAround(int currentX, int currentY, int amount)
     {
         int surroundCheckAmount = amount;
