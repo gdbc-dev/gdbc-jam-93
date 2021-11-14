@@ -30,24 +30,24 @@ public class CameraTargetMovement : MonoBehaviour
         var dir = cam.transform.forward;
         dir.y = 0;
         dir.Normalize();
-        transform.position += dir * Input.GetAxis("Vertical") * keyScrollSpeed * Time.deltaTime;
+        transform.position += dir * Input.GetAxis("Vertical") * keyScrollSpeed * Time.unscaledDeltaTime;
 
         var leftRight = Input.GetAxis("Horizontal");
-        transform.Translate(leftRight * Vector3.right * keyScrollSpeed * Time.deltaTime);
+        transform.Translate(leftRight * Vector3.right * keyScrollSpeed * Time.unscaledDeltaTime);
 
         // KEY TURNING
         if (Input.GetKey(KeyCode.Q))
         {
-            transform.Rotate(new Vector3(0, -1, 0) * keyTurnSpeed * Time.deltaTime);
+            transform.Rotate(new Vector3(0, -1, 0) * keyTurnSpeed * Time.unscaledDeltaTime);
         }
         if (Input.GetKey(KeyCode.E))
         {
-            transform.Rotate(new Vector3(0, 1, 0) * keyTurnSpeed * Time.deltaTime);
+            transform.Rotate(new Vector3(0, 1, 0) * keyTurnSpeed * Time.unscaledDeltaTime);
         }
 
         // MOUSE ZOOM
         var mouseScroll = Input.GetAxis("Mouse ScrollWheel");
-        var adjustment = -1 * mouseScroll * zoomSpeed * Time.deltaTime;
+        var adjustment = -1 * mouseScroll * zoomSpeed * Time.unscaledDeltaTime;
         actionTransposer.m_FollowOffset.y = Mathf.Clamp(actionTransposer.m_FollowOffset.y + adjustment, 3, 90);
     }
 }
