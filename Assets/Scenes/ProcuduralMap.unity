@@ -779,7 +779,7 @@ MonoBehaviour:
   minHeightForLand: 0.58
   autoGenerate: 0
   minIslandSize: 16
-  maxIslandSize: 32
+  maxIslandSize: 64
   maxIslands: 25
   groundEdgePrefabs:
   - {fileID: 1258712568071856, guid: 0c75154c4fc68e9468d08eebd25883ae, type: 3}
