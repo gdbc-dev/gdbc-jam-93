@@ -125,21 +125,25 @@ public class DolphinController : MonoBehaviour
     {
         if (other.CompareTag("Tourist") && !isUnwell)
         {
-            // if this is the first tourist boat to arrive
-            if (nearbyTourists.Count == 0)
-            {
-                print("Dolphin is being photographed!!!");
-                audioSource.PlayOneShot(audioDistressed);
-                rb.velocity = Vector3.zero;
-//                deathTimer = 0;
-            }
-
-            nearbyTourists.Add(other.gameObject);
             var status = other.GetComponent<TouristBoatController>().touristStatus;
+            
             if (status != TouristBoatController.TouristStatus.Retreating)
             {
-                TouristBoatController touristBoatController = other.GetComponent<TouristBoatController>();
-                touristBoatController.touristStatus = TouristBoatController.TouristStatus.Photographing;
+                // if this is the first tourist boat to arrive
+                if (nearbyTourists.Count == 0)
+                {
+                    print("Dolphin is being photographed!!!");
+                    audioSource.PlayOneShot(audioDistressed);
+                    rb.velocity = Vector3.zero;
+                    //                deathTimer = 0;
+                }
+
+                nearbyTourists.Add(other.gameObject);
+
+                TouristBoatController touristBoatController =
+                    other.GetComponent<TouristBoatController>();
+                touristBoatController.touristStatus =
+                    TouristBoatController.TouristStatus.Photographing;
                 if (touristBoatController.dialogOnDolphin.Count > 0)
                 {
                     touristBoatController.bubbleCanvas.setDialog(
