@@ -239,6 +239,7 @@ public class GameController : MonoBehaviour
         gameState = GAME_STATE.PLAYING;
         Time.timeScale = 1;
         actionScreenUi.timeRemaining = levels[currentLevelNum].surviveTime;
+        remainingTouristBoats = touristShipsToSpawn.Count;
 
         RepositionActionCamera();
         actionCam.SetActive(true);
