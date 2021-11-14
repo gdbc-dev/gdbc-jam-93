@@ -191,9 +191,9 @@ public class MapGenerator : MonoBehaviour
     {
         if (
             (x > 0 && map[x - 1, y] == 0) ||
-            (x < map.GetLength(0) && map[x + 1, y] == 0) ||
+            (x < map.GetLength(0) - 1 && map[x + 1, y] == 0) ||
             (y > 0 && map[x, y - 1] == 0) ||
-            (y < map.GetLength(1) && map[x, y + 1] == 0))
+            (y < map.GetLength(1) - 1 && map[x, y + 1] == 0))
         {
             return true;
         }
