@@ -81,7 +81,6 @@ public class PlanningPhaseController : MonoBehaviour
     public void StartPlanning(int numShips)
     {
         lineRenderer.gameObject.SetActive(true);
-        Debug.Log("Start Planning");
         shipsToSpawn = numShips;
         isPlanning = true;
         shipPathLists = new List<List<Vector2Int>>();
