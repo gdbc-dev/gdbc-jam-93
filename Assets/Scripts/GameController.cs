@@ -116,10 +116,14 @@ public class GameController : MonoBehaviour
         {
             return;
         }
+
         Time.timeScale = 0;
         await Task.Delay(2500);
         defeatScreen.SetActive(false);
-        startLevel(currentLevelNum);
+        if (Application.isPlaying)
+        {
+            startLevel(currentLevelNum);
+        }
     }
 
     [ContextMenu("Restart Level")]
