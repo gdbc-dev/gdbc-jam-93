@@ -108,8 +108,8 @@ MonoBehaviour:
   deathTimer: 0
   maxDeathTime: 10
   isUnwell: 0
-  distressed: {fileID: 8300000, guid: 8fe4f2bf940cd8f119194ec54fd753ab, type: 3}
-  unwell: {fileID: 8300000, guid: 4ccbceb387cb21a42b0c6023b51cdc32, type: 3}
+  audioDistressed: {fileID: 8300000, guid: 8fe4f2bf940cd8f119194ec54fd753ab, type: 3}
+  audioUnwell: {fileID: 8300000, guid: 4ccbceb387cb21a42b0c6023b51cdc32, type: 3}
   audioSource: {fileID: -8974444406654415513}
 --- !u!135 &6456802816235938905
 SphereCollider:
