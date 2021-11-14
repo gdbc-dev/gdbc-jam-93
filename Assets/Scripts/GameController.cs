@@ -370,6 +370,7 @@ public class GameController : MonoBehaviour
     {
         var pos = new Vector3(getMapSize() / 2f, 50, getMapSize() / 2f);
         planningCam.transform.position = pos;
+        planningCam.GetComponent<Camera>().orthographicSize = 35;
     }
 
     private void RepositionActionCamera()
@@ -378,6 +379,6 @@ public class GameController : MonoBehaviour
         actionCam.transform.Find("Action Virtual Camera").
             GetComponent<CinemachineVirtualCamera>().
             GetCinemachineComponent<CinemachineOrbitalTransposer>().
-            m_FollowOffset.y = 90;
+            m_FollowOffset.y = 45;
     }
 }

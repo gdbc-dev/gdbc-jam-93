@@ -54,7 +54,7 @@ public class PlanningPhaseController : MonoBehaviour
                 if (gameController.isWater(newPoint.x, newPoint.y))
                 {
                     Debug.Log("New Point! " + newPoint);
-                    if (shipPathLists[currentShipIndex].Count > 0 && shipPathLists[currentShipIndex][0] == newPoint)
+                    if (shipPathLists[currentShipIndex].Count > 0 && Vector2Int.Distance(shipPathLists[currentShipIndex][0], newPoint) < 5f)
                     {
                         shipPathLists[currentShipIndex].Add(newPoint);
                         Debug.Log("COmpleted Path");
