@@ -33,7 +33,7 @@ public class ActionScreenUI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        timeRemaining = totalTimeForLevel;
+//        timeRemaining = totalTimeForLevel;
         StartingTouristIcons(3);
         StartingDolphinsIcons(3);
     }
