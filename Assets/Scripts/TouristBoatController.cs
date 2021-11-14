@@ -19,9 +19,8 @@ public class TouristBoatController : MonoBehaviour
     [SerializeField] float wallAvoidWeight;
     float distanceCheckFrequency = 1;
     float timeOfNextDistanceCheck;
-    private enum TouristStatus { Idle, PursuingDolphin, EvadingPatrol};
-    [SerializeField] private TouristStatus touristStatus;
-    public bool inRangeOfDolphin;
+    public enum TouristStatus { Idle, PursuingDolphin, Retreating, Photographing};
+    public TouristStatus touristStatus;
 
     // Start is called before the first frame update
     void Start()
@@ -41,46 +40,87 @@ public class TouristBoatController : MonoBehaviour
 
     private void Update()
     {
-        // check if dolphin has been destroyed
-        if (!puTarget)
+        switch (touristStatus)
         {
-            puTarget = ReturnNearestaIRigidbody(
-                GameController.instance.aliveDolphins);
-            inRangeOfDolphin = false;
-        }
-        if (!evadeTarget)
-        {
-            evadeTarget = ReturnNearestaIRigidbody(
-                GameController.instance.patrolBoats);
-        }
-
-        if (puTarget == null)
-        {
-            puTarget = ReturnNearestaIRigidbody(
-                GameController.instance.aliveDolphins);
-            inRangeOfDolphin = false;
-        }
-        if (evadeTarget == null)
-        {
-            evadeTarget = ReturnNearestaIRigidbody(
-                GameController.instance.patrolBoats);
-        }
-
-        // check if you should be evading a closer patrol boat
-        if (evadeTarget != null)
-        {
-            if (Time.time > timeOfNextDistanceCheck)
-            {
-                timeOfNextDistanceCheck = Time.time + distanceCheckFrequency;
-
-                var nearestPatrol = ReturnNearestaIRigidbody(
-                    GameController.instance.patrolBoats);
-
-                if (evadeTarget != nearestPatrol)
+            case TouristStatus.Idle:
+                if (puTarget == null)
                 {
-                    evadeTarget = nearestPatrol;
+                    puTarget = ReturnNearestaIRigidbody(
+                        GameController.instance.aliveDolphins);
                 }
-            }
+                if (evadeTarget == null)
+                {
+                    evadeTarget = ReturnNearestaIRigidbody(
+                        GameController.instance.patrolBoats);
+                }
+                if (evadeTarget != null && puTarget != null)
+                {
+                    touristStatus = TouristStatus.PursuingDolphin;
+                }
+                break;
+
+            case TouristStatus.PursuingDolphin:
+                // check if dolphin or patrol has been destroyed or is null
+                if (!puTarget)
+                {
+                    puTarget = null;
+                }
+                if (!evadeTarget)
+                {
+                    evadeTarget = null;
+                }
+                if (puTarget == null)
+                {
+                    touristStatus = TouristStatus.Idle;
+                }
+                if (evadeTarget == null)
+                {
+                    touristStatus = TouristStatus.Idle;
+                    
+                }
+
+                // check if you should be evading a closer patrol boat
+                if (evadeTarget != null)
+                {
+                    if (Time.time > timeOfNextDistanceCheck)
+                    {
+                        timeOfNextDistanceCheck = Time.time + distanceCheckFrequency;
+
+                        var nearestPatrol = ReturnNearestaIRigidbody(
+                            GameController.instance.patrolBoats);
+
+                        if (evadeTarget != nearestPatrol)
+                        {
+                            evadeTarget = nearestPatrol;
+                        }
+                    }
+                }
+                break;
+
+            case TouristStatus.Retreating:
+                break;
+
+            case TouristStatus.Photographing:
+                // check if you should be evading a closer patrol boat
+                if (evadeTarget != null)
+                {
+                    if (Time.time > timeOfNextDistanceCheck)
+                    {
+                        timeOfNextDistanceCheck = Time.time + distanceCheckFrequency;
+
+                        var nearestPatrol = ReturnNearestaIRigidbody(
+                            GameController.instance.patrolBoats);
+
+                        if (evadeTarget != nearestPatrol)
+                        {
+                            evadeTarget = nearestPatrol;
+                        }
+                    }
+                }
+                break;
+
+            default:
+                break;
         }
     }
 
@@ -90,45 +130,74 @@ public class TouristBoatController : MonoBehaviour
         // reset the accel
         accel = Vector3.zero;
 
-        // always avoid walls!
-        if (!inRangeOfDolphin)
+        // avoid walls, unless in range of the dolphin!
+        if (touristStatus != TouristStatus.Photographing)
         {
             waAccel = wa.GetSteering();
             accel += waAccel * wallAvoidWeight;
         }
 
-        // check if you should be evading
-        if (evadeTarget != null)
+        switch (touristStatus)
         {
-            evadeAccel = evade.GetSteering(evadeTarget);
-            if (evadeAccel.magnitude > evadeThreshold)
-            {
-                accel += evadeAccel;
-                touristStatus = TouristStatus.EvadingPatrol;
-            }
-            else
-            {
-                if (puTarget != null)
+            case TouristStatus.Idle:
+                break;
+
+            case TouristStatus.PursuingDolphin:
+                // check if you should be evading
+                if (evadeTarget != null)
                 {
-                    puAccel = pu.GetSteering(puTarget);
-                    accel += puAccel;
-                    touristStatus = TouristStatus.PursuingDolphin;
+                    evadeAccel = evade.GetSteering(evadeTarget);
+                    if (evadeAccel.magnitude > evadeThreshold)
+                    {
+                        accel += evadeAccel;
+                    }
+                    else
+                    {
+                        if (puTarget != null)
+                        {
+                            puAccel = pu.GetSteering(puTarget);
+                            accel += puAccel;
+                            touristStatus = TouristStatus.PursuingDolphin;
+                        }
+                        else
+                        {
+                            rb.velocity = Vector3.zero;
+                            touristStatus = TouristStatus.Idle;
+                        }
+                    }
                 }
                 else
                 {
                     rb.velocity = Vector3.zero;
                     touristStatus = TouristStatus.Idle;
                 }
-            }
-        }
-        else
-        {
-            rb.velocity = Vector3.zero;
-            touristStatus = TouristStatus.Idle;
-        }
+                sb.Steer(accel);
+                sb.LookWhereYoureGoing();
+                break;
 
-        sb.Steer(accel);
-        sb.LookWhereYoureGoing();
+            case TouristStatus.Photographing:
+                if (evadeTarget != null)
+                {
+                    evadeAccel = evade.GetSteering(evadeTarget);
+                    if (evadeAccel.magnitude > evadeThreshold)
+                    {
+                        accel += evadeAccel;
+                    }
+                }
+                sb.Steer(accel);
+                sb.LookWhereYoureGoing();
+                break;
+
+            case TouristStatus.Retreating:
+                var arriveAccel = sb.Arrive(new Vector3 (200, 0, 200));
+                accel += arriveAccel;
+                sb.Steer(accel);
+                sb.LookWhereYoureGoing();
+                break;
+
+            default:
+                break;
+        }
     }
 
     private MovementAIRigidbody ReturnNearestaIRigidbody(
@@ -153,5 +222,13 @@ public class TouristBoatController : MonoBehaviour
             }
         }
         return nearestTarget;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("PatrolBoat)"))
+        {
+            touristStatus = TouristStatus.Retreating;
+        }
     }
 }
