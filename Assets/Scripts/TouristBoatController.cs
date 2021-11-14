@@ -241,14 +241,14 @@ public class TouristBoatController : MonoBehaviour
         // if within range of a patrol boat, receive a ticket
         var distToPatrol = Vector3.Distance(transform.position,
             evadeTarget.transform.position);
-        //print("Checking distance " + distToPatrol);
+        
         if (distToPatrol < ticketDistance)
         {
             touristStatus = TouristStatus.Retreating;
             GameController.instance.removeTouristBoat(
                 GetComponent<MovementAIRigidbody>());
-            //this.gameObject.tag = null;
             print(this.gameObject.name + ": OK, I'm out of here.");
+            Destroy(this.gameObject, 10);
         }
     }
 }
