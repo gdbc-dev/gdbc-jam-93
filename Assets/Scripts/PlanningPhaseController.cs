@@ -26,11 +26,13 @@ public class PlanningPhaseController : MonoBehaviour
         if (!isPlanning)
         {
             return;
-
-            
         }
-        
 
+
+        if (gameController.gameState == GameController.GAME_STATE.PLAYING)
+        {
+            return;
+        }
 
         if (Input.GetMouseButtonDown(0))
         {
@@ -72,11 +74,10 @@ public class PlanningPhaseController : MonoBehaviour
                             lineRenderer.SetPosition(1, new Vector3(shipPathLists[currentShipIndex][0].x + .5f, 5, shipPathLists[currentShipIndex][0].y + .5f));
                         }
 
-                    for (int i = 0; i < shipPathLists[currentShipIndex].Count; i++)
+                        for (int i = 0; i < shipPathLists[currentShipIndex].Count; i++)
                         {
                             lineRenderer.SetPosition(i, new Vector3(shipPathLists[currentShipIndex][i].x + .5f, 5, shipPathLists[currentShipIndex][i].y + .5f));
                         }
-        
                     }
                 }
             }
@@ -117,10 +118,11 @@ public class PlanningPhaseController : MonoBehaviour
                     shipPaths[i].Add(new Vector3(shipPathLists[i][j].x + .5f, 0, shipPathLists[i][j].y + .5f));
                 }
             }
+
             Debug.Log("Finish Planning");
             lineRenderer.gameObject.SetActive(false);
-            gameController.finishPlanning(shipPaths);
             isPlanning = false;
+            gameController.finishPlanning(shipPaths);
         }
         else
         {
@@ -128,6 +130,5 @@ public class PlanningPhaseController : MonoBehaviour
 
             StartShipPath();
         }
-        
     }
 }

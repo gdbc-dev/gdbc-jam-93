@@ -26,7 +26,8 @@ public class GameController : MonoBehaviour
 
     public int currentLevelNum = 0;
 
-    private GAME_STATE gameState = GAME_STATE.PLANNING;
+    [NonSerialized]
+    public GAME_STATE gameState = GAME_STATE.PLANNING;
 
     private int shipsLeftToSpawn;
     private List<TouristData> touristShipsToSpawn;
