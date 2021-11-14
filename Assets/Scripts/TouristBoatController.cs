@@ -313,7 +313,7 @@ public class TouristBoatController : MonoBehaviour
             GameController.instance.removeTouristBoat(
                 GetComponent<MovementAIRigidbody>());
             print(this.gameObject.name + ": OK, I'm out of here.");
-            Destroy(this.gameObject, 10);
+            Destroy(this.gameObject, 30);
         }
     }
 }
