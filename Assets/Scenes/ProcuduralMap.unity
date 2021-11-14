@@ -446,7 +446,7 @@ MonoBehaviour:
     touristSpawns:
     - spawnDelay: 5
     - spawnDelay: 5
-    - spawnDelay: 10
+    - spawnDelay: 5
   - worldSize: 96
     numIslands: 20
     surviveTime: 120
@@ -959,11 +959,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2949713834851094443, guid: f6f3af390e4634ddfa280918a1f66e58, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -3.8657427e-10
+      value: 0.0000000039328145
       objectReference: {fileID: 0}
     - target: {fileID: 2949713834851094443, guid: f6f3af390e4634ddfa280918a1f66e58, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.000000001707164
+      value: -0.000000017367684
       objectReference: {fileID: 0}
     - target: {fileID: 2949713834851094444, guid: f6f3af390e4634ddfa280918a1f66e58, type: 3}
       propertyPath: m_Follow
@@ -1003,11 +1003,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2949713835305622233, guid: f6f3af390e4634ddfa280918a1f66e58, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.000000040687734
+      value: 0.00000005641793
       objectReference: {fileID: 0}
     - target: {fileID: 2949713835305622233, guid: f6f3af390e4634ddfa280918a1f66e58, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.000000032504357
+      value: -0.000000045070795
       objectReference: {fileID: 0}
     - target: {fileID: 2949713835305622233, guid: f6f3af390e4634ddfa280918a1f66e58, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1933,7 +1933,7 @@ MonoBehaviour:
   minHeightForLand: 0.58
   autoGenerate: 0
   minIslandSize: 16
-  maxIslandSize: 64
+  maxIslandSize: 60
   maxIslands: 25
   groundEdgePrefabs:
   - {fileID: 1258712568071856, guid: 0c75154c4fc68e9468d08eebd25883ae, type: 3}

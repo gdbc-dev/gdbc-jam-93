@@ -24,11 +24,6 @@ public class PlanningCameraMovement : MonoBehaviour
         transform.Translate(forwardBack * Vector3.up  * keyScrollSpeed *
             Time.unscaledDeltaTime);
 
-        if (forwardBack > 0)
-        {
-            Debug.Log(forwardBack);
-        }
-
         var leftRight = Input.GetAxisRaw("Horizontal");
         transform.Translate(leftRight * Vector3.right * keyScrollSpeed *
             Time.unscaledDeltaTime);
