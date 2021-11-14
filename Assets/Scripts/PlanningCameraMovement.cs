@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -19,13 +20,19 @@ public class PlanningCameraMovement : MonoBehaviour
     void Update()
     {
         // KEY SCROLLING
-        var forwardBack = Input.GetAxis("Vertical");
-        transform.Translate(forwardBack * Vector3.forward  * keyScrollSpeed *
+        var forwardBack = Input.GetAxisRaw("Vertical");
+        transform.Translate(forwardBack * Vector3.up  * keyScrollSpeed *
             Time.unscaledDeltaTime);
 
-        var leftRight = Input.GetAxis("Horizontal");
+        if (forwardBack > 0)
+        {
+            Debug.Log(forwardBack);
+        }
+
+        var leftRight = Input.GetAxisRaw("Horizontal");
         transform.Translate(leftRight * Vector3.right * keyScrollSpeed *
             Time.unscaledDeltaTime);
+        transform.position = new Vector3(Mathf.Clamp(transform.position.x, -10, 150), transform.position.y, Mathf.Clamp(transform.position.z, -10, 150));
 
         // KEY TURNING
         /*
@@ -40,8 +47,9 @@ public class PlanningCameraMovement : MonoBehaviour
         */
 
         // MOUSE ZOOM
-        var mouseScroll = Input.GetAxis("Mouse ScrollWheel");
+        var mouseScroll = Input.GetAxisRaw("Mouse ScrollWheel");
         var adjustment = -1 * mouseScroll * zoomSpeed * Time.unscaledDeltaTime;
         cam.orthographicSize += adjustment;
+        cam.orthographicSize = Mathf.Clamp(cam.orthographicSize, 10, 110);
     }
 }

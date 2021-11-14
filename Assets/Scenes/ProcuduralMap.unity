@@ -959,11 +959,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2949713834851094443, guid: f6f3af390e4634ddfa280918a1f66e58, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.0000000038899937
+      value: -3.8657427e-10
       objectReference: {fileID: 0}
     - target: {fileID: 2949713834851094443, guid: f6f3af390e4634ddfa280918a1f66e58, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.000000017178536
+      value: 0.000000001707164
       objectReference: {fileID: 0}
     - target: {fileID: 2949713834851094444, guid: f6f3af390e4634ddfa280918a1f66e58, type: 3}
       propertyPath: m_Follow
@@ -1003,11 +1003,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2949713835305622233, guid: f6f3af390e4634ddfa280918a1f66e58, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.000000056500856
+      value: 0.000000040687734
       objectReference: {fileID: 0}
     - target: {fileID: 2949713835305622233, guid: f6f3af390e4634ddfa280918a1f66e58, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.000000045137035
+      value: -0.000000032504357
       objectReference: {fileID: 0}
     - target: {fileID: 2949713835305622233, guid: f6f3af390e4634ddfa280918a1f66e58, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1491,6 +1491,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4205398096892400348, guid: abeb438f69e13400bb0fd87580eee4a1, type: 3}
+      propertyPath: zoomSpeed
+      value: 2500
+      objectReference: {fileID: 0}
+    - target: {fileID: 4205398096892400348, guid: abeb438f69e13400bb0fd87580eee4a1, type: 3}
+      propertyPath: keyScrollSpeed
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 4502448615184120505, guid: abeb438f69e13400bb0fd87580eee4a1, type: 3}
       propertyPath: m_Name
       value: Planning Camera
