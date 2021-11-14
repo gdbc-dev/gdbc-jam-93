@@ -95,7 +95,7 @@ public class DolphinController : MonoBehaviour
                     TouristBoatController.TouristStatus.Photographing;
             }
         }
-        else if (other.CompareTag("Land"))
+        else if (other.gameObject.layer == 6)
         {
             destination = Vector3.zero;
         }
