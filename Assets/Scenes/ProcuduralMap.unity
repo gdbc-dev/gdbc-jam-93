@@ -570,7 +570,7 @@ LineRenderer:
     numCornerVertices: 3
     numCapVertices: 3
     alignment: 0
-    textureMode: 3
+    textureMode: 1
     shadowBias: 0.5
     generateLightingData: 0
   m_UseWorldSpace: 1
@@ -779,7 +779,7 @@ MonoBehaviour:
   minHeightForLand: 0.58
   autoGenerate: 0
   minIslandSize: 16
-  maxIslandSize: 32
+  maxIslandSize: 64
   maxIslands: 25
   groundEdgePrefabs:
   - {fileID: 1258712568071856, guid: 0c75154c4fc68e9468d08eebd25883ae, type: 3}
@@ -813,8 +813,7 @@ MonoBehaviour:
   largeInnerDoodads:
   - {fileID: 1284718070223092, guid: 787facca5f4ae3341834b69f5a7c941c, type: 3}
   - {fileID: 1737419297715478, guid: 4f925478599cb734590ff58c49a21803, type: 3}
-  waterDoodads:
-  - {fileID: 1889486365217932, guid: 90c7fc433604f96478dc023f03f17ad7, type: 3}
+  waterDoodads: []
   waterBesideLand:
   - {fileID: 1815794713128316, guid: 035adeb57cfb8c64e9e6985908f63572, type: 3}
   - {fileID: 1486004834697146, guid: 5881b4c54ede2b1468377a625b5a05fe, type: 3}

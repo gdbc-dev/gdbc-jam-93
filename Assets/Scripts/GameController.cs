@@ -83,7 +83,7 @@ public class GameController : MonoBehaviour
     {
         currentLevelNum++;
 
-        if (currentLevelNum == levels.Count)
+        if (currentLevelNum >= levels.Count)
         {
             Debug.Log("Won Game!");
         }
