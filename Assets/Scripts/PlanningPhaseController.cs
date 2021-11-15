@@ -20,6 +20,7 @@ public class PlanningPhaseController : MonoBehaviour
     public LineRenderer lineRendererPrefab;
     public GameObject remainingPatrolBoatPrefab;
     public GameObject remainingPatrolContainer;
+    public GameObject gridLines;
 
     [SerializeField] private Camera planningCamera;
 
@@ -185,6 +186,7 @@ public class PlanningPhaseController : MonoBehaviour
 
     public void StartPlanning(int numShips)
     {
+        gridLines.SetActive(true);
         shipsToSpawn = numShips;
 
         int childCount = remainingPatrolContainer.transform.childCount;
@@ -274,6 +276,8 @@ public class PlanningPhaseController : MonoBehaviour
         {
             return;
         }
+        
+        gridLines.SetActive(false);
         
         for (int i = 0; i < previousShipLinerenders.Count; i++)
         {

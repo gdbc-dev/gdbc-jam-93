@@ -222,7 +222,7 @@ public class GameController : MonoBehaviour
                     cursorTimer = 0;
                     cursorIndex = (cursorIndex + 1) % planningCursor.Length;
                 
-                    Cursor.SetCursor(planningCursor[cursorIndex], new Vector2(32f, 32f), CursorMode.Auto);
+                    Cursor.SetCursor(planningCursor[cursorIndex], new Vector2(16f, 16f), CursorMode.Auto);
                 }
             }
             else
