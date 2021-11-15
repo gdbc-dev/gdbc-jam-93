@@ -53,6 +53,10 @@ public class TouristBoatController : MonoBehaviour
     [SerializeField] private bool stuckCheckIsUnsticking;
     [SerializeField] private Vector3 stuckCheckUnstickingPos;
 
+    // for the camera flash
+    [SerializeField] private float lengthOfCameraFlash = 0.1f;
+    [SerializeField] private GameObject cameraFlash;
+
     private void Awake()
     {
         flagBehavior = GetComponent<FlagBehavior>();
@@ -369,6 +373,18 @@ public class TouristBoatController : MonoBehaviour
                 GetComponent<MovementAIRigidbody>());
             //print(this.gameObject.name + ": OK, I'm out of here.");
             Destroy(this.gameObject, 30);
+        }
+    }
+
+    public IEnumerator CameraFlashingCoro()
+    {
+        while (touristStatus == TouristStatus.Photographing)
+        {
+            cameraFlash.SetActive(true);
+            yield return new WaitForSeconds(lengthOfCameraFlash);
+            cameraFlash.SetActive(false);
+            var delay = Random.Range(0.5f, 3);
+            yield return new WaitForSeconds(delay);
         }
     }
 }
