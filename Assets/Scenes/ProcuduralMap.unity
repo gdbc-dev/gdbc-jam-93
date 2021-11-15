@@ -4367,11 +4367,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2949713834851094443, guid: f6f3af390e4634ddfa280918a1f66e58, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 3.835829e-10
+      value: 3.5527133e-15
       objectReference: {fileID: 0}
     - target: {fileID: 2949713834851094443, guid: f6f3af390e4634ddfa280918a1f66e58, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.0000000016939514
+      value: -7.1054265e-15
       objectReference: {fileID: 0}
     - target: {fileID: 2949713834851094444, guid: f6f3af390e4634ddfa280918a1f66e58, type: 3}
       propertyPath: m_Follow
@@ -4411,11 +4411,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2949713835305622233, guid: f6f3af390e4634ddfa280918a1f66e58, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.000000040708656
+      value: -0.00000004251147
       objectReference: {fileID: 0}
     - target: {fileID: 2949713835305622233, guid: f6f3af390e4634ddfa280918a1f66e58, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.000000032521072
+      value: 0.000000033961292
       objectReference: {fileID: 0}
     - target: {fileID: 2949713835305622233, guid: f6f3af390e4634ddfa280918a1f66e58, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -7936,7 +7936,9 @@ MonoBehaviour:
   m_text: "Your goal is to protect the dolphins shown on the map. \n\nTourist boats
     will attempt to disturb them.\n\nYour patrol boats are your defence - they will
     chase off the tourists.\n\nYou must draw a completed patrol path for each of
-    your patrol boats.\n\n"
+    your patrol boats.\n\n- Left click to place path\n- Right click to revert path\n-
+    WASD to move camera\n- Mouse Wheel to zoom in/out\n\n- After placing paths press
+    Begin Patrol!\n\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 654a9dedb05c549d78dddd997d2b7072, type: 2}
   m_sharedMaterial: {fileID: -5505788154110601672, guid: 654a9dedb05c549d78dddd997d2b7072, type: 2}
