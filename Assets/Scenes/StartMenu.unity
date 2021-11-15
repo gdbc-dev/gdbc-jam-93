@@ -1714,7 +1714,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -1743,7 +1743,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 0, y: 0, z: 25.536423, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -1973,6 +1973,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf1ca97d030aab94fa686269c4e44847, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isPlanning: 0
   hitMask:
     serializedVersion: 2
     m_Bits: 16
@@ -1981,6 +1982,11 @@ MonoBehaviour:
   planningStartImage: {fileID: 0}
   goodLineMaterial: {fileID: 0}
   badLineMaterial: {fileID: 0}
+  lineRendererPrefab: {fileID: 0}
+  remainingPatrolBoatPrefab: {fileID: 0}
+  remainingPatrolContainer: {fileID: 0}
+  gridLines: {fileID: 0}
+  startPatrolButton: {fileID: 0}
   planningCamera: {fileID: 0}
 --- !u!114 &932114958
 MonoBehaviour:
@@ -1996,6 +2002,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   planningPhaseController: {fileID: 932114957}
   actionScreenUi: {fileID: 0}
+  planningScreenUI: {fileID: 0}
   mapGenerator: {fileID: 701340517}
   levels:
   - worldSize: 64
@@ -2069,6 +2076,7 @@ MonoBehaviour:
   planningCam: {fileID: 0}
   actionCam: {fileID: 0}
   cameraTarget: {fileID: 0}
+  cursorOffset: {x: 0, y: 0}
   generateMenuLevelEnabled: 1
 --- !u!4 &932114959
 Transform:
@@ -4035,8 +4043,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 200, y: -200}
-  m_SizeDelta: {x: 260, y: 80}
+  m_AnchoredPosition: {x: 226.86954, y: -200}
+  m_SizeDelta: {x: 313.7391, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1958567230
 MonoBehaviour:
