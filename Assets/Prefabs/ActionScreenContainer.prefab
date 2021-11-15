@@ -1045,7 +1045,7 @@ GameObject:
   - component: {fileID: 9042154931476953042}
   - component: {fileID: 9042154931476953040}
   m_Layer: 5
-  m_Name: SlowDownIcon
+  m_Name: PauseIcon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1091,14 +1091,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.78431374}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 69f67cd6bf313403faeb7425f7ec04a9, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2dad644a16a9f4d8d8659137b46dd0e3, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1154,7 +1154,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 9042154932088878217}
         m_TargetAssemblyTypeName: ActionScreenUI, Assembly-CSharp
-        m_MethodName: SlowSpeed
+        m_MethodName: Pause
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2460,9 +2460,13 @@ MonoBehaviour:
   - {fileID: 9042154931713225083}
   totalNumberOfTouristBoats: 8
   totalNumberOfDolphins: 14
-  pausePlayButton: {fileID: 9042154932599984027}
+  pauseButton: {fileID: 9042154931476952876}
+  playButton: {fileID: 9042154932599984027}
+  fastForwardButton: {fileID: 9042154932359183926}
   pauseIconSprite: {fileID: 21300000, guid: 2dad644a16a9f4d8d8659137b46dd0e3, type: 3}
   playIconSprite: {fileID: 21300000, guid: 98d22d0230b0648e4bd5b8feb1e4858f, type: 3}
+  selectedColor: {r: 0.28235295, g: 0.08235294, b: 0.08235294, a: 0.78431374}
+  defaultColor: {r: 1, g: 1, b: 1, a: 0.78431374}
   countdownTimer: {fileID: 9042154931716298635}
   countDownTimerTextObject: {fileID: 9042154931716298633}
   totalTimeForLevel: 50
@@ -2750,7 +2754,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.78431374}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -3211,7 +3215,7 @@ GameObject:
   - component: {fileID: 9042154932599984025}
   - component: {fileID: 9042154932599984031}
   m_Layer: 5
-  m_Name: PausePlayIcon
+  m_Name: PlayIcon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3257,14 +3261,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.78431374}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 2dad644a16a9f4d8d8659137b46dd0e3, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 98d22d0230b0648e4bd5b8feb1e4858f, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3320,7 +3324,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 9042154932088878217}
         m_TargetAssemblyTypeName: ActionScreenUI, Assembly-CSharp
-        m_MethodName: PausePlay
+        m_MethodName: Play
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
