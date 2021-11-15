@@ -332,7 +332,7 @@ public class TouristBoatController : MonoBehaviour
             touristStatus = TouristStatus.Retreating;
             GameController.instance.removeTouristBoat(
                 GetComponent<MovementAIRigidbody>());
-            print(this.gameObject.name + ": OK, I'm out of here.");
+            //print(this.gameObject.name + ": OK, I'm out of here.");
             Destroy(this.gameObject, 30);
         }
     }

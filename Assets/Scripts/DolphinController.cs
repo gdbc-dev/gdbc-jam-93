@@ -48,7 +48,7 @@ public class DolphinController : MonoBehaviour
                 if (deathTimer > maxDeathTime)
                 {
                     isUnwell = true;
-                    print("This poor dolphin is now very unwell");
+                    //print("This poor dolphin is now very unwell");
                     audioSource.PlayOneShot(audioUnwell);
                     Destroy(this.gameObject, 0.5f);
                 }
@@ -132,7 +132,7 @@ public class DolphinController : MonoBehaviour
                 // if this is the first tourist boat to arrive
                 if (nearbyTourists.Count == 0)
                 {
-                    print("Dolphin is being photographed!!!");
+                    //print("Dolphin is being photographed!!!");
                     audioSource.PlayOneShot(audioDistressed);
                     rb.velocity = Vector3.zero;
                     //                deathTimer = 0;
