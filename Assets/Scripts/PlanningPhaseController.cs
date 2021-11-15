@@ -114,29 +114,7 @@ public class PlanningPhaseController : MonoBehaviour
                     else
                     {
                         shipPathLists[currentShipIndex].Add(newPoint);
-                        lineRenderer.positionCount = shipPathLists[currentShipIndex].Count;
-                        if (shipPathLists[currentShipIndex].Count == 1)
-                        {
-                            lineRenderer.positionCount = 2;
-                            planningStartImage.SetActive(true);
-                            planningStartImage.transform.position = new Vector3(
-                                shipPathLists[currentShipIndex][0].x, 5,
-                                shipPathLists[currentShipIndex][0].y);
-                            lineRenderer.SetPosition(0,
-                                new Vector3(shipPathLists[currentShipIndex][0].x, 5,
-                                    shipPathLists[currentShipIndex][0].y));
-                            lineRenderer.SetPosition(1,
-                                new Vector3(shipPathLists[currentShipIndex][0].x, 5,
-                                    shipPathLists[currentShipIndex][0].y));
-                            return;
-                        }
-
-                        for (int i = 0; i < shipPathLists[currentShipIndex].Count; i++)
-                        {
-                            lineRenderer.SetPosition(i,
-                                new Vector3(shipPathLists[currentShipIndex][i].x, 5,
-                                    shipPathLists[currentShipIndex][i].y));
-                        }
+                        makeFinishPath(shipPathLists[currentShipIndex]);
                     }
                 }
             }
@@ -144,6 +122,71 @@ public class PlanningPhaseController : MonoBehaviour
             {
                 Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * 1000, Color.white);
             }
+        }
+        else if (Input.GetMouseButtonDown(1))
+        {
+            if (shipPathLists.Count - 1 >= currentShipIndex)
+            {
+                if (shipPathLists[currentShipIndex].Count > 0)
+                {
+                    shipPathLists[currentShipIndex].RemoveAt(shipPathLists[currentShipIndex].Count - 1);
+                    planningStartImage.SetActive(false);
+                    makeFinishPath(shipPathLists[currentShipIndex]);
+                }
+                else
+                {
+                    if (currentShipIndex > 0)
+                    {
+                        currentShipIndex--;
+                        if (shipPathLists[currentShipIndex].Count > 0)
+                        {
+                            shipPathLists[currentShipIndex].RemoveAt(shipPathLists[currentShipIndex].Count - 1);
+                        }
+                        Instantiate(remainingPatrolBoatPrefab, remainingPatrolContainer.transform);
+                        makeFinishPath(shipPathLists[currentShipIndex]);
+                        buildHistoryPaths();
+                    }
+                }
+            }
+        }
+    }
+
+    private void makeFinishPath(List<Vector2Int> path)
+    {
+        lineRenderer.positionCount = path.Count;
+        if (path.Count > 0)
+        {
+            planningStartImage.SetActive(true);
+            planningStartImage.transform.position = new Vector3(
+                path[0].x, 5,
+                path[0].y);
+        }
+        else
+        {
+            planningStartImage.SetActive(false);
+        }
+
+        if (path.Count == 1)
+        {
+            lineRenderer.positionCount = 2;
+            planningStartImage.SetActive(true);
+            planningStartImage.transform.position = new Vector3(
+                path[0].x, 5,
+                path[0].y);
+            lineRenderer.SetPosition(0,
+                new Vector3(path[0].x, 5,
+                    path[0].y));
+            lineRenderer.SetPosition(1,
+                new Vector3(path[0].x, 5,
+                    path[0].y));
+            return;
+        }
+
+        for (int i = 0; i < path.Count; i++)
+        {
+            lineRenderer.SetPosition(i,
+                new Vector3(path[i].x, 5,
+                    path[i].y));
         }
     }
 
@@ -228,24 +271,29 @@ public class PlanningPhaseController : MonoBehaviour
         currentShipIndex++;
     }
 
-    public void finishPlanning()
+    private void buildHistoryPaths()
     {
-        finishLineRenderer.positionCount = 0;
-
-        planningStartImage.SetActive(false);
         for (int i = 0; i < previousShipLinerenders.Count; i++)
         {
             DestroyImmediate(previousShipLinerenders[i].gameObject);
         }
+
         previousShipLinerenders.Clear();
 
         for (int k = 0; k < shipPathLists.Count; k++)
         {
-            previousShipLinerenders.Add(Instantiate(lineRendererPrefab));
+            if (k < currentShipIndex || !isPlanning)
+            {
+                previousShipLinerenders.Add(Instantiate(lineRendererPrefab));
+            }
         }
 
         for (int k = 0; k < shipPathLists.Count; k++)
         {
+            if (k >= currentShipIndex && isPlanning)
+            {
+                continue;
+            }
             previousShipLinerenders[k].positionCount = shipPathLists[k].Count;
 
             for (int i = 0; i < shipPathLists[k].Count; i++)
@@ -255,7 +303,14 @@ public class PlanningPhaseController : MonoBehaviour
                         shipPathLists[k][i].y + .5f));
             }
         }
-        
+    }
+
+    public void finishPlanning()
+    {
+        finishLineRenderer.positionCount = 0;
+
+        planningStartImage.SetActive(false);
+
         if (remainingPatrolContainer.transform.childCount > 0)
         {
             Destroy(remainingPatrolContainer.transform.GetChild(remainingPatrolContainer.transform.childCount - 1).gameObject);
@@ -264,13 +319,15 @@ public class PlanningPhaseController : MonoBehaviour
         if (currentShipIndex + 1 >= shipsToSpawn)
         {
             isPlanning = false;
-         startPatrolButton.gameObject.SetActive(true);   
+            startPatrolButton.gameObject.SetActive(true);
         }
         else
         {
             Debug.Log("Starting next ship");
             StartShipPath();
         }
+        
+        buildHistoryPaths();
     }
 
     public void finishPlanningAndStart()
@@ -279,9 +336,9 @@ public class PlanningPhaseController : MonoBehaviour
         {
             return;
         }
-        
+
         gridLines.SetActive(false);
-        
+
         for (int i = 0; i < previousShipLinerenders.Count; i++)
         {
             Destroy(previousShipLinerenders[i].gameObject);
