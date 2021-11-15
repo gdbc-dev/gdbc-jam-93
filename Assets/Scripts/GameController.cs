@@ -214,6 +214,13 @@ public class GameController : MonoBehaviour
             return;
         }
 
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            SceneManager.LoadScene("StartMenu");
+            isQuitting = true;
+            return;
+        }
+
         if (gameState == GAME_STATE.PLANNING)
         {
             if (planningPhaseController.isPlanning)
