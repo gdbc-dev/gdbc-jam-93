@@ -16,9 +16,14 @@ public class ActionScreenUI : MonoBehaviour
 
 
     //for use with the time adjustment buttons
-    public GameObject pausePlayButton;
+    public GameObject pauseButton;
+    public GameObject playButton;
+    public GameObject fastForwardButton;
+
     public Sprite pauseIconSprite;
     public Sprite playIconSprite;
+    public Color selectedColor;
+    public Color defaultColor;
 
     //for use with the countdown clock
     public GameObject countdownTimer;
@@ -27,7 +32,7 @@ public class ActionScreenUI : MonoBehaviour
     public int totalTimeForLevel;
     [NonSerialized] public float timeRemaining;
 
-    private bool isPaused = false;
+    
 
 
     // Start is called before the first frame update
@@ -69,32 +74,31 @@ public class ActionScreenUI : MonoBehaviour
         GameController.instance.restartLevel();
     }
 
-    public void SlowSpeed()
+    public void Pause()
     {
-        Time.timeScale = 0.5f;
-        isPaused = false;
-        UpdatePauseIcon();
+       Time.timeScale = 0;
+        pauseButton.GetComponent<Image>().color = selectedColor;
+        playButton.GetComponent<Image>().color = defaultColor;
+        fastForwardButton.GetComponent<Image>().color = defaultColor; 
     }
 
-    public void UpdatePauseIcon()
-    {
-        pausePlayButton.GetComponent<Image>().sprite = isPaused ? pauseIconSprite : playIconSprite;
-        
-    }
+   
 
-    public void PausePlay()
+    public void Play()
     {
-        Time.timeScale = isPaused ? 1 : 0;
-        isPaused = !isPaused;
-        UpdatePauseIcon();
+        Time.timeScale = 1;
+        playButton.GetComponent<Image>().color = selectedColor;
+        pauseButton.GetComponent<Image>().color = defaultColor;
+        fastForwardButton.GetComponent<Image>().color = defaultColor;
     }
 
 
     public void FastForward()
     {
-        isPaused = false;
         Time.timeScale = 5;
-        UpdatePauseIcon();
+        fastForwardButton.GetComponent<Image>().color = selectedColor;
+        playButton.GetComponent<Image>().color = defaultColor;
+        pauseButton.GetComponent<Image>().color = defaultColor;
     }
 
 
