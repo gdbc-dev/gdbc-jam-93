@@ -216,22 +216,22 @@ public class GameController : MonoBehaviour
         }
 
         if (gameState == GAME_STATE.PLANNING)
-        {if (planningPhaseController.isPlanning)
+        {
+            if (planningPhaseController.isPlanning)
             {
                 cursorTimer += Time.unscaledDeltaTime;
                 if (cursorTimer >= .2f)
                 {
                     cursorTimer = 0;
                     cursorIndex = (cursorIndex + 1) % planningCursor.Length;
-                
-                    Cursor.SetCursor(planningCursor[cursorIndex], new Vector2(planningCursor[cursorIndex].width/2f,planningCursor[cursorIndex].height/2f), CursorMode.Auto);
+
+                    Cursor.SetCursor(planningCursor[cursorIndex], new Vector2(planningCursor[cursorIndex].width / 2f, planningCursor[cursorIndex].height / 2f), CursorMode.Auto);
                 }
             }
             else
             {
                 Cursor.SetCursor(null, new Vector2(.5f, .5f), CursorMode.Auto);
             }
-            
         }
         else if (gameState == GAME_STATE.PLAYING)
         {
@@ -249,7 +249,7 @@ public class GameController : MonoBehaviour
             }
 
             surviveeTimer += Time.deltaTime;
-            
+
             if (surviveeTimer >= levels[currentLevelNum].surviveTime)
             {
                 Debug.Log("Win Level");
@@ -439,10 +439,13 @@ public class GameController : MonoBehaviour
         {
             List<Vector3> currentPath = shipPaths[i];
 
-            GameObject gameObject = Instantiate(playerShipsPrefabs[Random.Range(0, playerShipsPrefabs.Length)],
-                new Vector3(currentPath[0].x, 0, currentPath[0].z), Quaternion.Euler(0, Random.Range(0, 360), 0));
-            gameObject.GetComponent<Rigidbody>().position = new Vector3(currentPath[i].x, 0, currentPath[i].z);
-            gameObject.GetComponent<PlayerBoatsController>().path = new LinePath(currentPath.ToArray());
+            if (currentPath != null && currentPath.Count > 0)
+            {
+                GameObject gameObject = Instantiate(playerShipsPrefabs[Random.Range(0, playerShipsPrefabs.Length)],
+                    new Vector3(currentPath[0].x, 0, currentPath[0].z), Quaternion.Euler(0, Random.Range(0, 360), 0));
+                gameObject.GetComponent<Rigidbody>().position = new Vector3(currentPath[0].x, 0, currentPath[0].z);
+                gameObject.GetComponent<PlayerBoatsController>().path = new LinePath(currentPath.ToArray());
+            }
         }
 
         StartGamePhase();
