@@ -1,7 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityMovementAI;
+using Random = UnityEngine.Random;
 
 public class TouristBoatController : MonoBehaviour
 {
@@ -19,6 +21,7 @@ public class TouristBoatController : MonoBehaviour
     [SerializeField] float wallAvoidWeight;
     float distanceCheckFrequency = 1;
     float timeOfNextDistanceCheck;
+    public FlagBehavior flagBehavior;
 
     public enum TouristStatus
     {
@@ -29,11 +32,22 @@ public class TouristBoatController : MonoBehaviour
     };
 
     public TouristStatus touristStatus;
+
+    public AudioClip audioExcited;
+    public AudioClip audioDisappointed;
+    public AudioClip audioTakingPictures;
+    public AudioSource audioSource;
+
     [SerializeField] float ticketDistance = 5;
     public BubbleCanvas bubbleCanvas;
 
     public List<string> dialogOnDolphin;
     public List<string> dialogOnFlee;
+
+    private void Awake()
+    {
+        flagBehavior = GetComponent<FlagBehavior>();
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -76,6 +90,9 @@ public class TouristBoatController : MonoBehaviour
                 break;
 
             case TouristStatus.PursuingDolphin:
+                if (!audioSource.isPlaying) {
+                    audioSource.PlayOneShot(audioExcited, 1f);
+                }
                 // check if dolphin or patrol has been destroyed or is null
                 if (!puTarget)
                 {
@@ -119,6 +136,7 @@ public class TouristBoatController : MonoBehaviour
                 break;
 
             case TouristStatus.Retreating:
+                // TODO
                 break;
 
             case TouristStatus.Photographing:
@@ -233,6 +251,22 @@ public class TouristBoatController : MonoBehaviour
             default:
                 break;
         }
+
+        // Play sounds appropriate to state
+        if (!audioSource.isPlaying) {
+            switch (touristStatus)
+            {
+                case TouristStatus.PursuingDolphin:
+                    audioSource.PlayOneShot(audioExcited, 1f);
+                    break;
+                case TouristStatus.Photographing:
+                    audioSource.PlayOneShot(audioTakingPictures, 1f);
+                    break;
+                case TouristStatus.Retreating:
+                    audioSource.PlayOneShot(audioDisappointed, 1f);
+                    break;
+            }
+        }
     }
 
     private MovementAIRigidbody ReturnNearestaIRigidbody(
@@ -268,17 +302,18 @@ public class TouristBoatController : MonoBehaviour
 
         if (distToPatrol < ticketDistance)
         {
-            Debug.Log("SEND BUBBLE REQUEST");
             if (dialogOnFlee.Count > 0)
             {
                 bubbleCanvas.setDialog(dialogOnFlee[Random.Range(0, dialogOnFlee.Count - 1)], 5f);
             }
 
+            flagBehavior.ticketed = true;
+
             touristStatus = TouristStatus.Retreating;
             GameController.instance.removeTouristBoat(
                 GetComponent<MovementAIRigidbody>());
             print(this.gameObject.name + ": OK, I'm out of here.");
-            Destroy(this.gameObject, 10);
+            Destroy(this.gameObject, 30);
         }
     }
 }
