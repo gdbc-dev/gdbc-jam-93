@@ -35,6 +35,12 @@ public class PlayerBoatsController : MonoBehaviour
     [SerializeField] float maxPursueDistance; // how far to stray from patrol
     // the max pursue distance should possibly be dynamic based on size of patrol route?
 
+    // variables to track if the bastard is stuck
+    private float stuckCheckFrequency = 3;
+    private float stuckCheckNextCheckTime = 0;
+    private float stuckCheckMovementThreshold = 5;
+    private Vector3 oldPos;
+
     private void OnEnable()
     {
         // add to the patrol boats list
@@ -90,6 +96,19 @@ public class PlayerBoatsController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        // check if you're stuck!
+        if (stuckCheckNextCheckTime > Time.time)
+        {
+            stuckCheckNextCheckTime = Time.time + stuckCheckFrequency;
+            var dist = Vector3.Distance(transform.position, oldPos);
+            if (dist < stuckCheckMovementThreshold)
+            {
+                print("I'm stuck at " + transform.position.x +
+                    "," + transform.position.z);
+            }
+            oldPos = transform.position;
+        }
+
         accel = Vector3.zero;
 
         path.Draw();
