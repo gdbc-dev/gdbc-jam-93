@@ -9842,12 +9842,17 @@ MonoBehaviour:
   - Get out of here!
   - You can't hide!
   - You're under arrest!
+  - This isn't a Sandals Resort. Get out of here!
+  - You're fin-ished!
+  - Time to flipper out.
   pathLoop: 1
   reversePath: 0
   wallAvoidWeight: 4
   maxPursueDistance: 200
   stuckCheckOldPos: {x: 0, y: 0, z: 0}
   stuckCheckDist: 0
+  stuckCheckIsUnsticking: 0
+  stuckCheckUnstickingPos: {x: 0, y: 0, z: 0}
 --- !u!54 &8953457121610363357
 Rigidbody:
   m_ObjectHideFlags: 0
