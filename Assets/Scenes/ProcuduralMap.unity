@@ -1058,6 +1058,7 @@ MonoBehaviour:
   remainingPatrolBoatPrefab: {fileID: 5356379128774501498, guid: 2cfc19a0ba18b454ba05e14d198a233d, type: 3}
   remainingPatrolContainer: {fileID: 9160605817685738239}
   gridLines: {fileID: 1516734402}
+  startPatrolButton: {fileID: 9160605818494228180}
   planningCamera: {fileID: 458615316}
 --- !u!1 &215158404
 GameObject:
@@ -4366,11 +4367,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2949713834851094443, guid: f6f3af390e4634ddfa280918a1f66e58, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.0000000022272173
+      value: -0.0000000018558237
       objectReference: {fileID: 0}
     - target: {fileID: 2949713834851094443, guid: f6f3af390e4634ddfa280918a1f66e58, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.000000009835612
+      value: 0.0000000081954825
       objectReference: {fileID: 0}
     - target: {fileID: 2949713834851094444, guid: f6f3af390e4634ddfa280918a1f66e58, type: 3}
       propertyPath: m_Follow
@@ -4410,11 +4411,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2949713835305622233, guid: f6f3af390e4634ddfa280918a1f66e58, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.000000048620738
+      value: 0.000000042064475
       objectReference: {fileID: 0}
     - target: {fileID: 2949713835305622233, guid: f6f3af390e4634ddfa280918a1f66e58, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.00000003884182
+      value: -0.000000033604195
       objectReference: {fileID: 0}
     - target: {fileID: 2949713835305622233, guid: f6f3af390e4634ddfa280918a1f66e58, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

@@ -21,6 +21,7 @@ public class PlanningPhaseController : MonoBehaviour
     public GameObject remainingPatrolBoatPrefab;
     public GameObject remainingPatrolContainer;
     public GameObject gridLines;
+    public GameObject startPatrolButton;
 
     [SerializeField] private Camera planningCamera;
 
@@ -60,8 +61,8 @@ public class PlanningPhaseController : MonoBehaviour
 
                 finishLineRenderer.positionCount = 2;
                 Vector2Int lastPos = shipPathLists[currentShipIndex][shipPathLists[currentShipIndex].Count - 1];
-                finishLineRenderer.SetPosition(0, new Vector3(lastPos.x + .5f, 5, lastPos.y + .5f));
-                finishLineRenderer.SetPosition(1, new Vector3(newPoint.x + .5f, 5, newPoint.y + .5f));
+                finishLineRenderer.SetPosition(0, new Vector3(lastPos.x, 5, lastPos.y));
+                finishLineRenderer.SetPosition(1, new Vector3(newPoint.x, 5, newPoint.y));
             }
             else
             {
@@ -119,22 +120,22 @@ public class PlanningPhaseController : MonoBehaviour
                             lineRenderer.positionCount = 2;
                             planningStartImage.SetActive(true);
                             planningStartImage.transform.position = new Vector3(
-                                shipPathLists[currentShipIndex][0].x + .5f, 5,
-                                shipPathLists[currentShipIndex][0].y + .5f);
+                                shipPathLists[currentShipIndex][0].x, 5,
+                                shipPathLists[currentShipIndex][0].y);
                             lineRenderer.SetPosition(0,
-                                new Vector3(shipPathLists[currentShipIndex][0].x + .5f, 5,
-                                    shipPathLists[currentShipIndex][0].y + .5f));
+                                new Vector3(shipPathLists[currentShipIndex][0].x, 5,
+                                    shipPathLists[currentShipIndex][0].y));
                             lineRenderer.SetPosition(1,
-                                new Vector3(shipPathLists[currentShipIndex][0].x + .5f, 5,
-                                    shipPathLists[currentShipIndex][0].y + .5f));
+                                new Vector3(shipPathLists[currentShipIndex][0].x, 5,
+                                    shipPathLists[currentShipIndex][0].y));
                             return;
                         }
 
                         for (int i = 0; i < shipPathLists[currentShipIndex].Count; i++)
                         {
                             lineRenderer.SetPosition(i,
-                                new Vector3(shipPathLists[currentShipIndex][i].x + .5f, 5,
-                                    shipPathLists[currentShipIndex][i].y + .5f));
+                                new Vector3(shipPathLists[currentShipIndex][i].x, 5,
+                                    shipPathLists[currentShipIndex][i].y));
                         }
                     }
                 }
@@ -186,6 +187,7 @@ public class PlanningPhaseController : MonoBehaviour
 
     public void StartPlanning(int numShips)
     {
+        startPatrolButton.gameObject.SetActive(false);
         gridLines.SetActive(true);
         shipsToSpawn = numShips;
 
@@ -262,6 +264,7 @@ public class PlanningPhaseController : MonoBehaviour
         if (currentShipIndex + 1 >= shipsToSpawn)
         {
             isPlanning = false;
+         startPatrolButton.gameObject.SetActive(true);   
         }
         else
         {

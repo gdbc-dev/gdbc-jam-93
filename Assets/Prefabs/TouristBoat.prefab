@@ -4964,12 +4964,16 @@ MonoBehaviour:
   dialogOnDolphin:
   - Dolphins!
   - Look at it!
-  - Hes hurting!
-  - Nice fins
+  - Wow!
+  - Nice fins!
   dialogOnFlee:
-  - Leave us alone
-  - Go away
+  - Leave us alone!
+  - Go away!
   - Time to run!
+  - You can't catch me!
+  - AHHHHHH
+  stuckCheckOldPos: {x: 0, y: 0, z: 0}
+  stuckCheckDist: 0
 --- !u!114 &3054030194625311869
 MonoBehaviour:
   m_ObjectHideFlags: 0
