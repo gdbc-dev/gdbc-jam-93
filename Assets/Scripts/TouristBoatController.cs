@@ -48,7 +48,8 @@ public class TouristBoatController : MonoBehaviour
     private float stuckCheckFrequency = 3;
     private float stuckCheckNextCheckTime = 0;
     private float stuckCheckMovementThreshold = 5;
-    private Vector3 oldPos;
+    [SerializeField] private Vector3 stuckCheckOldPos;
+    [SerializeField] private float stuckCheckDist;
 
     private void Awake()
     {
@@ -199,16 +200,16 @@ public class TouristBoatController : MonoBehaviour
 
             case TouristStatus.PursuingDolphin:
                 // check if you're stuck!
-                if (stuckCheckNextCheckTime > Time.time)
+                if (stuckCheckNextCheckTime < Time.time)
                 {
                     stuckCheckNextCheckTime = Time.time + stuckCheckFrequency;
-                    var dist = Vector3.Distance(transform.position, oldPos);
-                    if (dist < stuckCheckMovementThreshold)
+                    var stuckCheckDist = Vector3.Distance(transform.position, stuckCheckOldPos);
+                    if (stuckCheckDist < stuckCheckMovementThreshold)
                     {
                         print("I'm stuck at " + transform.position.x +
                             "," + transform.position.z);
                     }
-                    oldPos = transform.position;
+                    stuckCheckOldPos = transform.position;
                 }
 
                 // check if you should be evading
