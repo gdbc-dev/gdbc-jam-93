@@ -41,6 +41,8 @@ public class PlayerBoatsController : MonoBehaviour
     private float stuckCheckMovementThreshold = 5;
     [SerializeField] private Vector3 stuckCheckOldPos;
     [SerializeField] private float stuckCheckDist;
+    [SerializeField] private bool stuckCheckIsUnsticking;
+    [SerializeField] private Vector3 stuckCheckUnstickingPos;
 
     private void OnEnable()
     {
@@ -97,6 +99,20 @@ public class PlayerBoatsController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (stuckCheckIsUnsticking)
+        {
+            var accel = sb.Arrive(stuckCheckUnstickingPos);
+            sb.Steer(accel);
+            sb.LookWhereYoureGoing();
+
+            var dist = Vector3.Distance(transform.position, stuckCheckUnstickingPos);
+            if (dist < 1.5f)
+            {
+                stuckCheckIsUnsticking = false;
+            }
+            return;
+        }
+
         // check if you're stuck!
         if (stuckCheckNextCheckTime < Time.time)
         {
