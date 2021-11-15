@@ -144,6 +144,7 @@ public class DolphinController : MonoBehaviour
                     other.GetComponent<TouristBoatController>();
                 touristBoatController.touristStatus =
                     TouristBoatController.TouristStatus.Photographing;
+                StartCoroutine(touristBoatController.CameraFlashingCoro());
                 if (touristBoatController.dialogOnDolphin.Count > 0)
                 {
                     touristBoatController.bubbleCanvas.setDialog(
