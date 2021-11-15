@@ -191,8 +191,10 @@ public class TouristBoatController : MonoBehaviour
             sb.LookWhereYoureGoing();
 
             var dist = Vector3.Distance(transform.position, stuckCheckUnstickingPos);
+            print("Distance to unsticking point is " + dist);
             if (dist < 1.5f)
             {
+                print("I'm unstuck!");
                 stuckCheckIsUnsticking = false;
             }
             return;
@@ -219,26 +221,23 @@ public class TouristBoatController : MonoBehaviour
                 if (stuckCheckNextCheckTime < Time.time)
                 {
                     stuckCheckNextCheckTime = Time.time + stuckCheckFrequency;
-                    var stuckCheckDist = Vector3.Distance(transform.position, stuckCheckOldPos);
+                    stuckCheckDist = Vector3.Distance(transform.position, stuckCheckOldPos);
                     if (stuckCheckDist < stuckCheckMovementThreshold)
                     {
-                        // What to do if it is stuck!
                         print("I'm stuck at " + transform.position.x +
                             "," + transform.position.z);
-                        
 
                         int attempts = 0;
-                        while (attempts < 1000 && !GameController.instance.
-                            isWater((int)stuckCheckUnstickingPos.x,
-                            (int)stuckCheckUnstickingPos.z))
+
+                        do
                         {
-                            int stuckCheckUnstickingPosX = Random.Range(-10, 10);
-                            int stuckCheckUnstickingPosZ = Random.Range(-10, 10);
-                            stuckCheckUnstickingPos = new
-                                Vector3(stuckCheckUnstickingPosX, 0,
-                                stuckCheckUnstickingPosZ);
+                            var randomSpot = Random.insideUnitSphere * 10;
+                            randomSpot = new Vector3(randomSpot.x, 0, randomSpot.z);
+                            stuckCheckUnstickingPos = transform.position + randomSpot;
                             attempts++;
-                        }
+                        } while (attempts < 1000 && !GameController.instance.
+                            isWater((int)stuckCheckUnstickingPos.x,
+                            (int)stuckCheckUnstickingPos.z));
 
                         if (attempts == 999)
                         {
@@ -248,8 +247,6 @@ public class TouristBoatController : MonoBehaviour
                         {
                             stuckCheckIsUnsticking = true;
                         }
-
-                        
                     }
                     stuckCheckOldPos = transform.position;
                 }
