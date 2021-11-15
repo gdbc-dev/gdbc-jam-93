@@ -43,6 +43,13 @@ public class ActionScreenUI : MonoBehaviour
 //        StartingDolphinsIcons(3);
     }
 
+    private void OnEnable()
+    {
+        pauseButton.GetComponent<Image>().color = defaultColor;
+        playButton.GetComponent<Image>().color = selectedColor;
+        fastForwardButton.GetComponent<Image>().color = defaultColor;
+    }
+
     // Update is called once per frame
     void Update()
     {
