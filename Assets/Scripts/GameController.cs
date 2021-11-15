@@ -214,14 +214,22 @@ public class GameController : MonoBehaviour
         }
 
         if (gameState == GAME_STATE.PLANNING)
-        {
-            cursorTimer += Time.unscaledDeltaTime;
-            if (cursorTimer >= .2f)
+        {if (planningPhaseController.isPlanning)
             {
-                cursorTimer = 0;
-                cursorIndex = (cursorIndex + 1) % planningCursor.Length;
-                Cursor.SetCursor(planningCursor[cursorIndex], new Vector2(32f, 32f), CursorMode.Auto);
+                cursorTimer += Time.unscaledDeltaTime;
+                if (cursorTimer >= .2f)
+                {
+                    cursorTimer = 0;
+                    cursorIndex = (cursorIndex + 1) % planningCursor.Length;
+                
+                    Cursor.SetCursor(planningCursor[cursorIndex], new Vector2(32f, 32f), CursorMode.Auto);
+                }
             }
+            else
+            {
+                Cursor.SetCursor(null, new Vector2(.5f, .5f), CursorMode.Auto);
+            }
+            
         }
         else if (gameState == GAME_STATE.PLAYING)
         {
