@@ -106,7 +106,6 @@ public class PlayerBoatsController : MonoBehaviour
             sb.LookWhereYoureGoing();
 
             var dist = Vector3.Distance(transform.position, stuckCheckUnstickingPos);
-            print("Distance to unsticking point is " + dist);
             if (dist < 1.5f)
             {
                 print("I'm unstuck!");
