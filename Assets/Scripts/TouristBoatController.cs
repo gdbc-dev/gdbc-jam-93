@@ -361,6 +361,10 @@ public class TouristBoatController : MonoBehaviour
 
         if (distToPatrol < ticketDistance)
         {
+            if (dialogOnFlee.Count > 0)
+            {
+                bubbleCanvas.setDialog(dialogOnFlee[Random.Range(0, dialogOnFlee.Count - 1)], 5f);
+            }
 
             flagBehavior.ticketed = true;
 
