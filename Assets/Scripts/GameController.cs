@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -90,15 +91,14 @@ public class GameController : MonoBehaviour
     public void winLevel()
     {
         victoryScreen.SetActive(true);
-        winInABit();
+        StartCoroutine(winInABit());
     }
 
-    private async void winInABit()
+    IEnumerator winInABit()
     {
         currentLevelNum++;
         Time.timeScale = 0;
-
-        await Task.Delay(2500);
+        yield return new WaitForSecondsRealtime(2.5f);
         victoryScreen.SetActive(false);
 
         if (currentLevelNum >= levels.Count)
@@ -113,19 +113,18 @@ public class GameController : MonoBehaviour
         }
     }
 
-    private async void loseInABit()
+    IEnumerator loseInABit()
     {
-        if (isQuitting)
+        if (!isQuitting)
         {
-            return;
-        }
+            Time.timeScale = 0;
+            yield return new WaitForSecondsRealtime(2.5f);
 
-        Time.timeScale = 0;
-        await Task.Delay(2500);
-        defeatScreen.SetActive(false);
-        if (Application.isPlaying)
-        {
-            startLevel(currentLevelNum);
+            defeatScreen.SetActive(false);
+            if (Application.isPlaying)
+            {
+                startLevel(currentLevelNum);
+            }
         }
     }
 
@@ -141,7 +140,7 @@ public class GameController : MonoBehaviour
     {
         defeatScreen.SetActive(true);
         Debug.Log("Lost Level!!");
-        loseInABit();
+        StartCoroutine(loseInABit());
     }
 
     [ContextMenu("Restart Game")]
@@ -252,6 +251,7 @@ public class GameController : MonoBehaviour
 
             if (surviveeTimer >= levels[currentLevelNum].surviveTime)
             {
+                surviveeTimer = 0;
                 Debug.Log("Win Level");
                 winLevel();
             }

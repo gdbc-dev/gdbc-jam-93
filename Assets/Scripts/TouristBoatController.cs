@@ -126,6 +126,7 @@ public class TouristBoatController : MonoBehaviour
                 // check if you should be evading a closer patrol boat
                 if (evadeTarget != null)
                 {
+                    
                     if (Time.time > timeOfNextDistanceCheck)
                     {
                         timeOfNextDistanceCheck = Time.time + distanceCheckFrequency;
@@ -360,10 +361,6 @@ public class TouristBoatController : MonoBehaviour
 
         if (distToPatrol < ticketDistance)
         {
-            if (dialogOnFlee.Count > 0)
-            {
-                bubbleCanvas.setDialog(dialogOnFlee[Random.Range(0, dialogOnFlee.Count - 1)], 5f);
-            }
 
             flagBehavior.ticketed = true;
 
