@@ -44,6 +44,12 @@ public class TouristBoatController : MonoBehaviour
     public List<string> dialogOnDolphin;
     public List<string> dialogOnFlee;
 
+    // variables to track if the bastard is stuck
+    private float stuckCheckFrequency = 3;
+    private float stuckCheckNextCheckTime = 0;
+    private float stuckCheckMovementThreshold = 5;
+    private Vector3 oldPos;
+
     private void Awake()
     {
         flagBehavior = GetComponent<FlagBehavior>();
@@ -192,6 +198,19 @@ public class TouristBoatController : MonoBehaviour
                 break;
 
             case TouristStatus.PursuingDolphin:
+                // check if you're stuck!
+                if (stuckCheckNextCheckTime > Time.time)
+                {
+                    stuckCheckNextCheckTime = Time.time + stuckCheckFrequency;
+                    var dist = Vector3.Distance(transform.position, oldPos);
+                    if (dist < stuckCheckMovementThreshold)
+                    {
+                        print("I'm stuck at " + transform.position.x +
+                            "," + transform.position.z);
+                    }
+                    oldPos = transform.position;
+                }
+
                 // check if you should be evading
                 if (evadeTarget != null)
                 {
