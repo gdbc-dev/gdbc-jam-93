@@ -49,7 +49,6 @@ public class BubbleCanvas : MonoBehaviour
             if (!_camera)
             {
                 _camera = Camera.main;
-                Debug.Log("Where my camera at");
                 return;
             }
             myCanvas.transform.LookAt(myCanvas.transform.position +

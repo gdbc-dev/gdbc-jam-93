@@ -47,6 +47,8 @@ public class GameController : MonoBehaviour
     [SerializeField] private GameObject actionCam;
     public GameObject cameraTarget;
 
+    public Vector2 cursorOffset;
+
     public enum GAME_STATE
     {
         PLANNING,
@@ -88,12 +90,12 @@ public class GameController : MonoBehaviour
     public void winLevel()
     {
         victoryScreen.SetActive(true);
-        currentLevelNum++;
         winInABit();
     }
 
     private async void winInABit()
     {
+        currentLevelNum++;
         Time.timeScale = 0;
 
         await Task.Delay(2500);
@@ -222,7 +224,7 @@ public class GameController : MonoBehaviour
                     cursorTimer = 0;
                     cursorIndex = (cursorIndex + 1) % planningCursor.Length;
                 
-                    Cursor.SetCursor(planningCursor[cursorIndex], new Vector2(16f, 16f), CursorMode.Auto);
+                    Cursor.SetCursor(planningCursor[cursorIndex], cursorOffset, CursorMode.Auto);
                 }
             }
             else
@@ -247,7 +249,7 @@ public class GameController : MonoBehaviour
             }
 
             surviveeTimer += Time.deltaTime;
-
+            
             if (surviveeTimer >= levels[currentLevelNum].surviveTime)
             {
                 Debug.Log("Win Level");
