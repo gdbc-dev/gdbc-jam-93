@@ -50,6 +50,8 @@ public class TouristBoatController : MonoBehaviour
     private float stuckCheckMovementThreshold = 5;
     [SerializeField] private Vector3 stuckCheckOldPos;
     [SerializeField] private float stuckCheckDist;
+    [SerializeField] private bool stuckCheckIsUnsticking;
+    [SerializeField] private Vector3 stuckCheckUnstickingPos;
 
     private void Awake()
     {
@@ -182,6 +184,20 @@ public class TouristBoatController : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (stuckCheckIsUnsticking)
+        {
+            var accel = sb.Arrive(stuckCheckUnstickingPos);
+            sb.Steer(accel);
+            sb.LookWhereYoureGoing();
+
+            var dist = Vector3.Distance(transform.position, stuckCheckUnstickingPos);
+            if (dist < 1.5f)
+            {
+                stuckCheckIsUnsticking = false;
+            }
+            return;
+        }
+
         // reset the accel
         accel = Vector3.zero;
 
@@ -206,8 +222,34 @@ public class TouristBoatController : MonoBehaviour
                     var stuckCheckDist = Vector3.Distance(transform.position, stuckCheckOldPos);
                     if (stuckCheckDist < stuckCheckMovementThreshold)
                     {
+                        // What to do if it is stuck!
                         print("I'm stuck at " + transform.position.x +
                             "," + transform.position.z);
+                        
+
+                        int attempts = 0;
+                        while (attempts < 1000 && !GameController.instance.
+                            isWater((int)stuckCheckUnstickingPos.x,
+                            (int)stuckCheckUnstickingPos.z))
+                        {
+                            int stuckCheckUnstickingPosX = Random.Range(-10, 10);
+                            int stuckCheckUnstickingPosZ = Random.Range(-10, 10);
+                            stuckCheckUnstickingPos = new
+                                Vector3(stuckCheckUnstickingPosX, 0,
+                                stuckCheckUnstickingPosZ);
+                            attempts++;
+                        }
+
+                        if (attempts == 999)
+                        {
+                            print("Unstucking failed");
+                        }
+                        else
+                        {
+                            stuckCheckIsUnsticking = true;
+                        }
+
+                        
                     }
                     stuckCheckOldPos = transform.position;
                 }
