@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class PlanningPhaseController : MonoBehaviour
@@ -22,6 +23,7 @@ public class PlanningPhaseController : MonoBehaviour
     public GameObject remainingPatrolContainer;
     public GameObject gridLines;
     public GameObject startPatrolButton;
+    public TextMeshProUGUI levelText;
 
     [SerializeField] private Camera planningCamera;
 
@@ -230,6 +232,7 @@ public class PlanningPhaseController : MonoBehaviour
 
     public void StartPlanning(int numShips)
     {
+        levelText.text = "Level " + (gameController.currentLevelNum + 1);
         startPatrolButton.gameObject.SetActive(false);
         gridLines.SetActive(true);
         shipsToSpawn = numShips;

@@ -4962,18 +4962,30 @@ MonoBehaviour:
   ticketDistance: 8
   bubbleCanvas: {fileID: 5083517537144878943}
   dialogOnDolphin:
-  - Dolphins!
+  - Dolphin sighted!
   - Look at it!
-  - Wow!
+  - 'Hei, se, delfine! '
   - Nice fins!
+  - Bekijk de dolfijn man.
+  - Beaux dauphin!
+  - Set filters to "Atlanis".
+  - Uploading this to finstagram.
+  - So cute!
   dialogOnFlee:
   - Leave us alone!
-  - Go away!
-  - Time to run!
+  - It's the cops, let's bail!
+  - I'm too rich for this.
   - You can't catch me!
-  - AHHHHHH
+  - I didn't think there'd be consequences!
+  - C'est la police!
+  - Jeg skal ikke i fengsel for dette!
+  - Weglopen!
+  - This is ruining my selfie!
+  - Why no sir I haven't been drinking. This is a virgin daiquiri.
   stuckCheckOldPos: {x: 0, y: 0, z: 0}
   stuckCheckDist: 0
+  stuckCheckIsUnsticking: 0
+  stuckCheckUnstickingPos: {x: 0, y: 0, z: 0}
 --- !u!114 &3054030194625311869
 MonoBehaviour:
   m_ObjectHideFlags: 0
